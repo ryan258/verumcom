@@ -1,0 +1,223 @@
+# Navigation
+[nav_lookbook]
+other = "Lookbook"
+
+[nav_manifesto]
+other = "Manifesto"
+
+[nav_drops]
+other = "Drops"
+
+[nav_veritas]
+other = "Veritas"
+
+[nav_stockists]
+other = "Stockists"
+
+[nav_contact]
+other = "Contact"
+
+[nav_menu]
+other = "Menu"
+
+[nav_close]
+other = "Close"
+
+# Actions & CTAs
+[cta_lookbook]
+other = "View Lookbook"
+
+[cta_latest_drop]
+other = "Explore Drop"
+
+[cta_explore_drop]
+other = "Explore Drop"
+
+[cta_subscribe_btn]
+other = "Join List"
+
+[cta_where_to_buy]
+other = "Where to find it"
+
+[cta_view_piece]
+other = "Inspect piece"
+
+[cta_filter_all]
+other = "All"
+
+[cta_filter_category]
+other = "By category"
+
+[cta_filter_drop]
+other = "By drop"
+
+[cta_subscribe]
+other = "Join list"
+
+[cta_send]
+other = "Send message"
+
+[cta_back_to_lookbook]
+other = "← Back to Lookbook"
+
+[cta_back_to_drops]
+other = "← Back to Drops"
+
+[cta_back_to_veritas]
+other = "← Back to Stories"
+
+[cta_back_home]
+other = "Back to home"
+
+# Piece specs
+[spec_drop]
+other = "Release"
+
+[spec_category]
+other = "Category"
+
+[spec_fabric]
+other = "Fabric & Weight"
+
+[spec_color]
+other = "Colorway"
+
+[spec_sizes]
+other = "Available sizes"
+
+[spec_details]
+other = "Technical Specifications"
+
+[spec_story]
+other = "Piece Background"
+
+[spec_stockists_available]
+other = "Stockist Availability"
+
+[spec_no_cart_notice]
+other = "VERUM does not operate an e-commerce cart. Pieces are acquired in-person at partner stockists in Buenos Aires or through direct Instagram inquiry."
+
+# Categories
+[cat_outerwear]
+other = "Outerwear & Hoodies"
+
+[cat_tees]
+other = "T-Shirts"
+
+[cat_bottoms]
+other = "Pants & Trousers"
+
+[cat_accessories]
+other = "Accessories & Headwear"
+
+# Drops states
+[drop_status_released]
+other = "Available now"
+
+[drop_status_upcoming]
+other = "In production / Upcoming"
+
+[drop_status_archived]
+other = "Archived / Sold out"
+
+[drop_pieces_in_drop]
+other = "Pieces in this release"
+
+[drop_upcoming_notice]
+other = "Currently in production across Buenos Aires workshops. Subscribe to receive an alert when the batch lands."
+
+# Veritas editorial
+[veritas_byline]
+other = "By"
+
+[veritas_artist]
+other = "Artist"
+
+[veritas_neighborhood]
+other = "Neighborhood"
+
+[veritas_read_story]
+other = "Read full dispatch"
+
+# Stockists
+[stockists_title]
+other = "Stockists"
+
+[stockists_subtitle]
+other = "Physical locations to touch the fabric, test the drape, and acquire the garments."
+
+[stockists_hours]
+other = "Hours"
+
+[stockists_map_link]
+other = "Open in Google Maps"
+
+[stockists_instagram]
+other = "Store Instagram"
+
+# Contact
+[contact_title]
+other = "Direct Inquiry"
+
+[contact_subtitle]
+other = "Questions regarding pieces, studio visits, or press. Blunt and direct."
+
+[contact_name]
+other = "Name"
+
+[contact_email]
+other = "Email address"
+
+[contact_subject]
+other = "Subject"
+
+[contact_message]
+other = "Your message"
+
+[contact_direct]
+other = "Direct Channels"
+
+[contact_whatsapp]
+other = "Message on WhatsApp"
+
+# Newsletter
+[newsletter_title_1]
+other = "Hear It"
+
+[newsletter_title_2]
+other = "First"
+
+[newsletter_desc_mockup]
+other = "New drops. Stories. Events. Everything essential, zero spam."
+
+[newsletter_real_ones]
+other = "The real ones also subscribe"
+
+[newsletter_placeholder_mockup]
+other = "Your email here"
+
+# Footer
+[footer_rights]
+other = "VERUM — Crafted with conviction in Buenos Aires, Argentina."
+
+[footer_no_store]
+other = "Independent garment manufacturing. Zero middlemen."
+
+[footer_tagline_bar]
+other = "Buenos Aires, Argentina. Clothes. Ideas. People."
+
+[footer_slogan]
+other = "The real cannot be polished."
+
+[footer_legal_privacy]
+other = "Privacy Policy"
+
+[footer_legal_terms]
+other = "Terms of Service"
+
+# 404
+[error_404_title]
+other = "404 — Off the Grid"
+
+[error_404_desc]
+other = "The coordinates you requested do not exist or were lost in the noise. Return to base."

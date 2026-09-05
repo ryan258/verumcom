@@ -1,0 +1,223 @@
+# Navigation
+[nav_lookbook]
+other = "Pilchas"
+
+[nav_manifesto]
+other = "Manifiesto"
+
+[nav_drops]
+other = "Lanzamientos"
+
+[nav_veritas]
+other = "Veritas"
+
+[nav_stockists]
+other = "Dónde Encontrarnos"
+
+[nav_contact]
+other = "Contacto"
+
+[nav_menu]
+other = "Menú"
+
+[nav_close]
+other = "Cerrar"
+
+# Actions & CTAs
+[cta_lookbook]
+other = "Ver Lookbook"
+
+[cta_latest_drop]
+other = "Explorar Drop"
+
+[cta_explore_drop]
+other = "Explorar Drop"
+
+[cta_subscribe_btn]
+other = "Sumarme"
+
+[cta_where_to_buy]
+other = "Dónde rescatarlo"
+
+[cta_view_piece]
+other = "Ver pieza"
+
+[cta_filter_all]
+other = "Todo"
+
+[cta_filter_category]
+other = "Por prenda"
+
+[cta_filter_drop]
+other = "Por drop"
+
+[cta_subscribe]
+other = "Anotate"
+
+[cta_send]
+other = "Mandar mensaje"
+
+[cta_back_to_lookbook]
+other = "← Volver a las pilchas"
+
+[cta_back_to_drops]
+other = "← Volver a los drops"
+
+[cta_back_to_veritas]
+other = "← Volver a historias"
+
+[cta_back_home]
+other = "Volver al inicio"
+
+# Piece specs
+[spec_drop]
+other = "Lanzamiento"
+
+[spec_category]
+other = "Tipo de prenda"
+
+[spec_fabric]
+other = "Material / Gramaje"
+
+[spec_color]
+other = "Color"
+
+[spec_sizes]
+other = "Talles disponibles"
+
+[spec_details]
+other = "Ficha Técnica"
+
+[spec_story]
+other = "La Historia"
+
+[spec_stockists_available]
+other = "Talleres y locales con stock"
+
+[spec_no_cart_notice]
+other = "VERUM no tiene changuito ni tienda online. Cada prenda se busca en persona en los locales amigos o tirando un mensaje directo a nuestro Instagram."
+
+# Categories in Spanish (Argentine)
+[cat_outerwear]
+other = "Camperas y Buzos"
+
+[cat_tees]
+other = "Remeras"
+
+[cat_bottoms]
+other = "Pantalones"
+
+[cat_accessories]
+other = "Accesorios y Gorras"
+
+# Drops states
+[drop_status_released]
+other = "En la calle"
+
+[drop_status_upcoming]
+other = "En producción / Próximamente"
+
+[drop_status_archived]
+other = "Agotado / Archivo"
+
+[drop_pieces_in_drop]
+other = "Prendas de esta tirada"
+
+[drop_upcoming_notice]
+other = "Tirada en confección en talleres porteños. Dejanos tu correo para avisarte apenas caiga la tanda."
+
+# Veritas editorial
+[veritas_byline]
+other = "Por"
+
+[veritas_artist]
+other = "Artista"
+
+[veritas_neighborhood]
+other = "Barrio"
+
+[veritas_read_story]
+other = "Leer crónica completa"
+
+# Stockists
+[stockists_title]
+other = "Puntos de Venta"
+
+[stockists_subtitle]
+other = "Donde podés tocar la tela, probarte el corte y llevarte la prenda puesta."
+
+[stockists_hours]
+other = "Horarios"
+
+[stockists_map_link]
+other = "Ver en Google Maps"
+
+[stockists_instagram]
+other = "Instagram del local"
+
+# Contact
+[contact_title]
+other = "Mandanos un mensaje"
+
+[contact_subtitle]
+other = "Consultas por prendas, talleres o prensa. Respondemos sin vueltas."
+
+[contact_name]
+other = "Nombre o apodo"
+
+[contact_email]
+other = "Tu correo electrónico"
+
+[contact_subject]
+other = "Asunto"
+
+[contact_message]
+other = "¿Qué necesitás saber?"
+
+[contact_direct]
+other = "Atención directa"
+
+[contact_whatsapp]
+other = "Chatear por WhatsApp"
+
+# Newsletter
+[newsletter_title_1]
+other = "Enterate"
+
+[newsletter_title_2]
+other = "Primero"
+
+[newsletter_desc_mockup]
+other = "Nuevos drops. Historias. Eventos. Todo lo importante, sin spam."
+
+[newsletter_real_ones]
+other = "Los reales también se suscriben"
+
+[newsletter_placeholder_mockup]
+other = "Tu email aquí"
+
+# Footer
+[footer_rights]
+other = "VERUM — Hecho a pulmón en Buenos Aires, Argentina."
+
+[footer_no_store]
+other = "Indumentaria independiente. Sin intermediarios."
+
+[footer_tagline_bar]
+other = "Buenos Aires, Argentina. Ropa. Ideas. Personas."
+
+[footer_slogan]
+other = "Lo real no se pule."
+
+[footer_legal_privacy]
+other = "Privacidad"
+
+[footer_legal_terms]
+other = "Términos"
+
+# 404
+[error_404_title]
+other = "404 — Te fuiste a cualquier lado"
+
+[error_404_desc]
+other = "La página que estás buscando no existe o se la llevó la noche. Volvé al asfalto."
