@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="section">
+  <div class="section__header">
+    <div>
+      <span class="mono-meta">CRONOLOGÍA // CABA</span>
+      <h1 class="section__title glitch-text">{{ .Title }}</h1>
+    </div>
+  </div>
+
+  <div class="drops-grid">
+    {{ range .Pages }}
+      <article class="drop-card">
+        <div class="drop-card__media">
+          {{ $hero := .Resources.GetMatch .Params.hero }}
+          {{ if $hero }}
+            <img src="{{ $hero.RelPermalink }}" alt="{{ .Title }}" class="drop-card__img" loading="lazy" width="{{ $hero.Width }}" height="{{ $hero.Height }}">
+          {{ else }}
+            <div class="drop-card__placeholder">[PORTADA DROP]</div>
+          {{ end }}
+        </div>
+        <div class="drop-card__content">
+          <div class="drop-card__header">
+            <span class="drop-card__number">DROP {{ .Params.drop_number }}</span>
+            {{ if eq .Params.status "released" }}
+              <span class="badge-tag badge-tag--cyan">{{ i18n "drop_status_released" }}</span>
+            {{ else if eq .Params.status "upcoming" }}
+              <span class="badge-tag badge-tag--magenta">{{ i18n "drop_status_upcoming" }}</span>
+            {{ else }}
+              <span class="badge-tag">{{ i18n "drop_status_archived" }}</span>
+            {{ end }}
+          </div>
+          <h2 class="drop-card__title glitch-text">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h2>
+          <p class="drop-card__statement">{{ .Params.statement }}</p>
+          <div class="drop-card__action">
+            <a href="{{ .RelPermalink }}" class="btn btn--secondary">
+              <span>{{ if eq .Params.status "upcoming" }}{{ i18n "cta_subscribe" }}{{ else }}{{ i18n "drop_pieces_in_drop" }}{{ end }}</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

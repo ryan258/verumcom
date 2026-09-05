@@ -1,0 +1,79 @@
+{{ define "main" }}
+<div class="piece-detail">
+  <!-- Left Column: High-Res Image Gallery -->
+  <div class="piece-detail__gallery">
+    {{ $page := . }}
+    {{ range .Params.gallery_order }}
+      {{ $img := $page.Resources.GetMatch . }}
+      <div class="piece-detail__gallery-item">
+        {{ if $img }}
+          <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy" width="{{ $img.Width }}" height="{{ $img.Height }}">
+        {{ else }}
+          <div class="piece-detail__placeholder">[VISTA DE PRENDA]</div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+
+  <!-- Right Column: Specs & Zero-Cart Stockist Callout -->
+  <aside class="piece-detail__sidebar">
+    <div>
+      <a href="{{ relref . (dict "path" "lookbook" "lang" .Site.Language.Lang) }}" class="mono-meta piece-detail__back-link">
+        {{ i18n "cta_back_to_lookbook" }}
+      </a>
+      <div class="piece-detail__category">{{ index .Params.categories 0 | upper }} // {{ .Params.drop | upper }}</div>
+      <h1 class="piece-detail__title glitch-text">{{ .Title }}</h1>
+    </div>
+
+    <!-- Piece Story -->
+    <div class="piece-detail__story">
+      {{ .Content }}
+    </div>
+
+    <!-- Technical Spec Sheet -->
+    <div class="specs-sheet">
+      <div class="specs-sheet__row specs-sheet__row--header">
+        <span class="specs-sheet__name specs-sheet__name--accent">{{ i18n "spec_details" }}</span>
+        <span class="specs-sheet__val">VERUM SPEC-26</span>
+      </div>
+      <div class="specs-sheet__row">
+        <span class="specs-sheet__name">{{ i18n "spec_fabric" }}</span>
+        <span class="specs-sheet__val">{{ .Params.fabric }}</span>
+      </div>
+      <div class="specs-sheet__row">
+        <span class="specs-sheet__name">{{ i18n "spec_color" }}</span>
+        <span class="specs-sheet__val">{{ .Params.color }}</span>
+      </div>
+      <div class="specs-sheet__row">
+        <span class="specs-sheet__name">{{ i18n "spec_sizes" }}</span>
+        <span class="specs-sheet__val">{{ delimit .Params.sizes " · " }}</span>
+      </div>
+      <div class="specs-sheet__row">
+        <span class="specs-sheet__name">{{ i18n "spec_drop" }}</span>
+        <span class="specs-sheet__val">{{ .Params.drop | upper }}</span>
+      </div>
+    </div>
+
+    <!-- Zero Cart Notice & Acquisition Module -->
+    <div class="zero-cart-notice">
+      <div class="zero-cart-notice__badge">
+        <i class="fa-solid fa-store" aria-hidden="true"></i>
+        <span>{{ i18n "cta_where_to_buy" }}</span>
+      </div>
+      <p class="zero-cart-notice__text">
+        {{ i18n "spec_no_cart_notice" }}
+      </p>
+      <div class="zero-cart-notice__actions">
+        <a href="{{ relref . (dict "path" (cond (eq .Site.Language.Lang "es") "puntos-de-venta" "stockists") "lang" .Site.Language.Lang) }}" class="btn btn--primary">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <span>{{ i18n "nav_stockists" }}</span>
+        </a>
+        <a href="{{ .Site.Params.whatsapp }}" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          <span>{{ i18n "contact_whatsapp" }}</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+</div>
+{{ end }}

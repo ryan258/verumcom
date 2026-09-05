@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="section page-section page-section--list">
+  <div class="section__header">
+    <h1 class="section__title glitch-text">{{ .Title }}</h1>
+  </div>
+  <div class="default-list">
+    {{ range .Pages }}
+      <article class="default-list__item">
+        <div class="default-list__content">
+          <h2 class="default-list__title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h2>
+          <p class="default-list__summary">{{ .Summary }}</p>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

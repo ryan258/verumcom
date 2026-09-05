@@ -1,0 +1,38 @@
+{{ define "main" }}
+<article class="story-detail">
+  <div class="story-detail__header">
+    <a href="{{ relref . (dict "path" "veritas" "lang" .Site.Language.Lang) }}" class="mono-meta story-detail__back-link">
+      {{ i18n "cta_back_to_veritas" }}
+    </a>
+    
+    <div class="story-detail__meta-top">
+      <span class="mono-meta story-detail__location">{{ .Params.neighborhood | upper }}</span>
+      <span class="mono-meta">// {{ i18n "veritas_artist" }}: {{ .Params.artist_name }}</span>
+      <span class="mono-meta">// {{ .Date.Format "02.01.2006" }}</span>
+    </div>
+
+    <h1 class="story-detail__title glitch-text">{{ .Title }}</h1>
+    <p class="story-detail__lead">{{ .Params.summary }}</p>
+  </div>
+
+  <!-- Hero Image -->
+  <div class="story-detail__hero">
+    {{ $hero := .Resources.GetMatch .Params.hero }}
+    {{ if $hero }}
+      <img src="{{ $hero.RelPermalink }}" alt="{{ .Title }}" class="story-detail__hero-img" width="{{ $hero.Width }}" height="{{ $hero.Height }}">
+    {{ end }}
+  </div>
+
+  <!-- Article Body -->
+  <div class="story-detail__body">
+    {{ .Content }}
+  </div>
+
+  <div class="story-detail__footer">
+    <span class="mono-meta">{{ i18n "veritas_byline" }} {{ .Params.author }} // VERUM ARCHIVE</span>
+    <a href="{{ relref . (dict "path" "veritas" "lang" .Site.Language.Lang) }}" class="btn btn--secondary">
+      {{ i18n "cta_back_to_veritas" }}
+    </a>
+  </div>
+</article>
+{{ end }}

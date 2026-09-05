@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="manifesto-break">
+  <div class="manifesto-break__container">
+    <div class="badge-tag manifesto-break__badge">
+      STATEMENT OF PRINCIPLES // BUENOS AIRES
+    </div>
+
+    <h1 class="manifesto-break__lead glitch-text">
+      {{ .Title }}
+    </h1>
+
+    <div class="manifesto-break__body">
+      {{ .Content }}
+    </div>
+
+    <div class="manifesto-break__footer">
+      <span class="mono-meta manifesto-break__footer-meta">VERUM // RAW AUTHENTICITY // BUENOS AIRES</span>
+      <a href="{{ relref . (dict "path" "lookbook" "lang" .Site.Language.Lang) }}" class="btn btn--ink">
+        <span>{{ i18n "cta_lookbook" }}</span>
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+{{ end }}

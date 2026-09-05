@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="section">
+  <div class="section__header">
+    <div>
+      <span class="mono-meta">IN-PERSON PICKUP // BUENOS AIRES</span>
+      <h1 class="section__title glitch-text">{{ .Title }}</h1>
+    </div>
+  </div>
+
+  <div class="stockist-intro">
+    <p>{{ i18n "stockists_subtitle" }}</p>
+  </div>
+
+  <div class="stockist-grid">
+    {{ range hugo.Data.stockists }}
+      <article class="stockist-card">
+        <div class="stockist-card__header">
+          <span class="stockist-card__neighborhood">{{ .city }} // {{ .neighborhood }}</span>
+          <h2 class="stockist-card__name">{{ .name }}</h2>
+        </div>
+
+        <div class="stockist-card__address">
+          <i class="fa-solid fa-location-dot stockist-card__icon stockist-card__icon--location" aria-hidden="true"></i>
+          <span>{{ .address }}</span>
+        </div>
+
+        <div class="stockist-card__hours">
+          <i class="fa-regular fa-clock stockist-card__icon stockist-card__icon--hours" aria-hidden="true"></i>
+          <span>{{ .hours }}</span>
+        </div>
+
+        {{ with .description }}
+          <p class="stockist-card__desc">{{ . }}</p>
+        {{ end }}
+
+        <div class="stockist-card__actions">
+          <a href="{{ .maps_url }}" target="_blank" rel="noopener noreferrer" class="stockist-card__link">
+            <span>{{ i18n "stockists_map_link" }}</span>
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+          <a href="https://instagram.com/{{ trim .instagram "@" }}" target="_blank" rel="noopener noreferrer" class="stockist-card__link stockist-card__link--instagram">
+            <span>{{ .instagram }}</span>
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

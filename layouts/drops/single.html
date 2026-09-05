@@ -1,0 +1,83 @@
+{{ define "main" }}
+<div class="drop-detail">
+  <a href="{{ relref . (dict "path" "drops" "lang" .Site.Language.Lang) }}" class="mono-meta drop-detail__back-link">
+    {{ i18n "cta_back_to_drops" }}
+  </a>
+
+  <!-- Drop Hero Image -->
+  <div class="drop-detail__hero">
+    {{ $hero := .Resources.GetMatch .Params.hero }}
+    {{ if $hero }}
+      <img src="{{ $hero.RelPermalink }}" alt="{{ .Title }}" class="drop-detail__hero-img" width="{{ $hero.Width }}" height="{{ $hero.Height }}">
+    {{ end }}
+  </div>
+
+  <div class="drop-detail__intro">
+    <div class="drop-detail__meta">
+      <span class="mono-meta drop-detail__number">DROP {{ .Params.drop_number }}</span>
+      <span class="mono-meta">// {{ .Date.Format "02.01.2006" }}</span>
+      {{ if eq .Params.status "released" }}
+        <span class="badge-tag badge-tag--cyan">{{ i18n "drop_status_released" }}</span>
+      {{ else if eq .Params.status "upcoming" }}
+        <span class="badge-tag badge-tag--magenta">{{ i18n "drop_status_upcoming" }}</span>
+      {{ else }}
+        <span class="badge-tag">{{ i18n "drop_status_archived" }}</span>
+      {{ end }}
+    </div>
+
+    <h1 class="drop-detail__title glitch-text">{{ .Title }}</h1>
+    <p class="drop-detail__statement">{{ .Params.statement }}</p>
+    
+    <div class="drop-detail__content">
+      {{ .Content }}
+    </div>
+  </div>
+
+  <!-- State Branching: Upcoming vs Released -->
+  {{ if eq .Params.status "upcoming" }}
+    <div class="newsletter-box">
+      <span class="badge-tag badge-tag--magenta newsletter-box__badge">{{ i18n "drop_status_upcoming" }}</span>
+      <h2 class="newsletter-box__title">{{ i18n "drop_upcoming_notice" }}</h2>
+      
+      <form action="{{ .Site.Params.newsletter_endpoint }}" method="POST" target="_blank" class="newsletter-box__form">
+        <input type="email" name="email" class="newsletter-box__input" placeholder="{{ i18n "newsletter_placeholder" }}" required aria-label="{{ i18n "contact_email" }}">
+        <button type="submit" class="btn btn--accent">
+          <span>{{ i18n "cta_subscribe" }}</span>
+          <i class="fa-solid fa-bell" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+  {{ else }}
+    <!-- Pieces belonging to this drop -->
+    {{ $dropSlug := printf "drop-%s" .Params.drop_number }}
+    {{ $dropPieces := where (where .Site.RegularPages "Section" "lookbook") ".Params.drop" $dropSlug }}
+    <div>
+      <h2 class="drop-detail__pieces-title">{{ i18n "drop_pieces_in_drop" }}</h2>
+      <div class="lookbook-grid">
+        {{ range $dropPieces }}
+          <article class="piece-card" data-drop="{{ .Params.drop }}">
+            <a href="{{ .RelPermalink }}" class="piece-card__media" tabindex="-1" aria-hidden="true">
+              {{ $frontImg := index .Params.gallery_order 0 }}
+              {{ $res := .Resources.GetMatch $frontImg }}
+              {{ if $res }}
+                <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="piece-card__img" loading="lazy">
+              {{ else }}
+                <div class="piece-card__placeholder">[PRENDA]</div>
+              {{ end }}
+            </a>
+            <div class="piece-card__content">
+              <div class="piece-card__specs-row">
+                <span class="piece-card__meta-tag">{{ index .Params.categories 0 | upper }}</span>
+                <span class="piece-card__price-free-tag">{{ .Params.fabric }}</span>
+              </div>
+              <h3 class="piece-card__title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              </h3>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

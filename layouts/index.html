@@ -1,0 +1,231 @@
+{{ define "main" }}
+<!-- Section 1: Opening Hero Moment -->
+<section class="hero-section" aria-label="Introducción VERUM">
+  <img class="hero-section__model" src="{{ "images/hero-model.png" | relURL }}" alt="" aria-hidden="true" width="1122" height="1402">
+  <div class="hero-section__top-bar">
+    <span class="hero-section__stamp">01 / 05</span>
+    <span class="hero-section__stamp">ROPA // IDEAS // PERSONAS // ARGENTINA</span>
+  </div>
+
+  <div class="hero-section__main-lockup">
+    <!-- Signature Dripping Stencil Logo -->
+    <div class="hero-section__brand-svg">
+      <img src="/images/logo.svg" alt="VERUM Stencil" width="520" height="140">
+    </div>
+
+    <h1 class="hero-section__statement glitch-text">
+      {{ if eq .Site.Language.Lang "es" }}
+        LO REAL NO SE PULE.
+      {{ else }}
+        THE REAL CANNOT BE POLISHED.
+      {{ end }}
+    </h1>
+
+    <p class="hero-section__subhead">
+      {{ if eq .Site.Language.Lang "es" }}
+        ROPA PARA UNA GENERACIÓN QUE TODAVÍA CREE EN ALGO.
+      {{ else }}
+        CLOTHING FOR A GENERATION THAT STILL BELIEVES IN SOMETHING.
+      {{ end }}
+    </p>
+
+    <div class="hero-section__cta-row">
+      <a href="{{ relref . (dict "path" "lookbook" "lang" .Site.Language.Lang) }}" class="btn btn--accent glitch-hover">
+        <span>{{ i18n "cta_lookbook" }}</span>
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-section__bottom-bar">
+    <div class="hero-section__stamp">
+      CALLE // ARTE // IDENTIDAD // MOVIMIENTO <span class="hero-section__marker">+</span>
+    </div>
+    <img class="hero-section__tagline-graffiti" src="{{ "images/tag-corona.svg" | relURL }}" alt="MISMA CIUDAD OTRA VERDAD" width="900" height="220">
+    <div class="hero-section__coords">
+      -34.6037° S &nbsp; -58.3816° W &nbsp;//&nbsp; ARG X SIEMPRE
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: Drop Spotlight (DROP 03 / DROP 01) -->
+{{ $drops := where (where .Site.RegularPages "Section" "drops") ".Params.status" "released" }}
+{{ with index $drops 0 }}
+<section class="section" aria-label="{{ i18n "nav_drops" }}">
+  <div class="drop-spotlight">
+    <div class="drop-spotlight__content">
+      <div class="drop-spotlight__number-outline">
+        DROP {{ .Params.drop_number }}
+      </div>
+      <h2 class="drop-spotlight__title">
+        {{ if eq $.Site.Language.Lang "es" }}
+          NUEVOS CÓDIGOS. MISMA ESENCIA.
+        {{ else }}
+          NEW CODES. SAME ESSENCE.
+        {{ end }}
+      </h2>
+      <p class="drop-spotlight__desc">
+        {{ if eq $.Site.Language.Lang "es" }}
+          Una colección que nace de la calle, el ruido y todo lo que nos forma.
+        {{ else }}
+          A collection born from concrete, noise, and everything that shapes us.
+        {{ end }}
+      </p>
+      <div>
+        <a href="{{ .RelPermalink }}" class="drop-spotlight__link">
+          <span>{{ i18n "cta_explore_drop" }}</span>
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="drop-spotlight__media">
+      {{ $img := .Resources.GetMatch .Params.hero }}
+      {{ if $img }}
+        <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}" class="drop-spotlight__img" loading="lazy" width="{{ $img.Width }}" height="{{ $img.Height }}">
+      {{ end }}
+      <div class="drop-spotlight__spray-tag">
+        ARTE TAMBIÉN ES RESISTENCIA 👑
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Section 3: 5-Column Featured Pieces Spotlight -->
+{{ $featuredPieces := where (where .Site.RegularPages "Section" "lookbook") ".Params.featured" true | first 3 }}
+{{ if not $featuredPieces }}
+  {{ $featuredPieces = where .Site.RegularPages "Section" "lookbook" | first 3 }}
+{{ end }}
+<section class="section" aria-label="Piezas Destacadas">
+  <div class="featured-strip">
+    <!-- Left Banner -->
+    <aside class="featured-strip__side-banner featured-strip__side-banner--left">
+      <div>
+        <h2 class="featured-strip__side-title glitch-text">
+          {{ if eq .Site.Language.Lang "es" }}PIEZAS<br>DESTACADAS{{ else }}FEATURED<br>PIECES{{ end }}
+        </h2>
+      </div>
+      <div class="featured-strip__side-desc">
+        FUNCIONAL.<br>CRUDA.<br>ARGENTINA.
+      </div>
+    </aside>
+
+    <!-- 3 Center Featured Pieces -->
+    {{ range $idx, $piece := $featuredPieces }}
+      <article class="piece-card-mockup">
+        <a href="{{ .RelPermalink }}" class="piece-card-mockup__media" tabindex="-1" aria-hidden="true">
+          {{ $frontImg := index .Params.gallery_order 0 }}
+          {{ $res := .Resources.GetMatch $frontImg }}
+          {{ if $res }}
+            <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="piece-card-mockup__img" loading="lazy" width="{{ $res.Width }}" height="{{ $res.Height }}">
+          {{ end }}
+          <span class="piece-card-mockup__number-badge">0{{ add $idx 1 }}</span>
+        </a>
+        <div class="piece-card-mockup__body">
+          <h3 class="piece-card-mockup__title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <div class="piece-card-mockup__specs-list">
+            <span>// {{ .Params.fabric | upper }}</span>
+            <span>// FIT OVERSIZE</span>
+            <span>// {{ .Params.drop | upper }}</span>
+          </div>
+        </div>
+      </article>
+    {{ end }}
+
+    <!-- Right Banner -->
+    <aside class="featured-strip__side-banner featured-strip__side-banner--right">
+      <div class="featured-strip__side-slogan">
+        LA ROPA<br>TAMBIÉN<br>CUENTA<br>HISTORIAS
+      </div>
+      <div class="mono-meta">
+        — VERUM ARCHIVE
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- Section 4: Veritas Home Spread (The Light Paper Break) -->
+{{ $story := index (where .Site.RegularPages "Section" "veritas") 0 }}
+{{ with $story }}
+<section class="veritas-home-break" aria-label="Veritas — Historias Reales">
+  <div class="veritas-home-break__container">
+    <!-- Left Column: Artist B&W Portrait with Neon Spray Accent -->
+    <div class="veritas-home-break__portrait-col">
+      {{ $hero := .Resources.GetMatch .Params.hero }}
+      {{ if $hero }}
+        <img src="{{ $hero.RelPermalink }}" alt="{{ .Params.artist_name }}" class="veritas-home-break__portrait-img" loading="lazy">
+      {{ end }}
+      <div class="veritas-home-break__spray-accent">✕</div>
+    </div>
+
+    <!-- Center Column: Huge Headline & Editorial Statement -->
+    <div class="veritas-home-break__center-col">
+      <h2 class="veritas-home-break__title glitch-text">VERITAS</h2>
+      <h3 class="veritas-home-break__subhead">
+        {{ if eq $.Site.Language.Lang "es" }}
+          HISTORIAS REALES. PERSONAS REALES.
+        {{ else }}
+          REAL STORIES. REAL PEOPLE.
+        {{ end }}
+      </h3>
+      <p class="veritas-home-break__body">
+        {{ if eq $.Site.Language.Lang "es" }}
+          Una serie editorial sobre artistas, creadores y personas que mantienen viva la cultura en las calles de Argentina.
+        {{ else }}
+          An editorial series documenting artists, creators, and individuals keeping street culture alive across Argentina.
+        {{ end }}
+      </p>
+      <div>
+        <a href="{{ .RelPermalink }}" class="veritas-home-break__link">
+          <span>{{ if eq $.Site.Language.Lang "es" }}LEER HISTORIA{{ else }}READ STORY{{ end }}</span>
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Meta & Street View with Wheatpaste Tag -->
+    <div class="veritas-home-break__right-col">
+      <div class="veritas-home-break__right-meta">
+        <span>// 001</span>
+        <span>ARTISTAS // CALLE // COMUNIDAD // SIN FILTRO</span>
+      </div>
+      <div class="veritas-home-break__right-img-wrap">
+        <img src="{{ "images/veritas-street-wall.jpg" | relURL }}" alt="Fachada intervenida de un edificio de Buenos Aires" class="veritas-home-break__right-img" loading="lazy" width="1200" height="900">
+        <div class="veritas-home-break__wheatpaste-tag">
+          LA BELLEZA TAMBIÉN ES POLÍTICA 👑
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Section 5: Newsletter (Enterate Primero) -->
+<section class="newsletter-mockup" aria-label="Suscripción Enterate Primero">
+  <div class="newsletter-mockup__title-col">
+    <div class="newsletter-mockup__heading-1 glitch-text">{{ i18n "newsletter_title_1" }}</div>
+    <div class="newsletter-mockup__heading-2">{{ i18n "newsletter_title_2" }}</div>
+  </div>
+
+  <div class="newsletter-mockup__form-col">
+    <img class="newsletter-mockup__image" src="{{ "images/newsletter-eye.jpg" | relURL }}" alt="Mirada en sombra" loading="lazy" width="1000" height="600">
+    <p class="newsletter-mockup__subhead">{{ i18n "newsletter_desc_mockup" }}</p>
+
+    <form action="{{ .Site.Params.newsletter_endpoint }}" method="POST" target="_blank" class="newsletter-mockup__form">
+      <label class="sr-only" for="newsletter-email">{{ i18n "contact_email" }} *</label>
+      <input type="email" id="newsletter-email" name="email" class="newsletter-mockup__input" placeholder="{{ i18n "newsletter_placeholder_mockup" }}" required autocomplete="email" aria-describedby="newsletter-instructions">
+      <button type="submit" class="newsletter-mockup__btn">
+        <span>{{ i18n "cta_subscribe_btn" }}</span>
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </form>
+
+    <p id="newsletter-instructions" class="newsletter-mockup__footnote">
+      — {{ i18n "newsletter_real_ones" }}
+    </p>
+  </div>
+</section>
+{{ end }}

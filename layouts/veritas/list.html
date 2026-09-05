@@ -1,0 +1,39 @@
+{{ define "main" }}
+<div class="section">
+  <div class="section__header">
+    <div>
+      <span class="mono-meta">EDITORIAL // CRÓNICAS DE TALLER</span>
+      <h1 class="section__title glitch-text">{{ .Title }}</h1>
+    </div>
+  </div>
+
+  <div class="veritas-grid">
+    {{ range .Pages }}
+      <article class="veritas-card">
+        <a href="{{ .RelPermalink }}" class="veritas-card__media" tabindex="-1" aria-hidden="true">
+          {{ $hero := .Resources.GetMatch .Params.hero }}
+          {{ if $hero }}
+            <img src="{{ $hero.RelPermalink }}" alt="{{ .Title }}" class="veritas-card__img" loading="lazy">
+          {{ else }}
+            <div class="veritas-card__placeholder">[PORTADA HISTORIA]</div>
+          {{ end }}
+        </a>
+        <div class="veritas-card__content">
+          <div class="veritas-card__meta">
+            <span class="mono-meta">{{ .Params.neighborhood }} // {{ .Params.artist_name }}</span>
+            <span class="badge-tag badge-tag--magenta">VERITAS</span>
+          </div>
+          <h2 class="veritas-card__title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h2>
+          <p class="veritas-card__summary">{{ .Params.summary }}</p>
+          <a href="{{ .RelPermalink }}" class="veritas-card__read-more">
+            <span>{{ i18n "veritas_read_story" }}</span>
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

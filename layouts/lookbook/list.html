@@ -1,0 +1,58 @@
+{{ define "main" }}
+<div class="section">
+  <div class="section__header">
+    <div>
+      <span class="mono-meta">BUENOS AIRES // COLECCIÓN PERMANENTE</span>
+      <h1 class="section__title glitch-text">{{ .Title }}</h1>
+    </div>
+  </div>
+
+  <!-- Filter Bar with Progressive Enhancement -->
+  <div class="filter-bar" role="toolbar" aria-label="Filtro de prendas">
+    <div class="filter-bar__group">
+      <span class="filter-bar__label">{{ i18n "cta_filter_all" }}:</span>
+      <button type="button" class="filter-bar__btn filter-bar__btn--active" data-filter-type="all" data-filter-val="all">{{ i18n "cta_filter_all" }}</button>
+    </div>
+
+    <div class="filter-bar__group">
+      <span class="filter-bar__label">{{ i18n "cta_filter_category" }}:</span>
+      <button type="button" class="filter-bar__btn" data-filter-type="category" data-filter-val="outerwear">{{ i18n "cat_outerwear" }}</button>
+      <button type="button" class="filter-bar__btn" data-filter-type="category" data-filter-val="tees">{{ i18n "cat_tees" }}</button>
+      <button type="button" class="filter-bar__btn" data-filter-type="category" data-filter-val="bottoms">{{ i18n "cat_bottoms" }}</button>
+      <button type="button" class="filter-bar__btn" data-filter-type="category" data-filter-val="accessories">{{ i18n "cat_accessories" }}</button>
+    </div>
+
+    <div class="filter-bar__group">
+      <span class="filter-bar__label">{{ i18n "cta_filter_drop" }}:</span>
+      <button type="button" class="filter-bar__btn" data-filter-type="drop" data-filter-val="drop-01">Drop 01</button>
+      <button type="button" class="filter-bar__btn" data-filter-type="drop" data-filter-val="drop-02">Drop 02</button>
+    </div>
+  </div>
+
+  <!-- Asymmetric Lookbook Grid -->
+  <div class="lookbook-grid">
+    {{ range $index, $piece := .Pages }}
+      <article class="piece-card{{ if or (eq $index 0) (eq $index 5) }} piece-card--featured{{ end }}" data-drop="{{ .Params.drop }}" data-categories="{{ delimit .Params.categories "," }}">
+        <a href="{{ .RelPermalink }}" class="piece-card__media" tabindex="-1" aria-hidden="true">
+          {{ $frontImg := index .Params.gallery_order 0 }}
+          {{ $res := .Resources.GetMatch $frontImg }}
+          {{ if $res }}
+            <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="piece-card__img" loading="lazy" width="{{ $res.Width }}" height="{{ $res.Height }}">
+          {{ else }}
+            <div class="piece-card__placeholder">[IMAGEN DE PRENDA]</div>
+          {{ end }}
+        </a>
+        <div class="piece-card__content">
+          <div class="piece-card__specs-row">
+            <span class="piece-card__meta-tag">{{ index .Params.categories 0 | upper }} // {{ .Params.drop | upper }}</span>
+            <span class="piece-card__price-free-tag">{{ .Params.fabric }}</span>
+          </div>
+          <h2 class="piece-card__title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h2>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
