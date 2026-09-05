@@ -13,7 +13,8 @@
         <a href="{{ .RelPermalink }}" class="veritas-card__media" tabindex="-1" aria-hidden="true">
           {{ $hero := .Resources.GetMatch .Params.hero }}
           {{ if $hero }}
-            <img src="{{ $hero.RelPermalink }}" alt="{{ .Title }}" class="veritas-card__img" loading="lazy">
+            {{ $res := $hero.Resize "720x webp" }}
+            <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="veritas-card__img" loading="lazy" width="{{ $res.Width }}" height="{{ $res.Height }}">
           {{ else }}
             <div class="veritas-card__placeholder">[PORTADA HISTORIA]</div>
           {{ end }}
@@ -29,7 +30,7 @@
           <p class="veritas-card__summary">{{ .Params.summary }}</p>
           <a href="{{ .RelPermalink }}" class="veritas-card__read-more">
             <span>{{ i18n "veritas_read_story" }}</span>
-            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            <span class="ui-symbol" aria-hidden="true">→</span>
           </a>
         </div>
       </article>

@@ -19,6 +19,7 @@
   <div class="story-detail__hero">
     {{ $hero := .Resources.GetMatch .Params.hero }}
     {{ if $hero }}
+      {{ $hero = $hero.Resize "1200x webp" }}
       <img src="{{ $hero.RelPermalink }}" alt="{{ .Title }}" class="story-detail__hero-img" width="{{ $hero.Width }}" height="{{ $hero.Height }}">
     {{ end }}
   </div>

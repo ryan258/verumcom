@@ -43,7 +43,7 @@
         <input type="email" name="email" class="newsletter-box__input" placeholder="{{ i18n "newsletter_placeholder" }}" required aria-label="{{ i18n "contact_email" }}">
         <button type="submit" class="btn btn--accent">
           <span>{{ i18n "cta_subscribe" }}</span>
-          <i class="fa-solid fa-bell" aria-hidden="true"></i>
+          <span class="ui-symbol" aria-hidden="true">+</span>
         </button>
       </form>
     </div>
@@ -60,7 +60,8 @@
               {{ $frontImg := index .Params.gallery_order 0 }}
               {{ $res := .Resources.GetMatch $frontImg }}
               {{ if $res }}
-                <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="piece-card__img" loading="lazy">
+                {{ $res = $res.Resize "720x webp" }}
+                <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="piece-card__img" loading="lazy" width="{{ $res.Width }}" height="{{ $res.Height }}">
               {{ else }}
                 <div class="piece-card__placeholder">[PRENDA]</div>
               {{ end }}
