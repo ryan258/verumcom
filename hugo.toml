@@ -1,0 +1,53 @@
+baseURL = "https://verum.com/"
+title = "VERUM"
+defaultContentLanguage = "es"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+summaryLength = 30
+
+[languages]
+  [languages.es]
+    locale = "es-AR"
+    label = "Español"
+    contentDir = "content/es"
+    weight = 1
+    title = "VERUM — Lo Real"
+    [languages.es.params]
+      tagline = "Lujo de barrio. Sin filtros. CABA."
+      description = "VERUM — Indumentaria cruda y auténtica nacida en las calles de Buenos Aires. Sin chamuyo, sin intermediarios."
+
+  [languages.en]
+    locale = "en"
+    label = "English"
+    contentDir = "content/en"
+    weight = 2
+    title = "VERUM — The Real"
+    [languages.en.params]
+      tagline = "Neighborhood luxury. Unfiltered. CABA."
+      description = "VERUM — Raw, authentic streetwear straight from the streets of Buenos Aires. No gimmicks, no middlemen."
+
+[taxonomies]
+  drop = "drops"
+  category = "categories"
+
+[params]
+  brand_name = "VERUM"
+  origin = "Buenos Aires, Argentina"
+  instagram = "https://instagram.com/verum.ba"
+  whatsapp = "https://wa.me/5491100000000"
+  contact_email = "contacto@verum.com"
+  form_endpoint = "https://formspree.io/f/placeholder"
+  newsletter_endpoint = "https://buttondown.email/api/emails/embed-subscribe/verum"
+
+[imaging]
+  quality = 85
+  resampleFilter = "Lanczos"
+  bgColor = "#0A0A0A"
+
+[build]
+  writeStats = true
+
+[caches]
+  [caches.assets]
+    maxAge = "720h"
+    dir = ":resourceDir/_gen"
