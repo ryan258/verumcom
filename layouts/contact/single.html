@@ -42,26 +42,28 @@
 
         <button type="submit" class="btn btn--primary contact-form__submit">
           <span>{{ i18n "cta_send" }}</span>
-          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          <span class="ui-symbol" aria-hidden="true">→</span>
         </button>
       </form>
     </div>
 
-    <aside class="contact-direct">
+    <div class="contact-direct">
       <h2 class="contact-direct__title">{{ i18n "contact_direct" }}</h2>
 
+      {{ with .Site.Params.whatsapp }}
       <div class="contact-direct__item">
         <span class="contact-direct__label">Studio WhatsApp</span>
-        <a href="{{ .Site.Params.whatsapp }}" target="_blank" rel="noopener noreferrer" class="contact-direct__link">
-          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-          <span>+54 9 11 0000-0000</span>
+        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="contact-direct__link">
+          <span class="ui-symbol" aria-hidden="true">↗</span>
+          <span>WhatsApp</span>
         </a>
       </div>
+      {{ end }}
 
       <div class="contact-direct__item">
         <span class="contact-direct__label">Official Instagram</span>
         <a href="{{ .Site.Params.instagram }}" target="_blank" rel="noopener noreferrer" class="contact-direct__link">
-          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          <span class="ui-symbol" aria-hidden="true">↗</span>
           <span>@verum.ba</span>
         </a>
       </div>
@@ -69,7 +71,7 @@
       <div class="contact-direct__item">
         <span class="contact-direct__label">Email</span>
         <a href="mailto:{{ .Site.Params.contact_email }}" class="contact-direct__link">
-          <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+          <span class="ui-symbol" aria-hidden="true">→</span>
           <span>{{ .Site.Params.contact_email }}</span>
         </a>
       </div>
@@ -79,7 +81,7 @@
           Studio response hours: Monday to Friday 10:00 to 19:00 (Buenos Aires Time).
         </span>
       </div>
-    </aside>
+    </div>
   </div>
 </div>
 {{ end }}

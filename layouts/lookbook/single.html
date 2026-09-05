@@ -1,22 +1,13 @@
 {{ define "main" }}
 <div class="piece-detail">
-  <!-- Left Column: High-Res Image Gallery -->
-  <div class="piece-detail__gallery">
-    {{ $page := . }}
-    {{ range .Params.gallery_order }}
-      {{ $img := $page.Resources.GetMatch . }}
-      <div class="piece-detail__gallery-item">
-        {{ if $img }}
-          <img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy" width="{{ $img.Width }}" height="{{ $img.Height }}">
-        {{ else }}
-          <div class="piece-detail__placeholder">[VISTA DE PRENDA]</div>
-        {{ end }}
-      </div>
-    {{ end }}
-  </div>
+  {{ $page := . }}
+  {{ with .Resources.GetMatch (index .Params.gallery_order 0) }}
+    {{ $img := .Resize "1200x webp" }}
+    <div class="piece-detail__primary"><img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }} — {{ if eq $page.Language.Lang "es" }}vista 1{{ else }}view 1{{ end }}" width="{{ $img.Width }}" height="{{ $img.Height }}" fetchpriority="high"></div>
+  {{ end }}
 
   <!-- Right Column: Specs & Zero-Cart Stockist Callout -->
-  <aside class="piece-detail__sidebar">
+  <div class="piece-detail__sidebar">
     <div>
       <a href="{{ relref . (dict "path" "lookbook" "lang" .Site.Language.Lang) }}" class="mono-meta piece-detail__back-link">
         {{ i18n "cta_back_to_lookbook" }}
@@ -31,33 +22,19 @@
     </div>
 
     <!-- Technical Spec Sheet -->
-    <div class="specs-sheet">
-      <div class="specs-sheet__row specs-sheet__row--header">
-        <span class="specs-sheet__name specs-sheet__name--accent">{{ i18n "spec_details" }}</span>
-        <span class="specs-sheet__val">VERUM SPEC-26</span>
-      </div>
-      <div class="specs-sheet__row">
-        <span class="specs-sheet__name">{{ i18n "spec_fabric" }}</span>
-        <span class="specs-sheet__val">{{ .Params.fabric }}</span>
-      </div>
-      <div class="specs-sheet__row">
-        <span class="specs-sheet__name">{{ i18n "spec_color" }}</span>
-        <span class="specs-sheet__val">{{ .Params.color }}</span>
-      </div>
-      <div class="specs-sheet__row">
-        <span class="specs-sheet__name">{{ i18n "spec_sizes" }}</span>
-        <span class="specs-sheet__val">{{ delimit .Params.sizes " · " }}</span>
-      </div>
-      <div class="specs-sheet__row">
-        <span class="specs-sheet__name">{{ i18n "spec_drop" }}</span>
-        <span class="specs-sheet__val">{{ .Params.drop | upper }}</span>
-      </div>
-    </div>
+    <section class="specs-sheet" aria-labelledby="specs-title">
+      <h2 class="specs-sheet__heading" id="specs-title">{{ i18n "spec_details" }}</h2>
+      <dl>
+        {{ range slice (dict "label" "spec_fabric" "value" .Params.fabric) (dict "label" "spec_color" "value" .Params.color) (dict "label" "spec_sizes" "value" (delimit .Params.sizes " · ")) (dict "label" "spec_drop" "value" (upper .Params.drop)) }}
+        <div class="specs-sheet__row"><dt class="specs-sheet__name">{{ i18n .label }}</dt><dd class="specs-sheet__val">{{ .value }}</dd></div>
+        {{ end }}
+      </dl>
+    </section>
 
     <!-- Zero Cart Notice & Acquisition Module -->
     <div class="zero-cart-notice">
       <div class="zero-cart-notice__badge">
-        <i class="fa-solid fa-store" aria-hidden="true"></i>
+        <span class="ui-symbol" aria-hidden="true">→</span>
         <span>{{ i18n "cta_where_to_buy" }}</span>
       </div>
       <p class="zero-cart-notice__text">
@@ -65,15 +42,29 @@
       </p>
       <div class="zero-cart-notice__actions">
         <a href="{{ relref . (dict "path" (cond (eq .Site.Language.Lang "es") "puntos-de-venta" "stockists") "lang" .Site.Language.Lang) }}" class="btn btn--primary">
-          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <span class="ui-symbol" aria-hidden="true">◎</span>
           <span>{{ i18n "nav_stockists" }}</span>
         </a>
-        <a href="{{ .Site.Params.whatsapp }}" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
-          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        {{ with .Site.Params.whatsapp }}
+        <a href="{{ . }}" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">
+          <span class="ui-symbol" aria-hidden="true">↗</span>
           <span>{{ i18n "contact_whatsapp" }}</span>
         </a>
+        {{ else }}
+        <a href="{{ .Site.Params.instagram }}" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">
+          <span class="ui-symbol" aria-hidden="true">↗</span>
+          <span>Instagram</span>
+        </a>
+        {{ end }}
       </div>
     </div>
-  </aside>
+  </div>
+  <div class="piece-detail__gallery">
+    {{ range $index, $file := after 1 .Params.gallery_order }}
+      {{ with $page.Resources.GetMatch $file }}{{ $img := .Resize "960x webp" }}
+      <figure class="piece-detail__gallery-item"><img src="{{ $img.RelPermalink }}" alt="{{ $page.Title }} — {{ if eq $page.Language.Lang "es" }}vista{{ else }}view{{ end }} {{ add $index 2 }}" loading="lazy" width="{{ $img.Width }}" height="{{ $img.Height }}"></figure>
+      {{ end }}
+    {{ end }}
+  </div>
 </div>
 {{ end }}
