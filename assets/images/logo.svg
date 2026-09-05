@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" width="100%" height="100%" aria-label="VERUM">
+  <defs>
+    <filter id="chromatic-split" x="-20%" y="-20%" width="140%" height="140%">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" in="SourceGraphic" result="red"/>
+      <feOffset dx="3" dy="1" in="red" result="red-shifted"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" in="SourceGraphic" result="cyan"/>
+      <feOffset dx="-3" dy="-1" in="cyan" result="cyan-shifted"/>
+      <feBlend mode="screen" in="red-shifted" in2="cyan-shifted" result="glitch"/>
+      <feMerge>
+        <feMergeNode in="cyan-shifted"/>
+        <feMergeNode in="red-shifted"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Stencil glyph definitions with street drips -->
+    <g id="verum-stencil">
+      <!-- V -->
+      <path d="M 20 20 L 52 20 L 76 92 L 100 20 L 132 20 L 92 118 L 60 118 Z" fill="currentColor"/>
+      <line x1="42" y1="62" x2="68" y2="62" stroke="#0A0A0A" stroke-width="4"/>
+      
+      <!-- E -->
+      <path d="M 148 20 L 215 20 L 215 46 L 180 46 L 180 58 L 210 58 L 210 80 L 180 80 L 180 92 L 216 92 L 216 118 L 148 118 Z" fill="currentColor"/>
+      <line x1="140" y1="52" x2="185" y2="52" stroke="#0A0A0A" stroke-width="3"/>
+      <line x1="140" y1="86" x2="185" y2="86" stroke="#0A0A0A" stroke-width="3"/>
+      
+      <!-- R (with wet paint drips) -->
+      <path d="M 232 20 L 285 20 C 308 20 318 32 318 52 C 318 68 308 77 292 81 L 322 118 L 290 118 L 264 85 L 260 85 L 260 118 L 232 118 Z M 260 44 L 260 65 L 280 65 C 288 65 292 61 292 54 C 292 48 288 44 280 44 Z" fill="currentColor"/>
+      <!-- Drips off R -->
+      <path d="M 244 118 Q 243 132 245 136 Q 247 138 249 135 Q 250 128 248 118 Z" fill="currentColor"/>
+      <path d="M 314 118 Q 315 127 317 131 Q 319 133 320 129 Q 321 123 318 118 Z" fill="currentColor"/>
+
+      <!-- U (with bottom drips) -->
+      <path d="M 334 20 L 362 20 L 362 82 C 362 96 370 102 381 102 C 392 102 400 96 400 82 L 400 20 L 428 20 L 428 84 C 428 108 409 122 381 122 C 353 122 334 108 334 84 Z" fill="currentColor"/>
+      <!-- Drip off U curve -->
+      <path d="M 378 122 Q 377 136 379 140 Q 382 142 383 137 Q 384 128 382 122 Z" fill="currentColor"/>
+
+      <!-- M (with dripping ink tail) -->
+      <path d="M 442 20 L 468 20 L 485 75 L 502 20 L 528 20 L 528 118 L 502 118 L 502 62 L 488 104 L 481 104 L 467 62 L 467 118 L 442 118 Z" fill="currentColor"/>
+      <!-- Drips off M -->
+      <path d="M 454 118 Q 453 128 455 133 Q 457 134 458 130 Q 458 124 456 118 Z" fill="currentColor"/>
+      <path d="M 518 118 Q 517 131 519 138 Q 522 141 523 135 Q 524 126 521 118 Z" fill="currentColor"/>
+    </g>
+  </defs>
+
+  <!-- Cyan Glitch Offset Shadow -->
+  <g transform="translate(-2.5, -1.2)" fill="#00F0FF" opacity="0.85">
+    <use href="#verum-stencil"/>
+  </g>
+
+  <!-- Magenta Glitch Offset Shadow -->
+  <g transform="translate(2.5, 1.2)" fill="#FF0090" opacity="0.85">
+    <use href="#verum-stencil"/>
+  </g>
+
+  <!-- Primary Foreground Layer -->
+  <g fill="#F2F0EB">
+    <use href="#verum-stencil"/>
+  </g>
+</svg>

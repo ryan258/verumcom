@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" role="img" aria-labelledby="title desc">
+  <title id="title">MISMA CIUDAD OTRA VERDAD</title>
+  <desc id="desc">Hand-painted white and cyan street tag with a small crown.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 164C123 122 193 145 272 116s145-55 228-19 161 46 253 6 84-42 113-50" stroke="#fff" stroke-width="9" opacity=".92"/>
+    <path d="M49 181c93-33 146-21 235-49 94-30 148-52 224-23 91 35 171 34 266-9 31-14 56-22 91-25" stroke="#00F0FF" stroke-width="4" opacity=".9"/>
+    <text x="42" y="105" fill="#fff" stroke="none" font-family="Arial Black, Impact, sans-serif" font-size="56" font-style="italic" font-weight="900" letter-spacing="2" transform="rotate(-4 42 105)">MISMA CIUDAD</text>
+    <text x="160" y="168" fill="#00F0FF" stroke="none" font-family="Arial Black, Impact, sans-serif" font-size="58" font-style="italic" font-weight="900" letter-spacing="1" transform="rotate(-4 160 168)">OTRA VERDAD</text>
+    <path d="M760 34l18 28 31-11-8 32 29 17-32 11 3 33-28-18-23 24-3-33-32-7 27-19-13-30 31 11z" stroke="#FF0090" stroke-width="6" fill="#00F0FF"/>
+  </g>
+</svg>

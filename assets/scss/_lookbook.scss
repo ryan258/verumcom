@@ -1,0 +1,334 @@
+/* BEM Lookbook Filter Bar */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.25rem 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--line-bold);
+
+  &__group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--concrete);
+    text-transform: uppercase;
+    margin-right: 0.25rem;
+  }
+
+  &__btn {
+    background: transparent;
+    border: 1px solid var(--concrete);
+    color: var(--bone);
+    min-height: 36px;
+    padding: 0.35rem 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover, &--active {
+      background: var(--cyan);
+      color: var(--ink);
+      border-color: var(--cyan);
+    }
+  }
+}
+
+/* BEM Lookbook Grid & Cards */
+.lookbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+.piece-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+  border: 1px solid var(--concrete);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--cyan);
+    box-shadow: -4px 0 0 var(--cyan), 4px 0 0 var(--magenta);
+  }
+
+  &--featured {
+    grid-column: span 2;
+
+    @media (max-width: 768px) {
+      grid-column: span 1;
+    }
+  }
+
+  &__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background-color: var(--surface-3);
+    display: block;
+    overflow: hidden;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    color: var(--text-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  &:hover &__img {
+    transform: scale(1.03);
+  }
+
+  &__content {
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid var(--concrete);
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+  }
+
+  &__specs-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__meta-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--concrete);
+  }
+
+  &__price-free-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+    font-weight: 600;
+  }
+}
+
+/* BEM Single Piece Detail View */
+.piece-detail {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3.5rem;
+  padding: 3rem 1.5rem 6rem;
+  max-width: var(--container-max);
+  margin: 0 auto;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+
+  &__gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__gallery-item {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background-color: var(--surface-3);
+    border: 1px solid var(--concrete);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: var(--surface-3);
+    color: var(--text-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  &__sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__category {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.95;
+  }
+
+  &__story {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+
+    p {
+      margin-bottom: 1.4rem;
+    }
+
+    h2, h3, h4, h5, h6 {
+      color: var(--bone);
+      margin: 2.25rem 0 1rem;
+    }
+
+    a {
+      display: inline;
+      color: var(--cyan);
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    ul, ol {
+      margin-bottom: 1.4rem;
+      padding-left: 1.5rem;
+    }
+  }
+}
+
+/* BEM Technical Spec Sheet */
+.specs-sheet {
+  border: 1px solid var(--concrete);
+  background: var(--surface-2);
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 0.85rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__row--header {
+    background: var(--surface-3);
+  }
+
+  &__name {
+    font-family: var(--font-mono);
+    color: var(--concrete);
+    text-transform: uppercase;
+  }
+
+  &__name--accent {
+    color: var(--cyan);
+  }
+
+  &__val {
+    font-family: var(--font-mono);
+    color: var(--bone);
+    font-weight: 600;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  @media (max-width: 520px) {
+    &__row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+    }
+
+    &__val {
+      margin-left: 0;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+/* BEM Zero-Commerce Callout */
+.zero-cart-notice {
+  border: 1px solid var(--cyan);
+  padding: 1.5rem;
+  background: var(--cyan-wash);
+
+  &__badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--bone);
+    margin-bottom: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+}

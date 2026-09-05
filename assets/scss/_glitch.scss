@@ -1,0 +1,84 @@
+/* Signature RGB Split Chromatic Aberration */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  color: var(--bone);
+  text-shadow: 
+    -2px 0 0 rgba(0, 240, 255, 0.75),
+     2px 0 0 rgba(255, 0, 144, 0.75);
+  transition: text-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.glitch-hover:hover {
+  animation: glitch-anim 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes glitch-anim {
+  0% {
+    text-shadow: -2px 0 0 var(--cyan), 2px 0 0 var(--magenta);
+    transform: translate(0, 0);
+  }
+  30% {
+    text-shadow: 2px -1px 0 var(--cyan), -2px 1px 0 var(--magenta);
+    transform: translate(-1px, 0.5px);
+  }
+  70% {
+    text-shadow: -3px 1px 0 var(--cyan), 3px -1px 0 var(--magenta);
+    transform: translate(1px, -0.5px);
+  }
+  100% {
+    text-shadow: -2px 0 0 var(--cyan), 2px 0 0 var(--magenta);
+    transform: translate(0, 0);
+  }
+}
+
+/* Hard edge glitch box styling */
+.glitch-box {
+  position: relative;
+  border: 1px solid var(--concrete);
+  background: var(--ink);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glitch-box:hover {
+  border-color: var(--cyan);
+  box-shadow: -3px 0 0 var(--cyan), 3px 0 0 var(--magenta);
+}
+
+/* Tactile noise overlay */
+.textured-bg {
+  position: relative;
+}
+
+.textured-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/images/noise.png");
+  background-repeat: repeat;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+/* Accessibility: STRICT PREFERS REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text,
+  .glitch-hover:hover,
+  .glitch-box:hover {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    text-shadow: -1px 0 0 var(--cyan), 1px 0 0 var(--magenta) !important;
+    box-shadow: none !important;
+  }
+  
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

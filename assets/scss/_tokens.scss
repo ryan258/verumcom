@@ -1,0 +1,50 @@
+:root {
+  --ink: #0A0A0A;
+  --bone: #F2F0EB;
+  --cyan: #00F0FF;
+  --magenta: #FF0090;
+  --concrete: #A6A6A6;
+  --paper: #E8E4DC;
+
+  /* Semantic surfaces, text, and lines */
+  --surface-1: #0D0D0D;
+  --surface-2: #111111;
+  --surface-3: #181818;
+  --surface-input: #141414;
+  --surface-tint: rgba(110, 110, 110, 0.2);
+  --ink-soft: #1A1A1A;
+  --ink-readable: #2B2B2B;
+  --paper-white: #FFFFFF;
+  --text-secondary: #DEDEDE;
+  --text-tertiary: #CCCCCC;
+  --text-subtle: #777777;
+  --text-low: #B0B0B0;
+  --text-deep: #555555;
+  --text-strong: #E0E0E0;
+  --text-nav: #B8B8B8;
+  --line-deep: #444444;
+  --line-faint: rgba(110, 110, 110, 0.2);
+  --line-soft: rgba(110, 110, 110, 0.3);
+  --line-medium: rgba(110, 110, 110, 0.35);
+  --line-bold: rgba(110, 110, 110, 0.4);
+  --cyan-wash: rgba(0, 240, 255, 0.05);
+  --magenta-wash: rgba(255, 0, 144, 0.05);
+  --magenta-wash-strong: rgba(255, 0, 144, 0.06);
+
+  /* Typography stacks */
+  --font-display: "Syne", "Impact", "Arial Black", -apple-system, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Space Mono", "SF Mono", "Courier New", monospace;
+
+  /* Layout */
+  --container-max: 1440px;
+  --header-height: 72px;
+  --border-width: 1px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 !important; /* Hard edges strict enforcement */
+}
