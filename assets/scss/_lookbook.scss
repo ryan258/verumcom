@@ -15,14 +15,6 @@
     gap: 0.5rem;
   }
 
-  &__label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--concrete);
-    text-transform: uppercase;
-    margin-right: 0.25rem;
-  }
-
   &__btn {
     background: transparent;
     border: 1px solid var(--concrete);
@@ -35,7 +27,7 @@
     cursor: pointer;
     transition: all 0.15s ease;
 
-    &:hover, &--active {
+    &:hover {
       background: var(--cyan);
       color: var(--ink);
       border-color: var(--cyan);
@@ -66,13 +58,6 @@
     box-shadow: -4px 0 0 var(--cyan), 4px 0 0 var(--magenta);
   }
 
-  &--featured {
-    grid-column: span 2;
-
-    @media (max-width: 768px) {
-      grid-column: span 1;
-    }
-  }
 
   &__media {
     position: relative;

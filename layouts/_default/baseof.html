@@ -26,11 +26,9 @@
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
 
-  <!-- Font Awesome CDN as requested -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Preload SVG Logo -->
-  <link rel="preload" href="{{ "images/logo.svg" | relURL }}" as="image" type="image/svg+xml">
+  <meta name="theme-color" content="#0A0A0A">
+  <link rel="icon" href="{{ "images/favicon.svg" | relURL }}" type="image/svg+xml">
+  <link rel="preload" href="{{ "fonts/anton-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
 
   <!-- Hugo Pipes SCSS -->
   {{ $sassOpts := dict "targetPath" "css/style.css" "outputStyle" "compressed" }}
@@ -41,121 +39,41 @@
   {{ $script := resources.Get "js/main.js" | minify | fingerprint }}
   <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" defer></script>
 </head>
-<body class="textured-bg">
-  <a href="#main-content" class="skip-link">{{ if eq .Site.Language.Lang "es" }}Saltar al contenido{{ else }}Skip to content{{ end }}</a>
-
-  <!-- Global Header -->
-  <header class="site-header" role="banner">
+<body>
+  {{ $es := eq .Site.Language.Lang "es" }}
+  {{ $about := cond $es "manifiesto" "manifesto" }}
+  {{ $stockists := cond $es "puntos-de-venta" "stockists" }}
+  {{ $contact := cond $es "contacto" "contact" }}
+  <a href="#main-content" class="skip-link">{{ if $es }}Saltar al contenido{{ else }}Skip to content{{ end }}</a>
+  <header class="site-header">
     <div class="site-header__inner">
-      <div class="site-header__left">
-        <a href="{{ .Site.Home.RelPermalink }}" class="site-header__brand" aria-label="VERUM — {{ .Site.Title }}">
-          <img src="{{ "images/logo.svg" | relURL }}" alt="VERUM Logo" class="site-header__logo" width="130" height="35">
-        </a>
-
-        <div class="site-header__divider"></div>
-
-        <!-- Navigation Menu -->
-        <nav class="main-nav" id="site-navigation" aria-label="Main Navigation">
-          <ul class="main-nav__list">
-            <li class="main-nav__item">
-              <a href="{{ .Site.Home.RelPermalink }}" class="main-nav__link{{ if .IsHome }} main-nav__link--active{{ end }}">
-                {{ if eq .Site.Language.Lang "es" }}Inicio{{ else }}Home{{ end }}
-              </a>
-            </li>
-            <li class="main-nav__item">
-              <a href="{{ relref . (dict "path" "lookbook" "lang" .Site.Language.Lang) }}" class="main-nav__link{{ if eq .Section "lookbook" }} main-nav__link--active{{ end }}">
-                Lookbook
-              </a>
-            </li>
-            <li class="main-nav__item">
-              <a href="{{ relref . (dict "path" "veritas" "lang" .Site.Language.Lang) }}" class="main-nav__link{{ if eq .Section "veritas" }} main-nav__link--active{{ end }}">
-                Veritas
-              </a>
-            </li>
-            <li class="main-nav__item">
-              <a href="{{ relref . (dict "path" (cond (eq .Site.Language.Lang "es") "manifiesto" "manifesto") "lang" .Site.Language.Lang) }}" class="main-nav__link{{ if or (eq .Section "manifiesto") (eq .Section "manifesto") }} main-nav__link--active{{ end }}">
-                {{ if eq .Site.Language.Lang "es" }}Nosotros{{ else }}About{{ end }}
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
+      <a href="{{ .Site.Home.RelPermalink }}" class="wordmark" aria-label="VERUM — {{ if $es }}Inicio{{ else }}Home{{ end }}">VERUM<span aria-hidden="true">®</span></a>
+      <span class="site-header__origin">BUENOS AIRES<br>{{ if $es }}INDUMENTARIA INDEPENDIENTE{{ else }}INDEPENDENT STREETWEAR{{ end }}</span>
       <div class="site-header__right">
-        <!-- Language Switcher: ES / EN -->
-        <div class="lang-switch" aria-label="Language selection">
-          {{ if .IsTranslated }}
-            {{ range $i, $e := .AllTranslations }}
-              {{ if $i }}<span class="lang-switch__sep">/</span>{{ end }}
-              <a href="{{ .Permalink }}" class="lang-switch__link{{ if eq .Language.Lang $.Site.Language.Lang }} lang-switch__link--active{{ end }}" lang="{{ .Language.Locale }}">
-                {{ if eq .Language.Lang "es" }}ES{{ else }}EN{{ end }}
-              </a>
-            {{ end }}
-          {{ else }}
-            <span class="lang-switch__link lang-switch__link--active">{{ if eq .Site.Language.Lang "es" }}ES{{ else }}EN{{ end }}</span>
-            <span class="lang-switch__sep">/</span>
-            <span class="lang-switch__link lang-switch__link--disabled" title="Traducción no disponible">{{ if eq .Site.Language.Lang "es" }}EN{{ else }}ES{{ end }}</span>
-          {{ end }}
-        </div>
-
-        <!-- Corner Micro-Metadata -->
-        <div class="site-header__meta">
-          ROPA<br>IDEAS<br>PERSONAS<br>ARGENTINA
-        </div>
-
-        <!-- Mobile Drawer Toggle Button -->
-        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="{{ i18n "nav_menu" }}">
-          <i class="fa-solid fa-bars" aria-hidden="true"></i>
-          <span>{{ i18n "nav_menu" }}</span>
-        </button>
+        <nav class="lang-switch" aria-label="{{ if $es }}Idioma{{ else }}Language{{ end }}">
+          {{ range .AllTranslations }}<a href="{{ .RelPermalink }}" lang="{{ .Language.Locale }}" hreflang="{{ .Language.Locale }}" aria-label="{{ .Language.Label }}"{{ if eq .Language.Lang $.Language.Lang }} aria-current="page"{{ end }}>{{ upper .Language.Lang }}</a>{{ end }}
+        </nav>
+        <a class="header-stockists" href="{{ relref . $stockists }}">{{ if $es }}Dónde encontrarnos{{ else }}Find us{{ end }} <span aria-hidden="true">↗</span></a>
       </div>
+      <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-navigation" hidden><span>{{ i18n "nav_menu" }}</span><span class="menu-symbol" aria-hidden="true">+</span></button>
+      <nav class="main-nav" id="site-navigation" aria-label="{{ if $es }}Navegación principal{{ else }}Main navigation{{ end }}">
+        <ul class="main-nav__list">
+          {{ range slice (dict "path" "lookbook" "label" "Lookbook") (dict "path" "drops" "label" "Drops") (dict "path" "veritas" "label" "Veritas") (dict "path" $about "label" (cond $es "Manifiesto" "Manifesto")) }}
+          <li><a href="{{ relref $ .path }}" class="main-nav__link"{{ if eq $.Section .path }} aria-current="{{ if $.IsSection }}page{{ else }}true{{ end }}"{{ end }}>{{ .label }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
     </div>
   </header>
-
-  <!-- Main Landmark -->
-  <main id="main-content" role="main">
-    {{ block "main" . }}{{ end }}
-  </main>
-
-  <!-- Global Footer -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="site-footer__main-bar">
-      <div class="site-footer__brand">
-        <a href="{{ .Site.Home.RelPermalink }}" aria-label="VERUM Home">
-          <img src="{{ "images/logo.svg" | relURL }}" alt="VERUM Logo" class="site-footer__brand-logo" width="120" height="32">
-        </a>
-      </div>
-
-      <div class="site-footer__links-wrap">
-        <ul class="site-footer__menu-list">
-          <li><a href="{{ .Site.Home.RelPermalink }}" class="site-footer__menu-link">{{ if eq .Site.Language.Lang "es" }}Inicio{{ else }}Home{{ end }}</a></li>
-          <li><a href="{{ relref . (dict "path" "lookbook" "lang" .Site.Language.Lang) }}" class="site-footer__menu-link">Lookbook</a></li>
-          <li><a href="{{ relref . (dict "path" "veritas" "lang" .Site.Language.Lang) }}" class="site-footer__menu-link">Veritas</a></li>
-          <li><a href="{{ relref . (dict "path" (cond (eq .Site.Language.Lang "es") "manifiesto" "manifesto") "lang" .Site.Language.Lang) }}" class="site-footer__menu-link">{{ if eq .Site.Language.Lang "es" }}Nosotros{{ else }}About{{ end }}</a></li>
-          <li><a href="{{ relref . (dict "path" (cond (eq .Site.Language.Lang "es") "puntos-de-venta" "stockists") "lang" .Site.Language.Lang) }}" class="site-footer__menu-link">Stockists</a></li>
-        </ul>
-
-        <div class="site-footer__socials-divider"></div>
-
-        <div class="site-footer__socials">
-          <a href="https://instagram.com/verum.ba" target="_blank" rel="noopener noreferrer" class="site-footer__social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://tiktok.com/@verum.ba" target="_blank" rel="noopener noreferrer" class="site-footer__social-icon" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="https://youtube.com/@verum" target="_blank" rel="noopener noreferrer" class="site-footer__social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-          <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" class="site-footer__social-icon" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
-        </div>
-      </div>
+  <main id="main-content" tabindex="-1">{{ block "main" . }}{{ end }}</main>
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <div><a class="wordmark" href="{{ .Site.Home.RelPermalink }}" aria-label="VERUM — {{ if $es }}Inicio{{ else }}Home{{ end }}">VERUM<span aria-hidden="true">®</span></a><p>{{ if $es }}Ropa. Ideas. Personas.<br>Desde Buenos Aires, con identidad.{{ else }}Clothing. Ideas. People.<br>From Buenos Aires, with identity.{{ end }}</p></div>
+      <nav aria-label="{{ if $es }}Explorá VERUM{{ else }}Explore VERUM{{ end }}"><span class="eyebrow">{{ if $es }}Explorá{{ else }}Explore{{ end }}</span><a href="{{ relref . "lookbook" }}">Lookbook</a><a href="{{ relref . "drops" }}">Drops</a><a href="{{ relref . "veritas" }}">Veritas</a><a href="{{ relref . $about }}">{{ if $es }}Manifiesto{{ else }}Manifesto{{ end }}</a></nav>
+      <nav aria-label="{{ if $es }}Conectá{{ else }}Connect{{ end }}"><span class="eyebrow">{{ if $es }}En persona{{ else }}In person{{ end }}</span><a href="{{ relref . $stockists }}">{{ i18n "nav_stockists" }}</a>{{ with .Site.GetPage $contact }}<a href="{{ .RelPermalink }}">{{ if $es }}Contacto{{ else }}Contact{{ end }}</a>{{ end }}<a href="{{ .Site.Params.instagram }}" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a></nav>
+      <div class="site-footer__note"><span class="eyebrow">34°36′ S / 58°22′ W</span><p>{{ if $es }}MISMA CIUDAD.<br>OTRA VERDAD.{{ else }}SAME CITY.<br>ANOTHER TRUTH.{{ end }}</p></div>
     </div>
-
-    <!-- Bottom Bar with Slogan & Origin Details -->
-    <div class="site-footer__bottom-bar">
-      <div class="site-footer__city-meta">
-        BUENOS AIRES, ARGENTINA.<br>
-        ROPA. IDEAS. PERSONAS.
-      </div>
-      <div class="site-footer__slogan">
-        LO REAL NO SE PULE.
-      </div>
-    </div>
+    <div class="site-footer__bottom"><span>© {{ now.Year }} VERUM · BUENOS AIRES, ARGENTINA</span><div><a href="{{ relref . "legal/privacidad" }}">{{ if $es }}Privacidad{{ else }}Privacy{{ end }}</a><a href="{{ relref . "legal/terminos" }}">{{ if $es }}Términos{{ else }}Terms{{ end }}</a><a href="#main-content">{{ if $es }}Volver arriba{{ else }}Back to top{{ end }} <span aria-hidden="true">↑</span></a></div></div>
   </footer>
 </body>
 </html>
