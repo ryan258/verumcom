@@ -39,8 +39,9 @@
       <span class="badge-tag badge-tag--magenta newsletter-box__badge">{{ i18n "drop_status_upcoming" }}</span>
       <h2 class="newsletter-box__title">{{ i18n "drop_upcoming_notice" }}</h2>
       
-      <form action="{{ .Site.Params.newsletter_endpoint }}" method="POST" target="_blank" class="newsletter-box__form">
-        <input type="email" name="email" class="newsletter-box__input" placeholder="{{ i18n "newsletter_placeholder" }}" required aria-label="{{ i18n "contact_email" }}">
+      <label class="newsletter-box__label" for="drop-newsletter-email">{{ i18n "contact_email" }} ({{ if eq .Language.Lang "es" }}obligatorio{{ else }}required{{ end }})</label>
+      <form action="{{ .Site.Params.newsletter_endpoint }}" method="POST" class="newsletter-box__form">
+        <input type="email" id="drop-newsletter-email" name="email" autocomplete="email" class="newsletter-box__input" placeholder="{{ i18n "newsletter_placeholder" }}" required aria-label="{{ i18n "contact_email" }}">
         <button type="submit" class="btn btn--accent">
           <span>{{ i18n "cta_subscribe" }}</span>
           <span class="ui-symbol" aria-hidden="true">+</span>

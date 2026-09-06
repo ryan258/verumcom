@@ -54,14 +54,16 @@ hugo --minify --gc
 
 El proyecto implementa una arquitectura modular con metodología **BEM (Block Element Modifier)** en toda la suite SCSS:
 
-- `assets/scss/_tokens.scss`: Variables de diseño (`--ink`, `--bone`, `--cyan`, `--magenta`, `--concrete`, `--paper`).
-- `assets/scss/_typography.scss`: Familias tipográficas y accesibilidad.
+- `assets/scss/_tokens.scss`: Variables de diseño (`--ink`, `--bone`, `--accent`, `--concrete`, `--paper`; `--cyan` y `--magenta` conservan compatibilidad con componentes existentes).
+- `assets/scss/_typography.scss`: Tipografía Anton autoalojada, texto de sistema y bases de accesibilidad. La licencia de Anton vive en `static/fonts/OFL-Anton.txt`.
 - `assets/scss/_glitch.scss`: Efecto aberración cromática RGB split en CSS puro con protección estricta para `@media (prefers-reduced-motion: reduce)`.
-- `assets/scss/_nav.scss`: Cabecera sticky, menú accesible, drawer mobile y footer.
-- `assets/scss/_lookbook.scss`: Grilla asimétrica de prendas, ficha técnica y aviso de no-carrito.
+- `assets/scss/_nav.scss`: Cabecera sticky en escritorio, navegación desplegable en el flujo de la página en mobile y footer.
+- `assets/scss/_lookbook.scss`: Bases de la grilla de prendas, ficha técnica y aviso de no-carrito.
 - `assets/scss/_drops.scss`: Lanzamientos con estados condicionales (en la calle vs. próximamente).
 - `assets/scss/_veritas.scss`: Crónicas editoriales de lectura inmersiva con artistas locales.
 - `assets/scss/_forms.scss`: Puntos de venta físicos y formulario de contacto antispam.
+- `assets/scss/_editorial.scss`: Dirección visual editorial, campaña, selección de prendas, newsletter, refinamientos de páginas internas y adaptación responsive.
+- `assets/js/main.js`: Menú progresivo y filtros combinados por categoría/drop, con estado en la URL y conteo de resultados anunciado.
 
 ---
 
@@ -88,7 +90,7 @@ Se recomienda configurar las siguientes cabeceras en el host:
 - `X-Content-Type-Options: nosniff`
 - `X-Frame-Options: DENY`
 - `Referrer-Policy: strict-origin-when-cross-origin`
-- `Content-Security-Policy: default-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';`
+- `Content-Security-Policy: default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self' https://buttondown.email https://formspree.io; base-uri 'self'; object-src 'none';`
 
 ---
 
@@ -96,3 +98,18 @@ Se recomienda configurar las siguientes cabeceras en el host:
 
 - [`CONTENT.md`](./CONTENT.md): Guía para cargar y editar prendas, drops y crónicas editoriales.
 - [`PLACEHOLDERS.md`](./PLACEHOLDERS.md): Registro técnico de imágenes y activos provisionales para su sustitución en producción.
+
+
+## 8. Diseño y Accesibilidad
+
+La interfaz combina superficies de papel y tinta, un acento ácido, fotografía local y títulos condensados. La tipografía y los símbolos se sirven desde el sitio; los íconos decorativos no dependen de una fuente externa. Hugo genera versiones WebP de las fotografías de campaña y catálogo.
+
+- El enlace para saltar al contenido transfiere el foco al `main`.
+- El menú mobile es un desplegable en el flujo del documento. `Escape` lo cierra y devuelve el foco al botón. Sin JavaScript, los enlaces permanecen disponibles.
+- Los filtros de prenda y drop se intersectan. Los botones exponen `aria-pressed`, el conteo anuncia los cambios y el estado vacío explica cómo recuperarse. La URL conserva los filtros al recargar o regresar desde una ficha.
+- Las fichas presentan la imagen principal, la información de la prenda y las imágenes adicionales en el mismo orden de lectura visual y semántico. Los materiales, colores y talles usan una lista de definiciones.
+- Los controles principales tienen objetivos de al menos 44 px. Los focos visibles, la preferencia de movimiento reducido y los modos de colores forzados tienen estilos explícitos.
+- La suscripción usa un campo con etiqueta visible, autocompletado y validación nativa. La entrega del servicio externo debe verificarse por separado antes del lanzamiento.
+- Contacto muestra un enlace de email cuando `form_endpoint` está vacío o contiene `placeholder`. Un endpoint real habilita el formulario. No se envían mensajes a un destino provisional.
+
+Verificación de la revisión del 5 de septiembre de 2026: compilación de producción bilingüe; inspección de enlaces internos, IDs y alternativas de imágenes; recorridos de teclado del menú y enlace de salto; filtros combinados y recuperación del estado vacío; cambio de idioma en una ficha; validación de email vacío; revisión de reflujo y contraste de texto en páginas representativas a 320 px y revisión visual de escritorio. Estas comprobaciones no constituyen una certificación WCAG ni sustituyen una prueba con lectores de pantalla reales.

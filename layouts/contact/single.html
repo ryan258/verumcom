@@ -13,6 +13,7 @@
         {{ i18n "contact_subtitle" }}
       </p>
 
+      {{ if and .Site.Params.form_endpoint (not (in .Site.Params.form_endpoint "placeholder")) }}
       <form action="{{ .Site.Params.form_endpoint }}" method="POST" class="contact-form">
         <input type="hidden" name="_gotcha" value="">
 
@@ -45,6 +46,13 @@
           <span class="ui-symbol" aria-hidden="true">→</span>
         </button>
       </form>
+      {{ else }}
+      <div class="contact-fallback">
+        <h2>Let's talk.</h2>
+        <p>For clothing, availability, or press inquiries, reach us by email or Instagram.</p>
+        <a class="btn btn--accent" href="mailto:{{ .Site.Params.contact_email }}">Email the studio <span aria-hidden="true">↗</span></a>
+      </div>
+      {{ end }}
     </div>
 
     <div class="contact-direct">

@@ -208,3 +208,8 @@ h1, h2, h3 { overflow-wrap: break-word; }
   .site-header .wordmark { font-size: 1.7rem; }
   .site-header__toggle { font-size: .85rem; gap: .5rem; padding: .4rem .6rem; }
 }
+
+.contact-fallback { border-top: 1px solid var(--line-deep); padding-top: 2rem; }
+.contact-fallback h2 { margin-bottom: 1rem; }
+.contact-fallback p { color: var(--text-secondary); max-width: 40ch; margin-bottom: 1.5rem; }
+.newsletter-box__label { display: block; margin-bottom: .6rem; font-size: .9rem; }

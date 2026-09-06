@@ -14,6 +14,7 @@
         {{ i18n "contact_subtitle" }}
       </p>
 
+      {{ if and .Site.Params.form_endpoint (not (in .Site.Params.form_endpoint "placeholder")) }}
       <form action="{{ .Site.Params.form_endpoint }}" method="POST" class="contact-form">
         <!-- Honeypot anti-spam protection -->
         <input type="hidden" name="_gotcha" value="">
@@ -47,6 +48,13 @@
           <span class="ui-symbol" aria-hidden="true">→</span>
         </button>
       </form>
+      {{ else }}
+      <div class="contact-fallback">
+        <h2>Hablemos.</h2>
+        <p>Para consultas de prendas, disponibilidad o prensa, escribinos por email o Instagram.</p>
+        <a class="btn btn--accent" href="mailto:{{ .Site.Params.contact_email }}">Escribinos por email <span aria-hidden="true">↗</span></a>
+      </div>
+      {{ end }}
     </div>
 
     <!-- Direct Attention Sidebar -->
