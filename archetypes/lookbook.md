@@ -1,4 +1,5 @@
 ---
+# Español (Argentina): docs/ARCHETYPES.es-AR.md (desde la raíz del proyecto).
 # P03 — Garment/sample brief in PLACEHOLDERS.md. Keep proposed and measured data distinct.
 title: "{{ replace .File.ContentBaseName "-" " " | title }}"
 translationKey: "piece-{{ .File.ContentBaseName }}"

@@ -1,5 +1,7 @@
 # Studio imagery provenance
 
+[Español (Argentina)](PROMPTS.es-AR.md) · English
+
 Generated September 21, 2026 with the built-in image generation tool. Both images depict imagined workshops without people. They are disclosed as generated concept imagery in the site. Garment SVG files in this directory are native design illustrations, not generated photographs.
 
 ## sobreimpreso-studio.png
@@ -12,9 +14,9 @@ Create a single landscape black-and-white editorial photograph, 3:2 aspect ratio
 
 ## Homepage campaign images (provisional)
 
-Not part of the artist series; recorded here so provenance lives next to the other generated imagery. The homepage discloses the model image as AI-generated and provisional.
+Not part of the artist series; recorded here so provenance lives next to the other generated imagery. These retired campaign assets are no longer displayed on the homepage or used as social fallbacks. The recorded provenance below is historical.
 
 - `assets/images/hero-model.png`: embedded Content Credentials (C2PA) identify OpenAI `gpt-image` output, created September 5, 2026, IPTC type `trainedAlgorithmicMedia`. The prompt was not recorded.
 - `assets/images/hero-bg.jpg`: no embedded credentials; provenance not recorded. Treat as a placeholder until the source is confirmed.
 
-Replace both with real photography before launch (see `PLACEHOLDERS.md`).
+Do not reuse either as real product evidence. Confirm provenance and suitability before any future use (see [PLACEHOLDERS.md](../../../PLACEHOLDERS.md)).

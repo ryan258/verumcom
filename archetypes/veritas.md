@@ -1,4 +1,5 @@
 +++
+# Español (Argentina): docs/ARCHETYPES.es-AR.md (desde la raíz del proyecto).
 # P04 — En proceso / In process. The technical folder name remains veritas.
 # Keep draft and concept framing. Real quotes require provenance and approval.
 title = "{{ replace .File.ContentBaseName "-" " " | title }}"

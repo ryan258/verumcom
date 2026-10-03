@@ -1,4 +1,5 @@
 ---
+# Español (Argentina): docs/ARCHETYPES.es-AR.md (desde la raíz del proyecto).
 # P02 — Collection brief in PLACEHOLDERS.md. Keep draft until both languages are ready.
 # Supply: source observation -> design choice -> consequence on each of three garments.
 # A real name requires a new approved biography/interview/image set; do not relabel fiction.
