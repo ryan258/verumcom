@@ -1,6 +1,8 @@
 # VERUM — Project Roadmap & Implementation Milestones
 
-This document tracks the phased progression of the VERUM platform, from structural foundation and creative direction to real contributor onboarding and physical production.
+[Español (Argentina)](ROADMAP.es-AR.md) · English
+
+This document tracks implementation and possible next steps. Completed items describe the local concept site and recorded checks, not live operations, full accessibility acceptance or production readiness. Future phases need owner decisions; they do not establish that recruitment, partnerships or manufacturing have started.
 
 ---
 
@@ -10,7 +12,7 @@ This document tracks the phased progression of the VERUM platform, from structur
 [Phase 1: Architecture] ──► [Phase 2: Design Identity] ──► [Phase 3: Series 01-02] ──► [Phase 4: QA & Verification]
                                                                                                │
                                                                                                ▼
-[Phase 7: Production Launch] ◄── [Phase 6: Garment Sampling] ◄── [Phase 5: Contributor Onboarding (Active)]
+[Phase 7: Production Launch] ◄── [Phase 6: Garment Sampling] ◄── [Phase 5: Contributor Inputs (Pending)]
 ```
 
 ---
@@ -23,7 +25,7 @@ This document tracks the phased progression of the VERUM platform, from structur
 - [x] Bi-directional language routing via `translationKey`.
 - [x] Accessible HTML5 document semantics with landmark roles and skip navigation.
 - [x] Zero external runtime JavaScript frameworks; progressive vanilla JS for mobile menu.
-- [x] Standard-compliant Content Security Policy and privacy-focused static assets.
+- [x] Self-hosted fonts and static assets. Hosting security headers, including CSP, remain a deployment check; this repository does not establish an active CSP.
 
 ---
 
@@ -35,7 +37,7 @@ This document tracks the phased progression of the VERUM platform, from structur
 - [x] Unified layout templates (`layouts/_default/`, `layouts/partials/`) replacing fragmented one-offs.
 - [x] Modern Hugo Pipes image optimization pipeline (WebP generation, CLS prevention with explicit dimensions).
 - [x] Native UI iconography replacing heavyweight external font icon libraries.
-- [x] Responsive layout testing across 320 px to 1440 px viewports with high-contrast accessibility support.
+- [x] Responsive layout testing across 320 px to 1440 px viewports and forced-colors styles; full accessibility acceptance remains separate.
 
 ---
 
@@ -60,20 +62,21 @@ This document tracks the phased progression of the VERUM platform, from structur
 ## Phase 4: Deterministic QA & Verification Suite
 **Status: Completed**
 
-- [x] Developed `scripts/verify_concepts.py` checking 720+ internal links, image paths, anchors, and retired routes.
-- [x] Developed `scripts/verify_review.py` for full regression testing of lookbook, social cards, and contact states.
+- [x] Developed `scripts/verify_concepts.py` checking internal links (720 in the recorded October 3 run), image paths, anchors, and retired routes.
+- [x] Developed `scripts/verify_review.py` for focused regression checks of lookbook, social cards, and contact states.
 - [x] Generated localized 1200 × 630 Open Graph share cards via `scripts/render_social_cards.py`.
 - [x] Integrated automated verification into isolated temporary preview environments.
 - [x] Configured GitNexus code intelligence knowledge graph and blast-radius tracking.
+- [x] Established complete Argentine Spanish (`.es-AR.md`) and English documentation suite parity with bidirectional cross-linking.
 
 ---
 
 ## Phase 5: Contributor Onboarding & Editorial Content (Current Focus)
-**Status: In Progress**
+**Status: Inputs pending; current editorial focus**
 
 - [ ] **P00 (Editorial Title):** Confirm final editorial section naming with local Buenos Aires contributors.
-- [ ] **P01 (Contributor Identification):** Identify and engage initial authentic Buenos Aires artists/makers.
-- [ ] **P02 (Artifact Documentation):** Document real source materials, studio tools, and graphic iterations.
+- [ ] **P01 (Team and Founder Story):** Supply approved public names, roles and a factual founder story.
+- [ ] **P02 (Collection and Collaboration):** Supply an approved collaborator introduction, source observation, design choice and garment consequences.
 - [ ] **P04 (Interviews):** Record and transcribe authentic 3-chapter interviews covering technique, choices, and discards.
 - [ ] **P05 (Studio Photography):** Conduct authentic on-site photography of workshops, works in progress, and artisans.
 - [ ] **P06 (Design Iteration Cards):** Produce before-and-after process cards highlighting real design decisions.
@@ -88,7 +91,7 @@ This document tracks the phased progression of the VERUM platform, from structur
 - [ ] **P03 (Fleece Testing):** Physical sample runs of 400 g/m² heavy cotton fleece hoodies.
 - [ ] **P03 (Headwear Testing):** Physical sample runs of unstructured six-panel twill caps.
 - [ ] Record dimensional stability, post-wash shrinkage, collar retention, and ink longevity.
-- [ ] **P07 (Hangtag & Care Study):** Finalize bilingual care labels, material composition, and provenance tags.
+- [ ] **P07 (Printed Study):** Develop a hangtag or insert; composition, care and origin require actual supporting data.
 - [ ] Conduct studio photography of real physical garment samples worn seated and standing.
 
 ---
@@ -100,4 +103,4 @@ This document tracks the phased progression of the VERUM platform, from structur
 - [ ] Formally partner with curated independent retail spaces in Buenos Aires and populate `data/stockists.yaml`.
 - [ ] Validate and connect external form endpoint (`form_endpoint`) and subscriber newsletter (`newsletter_endpoint`).
 - [ ] Execute formal production run based on sampling sign-offs.
-- [ ] Transition concept notices to live commercial availability upon stock arrival.
+- [ ] Review person, interview, garment evidence, images and template disclosures together before presenting a real collaboration; stock alone does not replace every fictional element.

@@ -1,5 +1,7 @@
 # VERUM — Sitio de marca y lookbook
 
+**Español (Argentina)** · [Índice de documentación](docs/README.es-AR.md)
+
 Sitio bilingüe de una marca de indumentaria independiente en desarrollo en Buenos Aires. Español en `/`, inglés en `/en/`. Hugo Extended, SCSS y JavaScript mínimo; sin carrito ni pagos.
 
 La serie actual usa contenido provisional: dos artistas ficticios, seis prendas conceptuales y dos entrevistas imaginadas. Es una demostración de la dirección y de la estructura editorial, no un anuncio de colaboraciones reales ni de productos disponibles. La dirección actual es «Ideas que se llevan / Ideas you can wear». Las biografías, imágenes y especificaciones reales se incorporan cuando estén aprobadas.
@@ -49,7 +51,7 @@ hugo --destination "$VERUM_PREVIEW_DIR" --cacheDir /tmp/verum-hugo-cache --baseU
 python3 scripts/verify_review.py "$VERUM_PREVIEW_DIR"
 ```
 
-`verify_review.py` ejecuta primero `verify_concepts.py`: relaciones bilingües, enlaces, imágenes, capítulos, disclosures y ausencia de rutas retiradas. Luego comprueba la separación Lookbook/Drops, las seis tarjetas, las imágenes sociales de cada prenda, la ruta al equipo y el estado del canal principal.
+`verify_review.py` ejecuta primero `verify_concepts.py`: relaciones bilingües, enlaces, imágenes, capítulos, aclaraciones de ficción y ausencia de rutas retiradas. Luego comprueba la separación Lookbook/Drops, las seis tarjetas, las imágenes sociales de cada prenda, la ruta al equipo y el estado del canal principal.
 
 Para revisar ese mismo resultado en el navegador, en la misma terminal:
 
@@ -61,14 +63,18 @@ Abrir `http://127.0.0.1:8766/`. Revisar a 1440, 390 y 320 px: portada → prenda
 
 ## Documentación y arquitectura
 
-- [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md): Arquitectura estática, jerarquía de plantillas, partials, procesamiento de imágenes y SCSS.
-- [`docs/CONTENT-GUIDE.md`](./docs/CONTENT-GUIDE.md): Guía editorial, los cuatro territorios, estándares de voz y modelos de contenido.
-- [`docs/VERIFICATION.md`](./docs/VERIFICATION.md): Suite de verificación determinista, scripts de prueba y protocolo de accesibilidad.
-- [`ROADMAP.md`](./ROADMAP.md): Hitos del proyecto, fases completadas, prioridades activas y próximas etapas.
+**[Toda la documentación en español argentino](docs/README.es-AR.md)**. Las versiones en inglés se conservan y cada par tiene enlaces de idioma.
+
+- [`docs/ARCHITECTURE.es-AR.md`](./docs/ARCHITECTURE.es-AR.md): Arquitectura estática, jerarquía de plantillas, partials, procesamiento de imágenes y SCSS.
+- [`docs/CONTENT-GUIDE.es-AR.md`](./docs/CONTENT-GUIDE.es-AR.md): Guía editorial, los cuatro territorios, estándares de voz y modelos de contenido.
+- [`docs/VERIFICATION.es-AR.md`](./docs/VERIFICATION.es-AR.md): Controles enfocados, alcance de los scripts y revisión de accesibilidad.
+- [`ROADMAP.es-AR.md`](./ROADMAP.es-AR.md): Hitos del proyecto, fases completadas, prioridades activas y próximas etapas.
 - [`CONTENT.md`](./CONTENT.md): Campos y pasos de carga editorial.
 - [`PLACEHOLDERS.md`](./PLACEHOLDERS.md): Inventario y briefs P00–P08; consignas, extensión, ejemplos y qué hacer cuando faltan datos.
-- [`CREATIVE-DIRECTION.md`](./CREATIVE-DIRECTION.md): Universo, voz, gramática visual, aplicaciones, decisión de nombre editorial y dos colecciones.
-- [`project-description.md`](./project-description.md): Brief original, conservado como antecedente histórico.
+- [`CREATIVE-DIRECTION.es-AR.md`](./CREATIVE-DIRECTION.es-AR.md): Universo, voz, gramática visual, aplicaciones, decisión de nombre editorial y dos colecciones.
+- [`docs/ARCHETYPES.es-AR.md`](./docs/ARCHETYPES.es-AR.md): Consignas de arquetipos de colección, prenda y entrevista.
+- [`docs/AGENT-INSTRUCTIONS.es-AR.md`](./docs/AGENT-INSTRUCTIONS.es-AR.md): Traducción de consulta para agentes y reglas de GitNexus.
+- [`project-description.es-AR.md`](./project-description.es-AR.md): Brief original, conservado como antecedente histórico.
 
 ## Archivos principales
 
