@@ -1,5 +1,7 @@
 # VERUM — Architecture & Technical Specifications
 
+[Español (Argentina)](ARCHITECTURE.es-AR.md) · English
+
 Technical architecture and engineering standards for the VERUM static web platform.
 
 ## 1. System Overview
@@ -31,7 +33,7 @@ Pages in both languages are linked via Hugo's `translationKey` front matter para
 - Legal: `legal/privacidad` ↔ `legal/privacy`, `legal/terminos` ↔ `legal/terms`.
 
 ### URL Stability & Working Editorial Title
-The editorial section uses the working title **En proceso** (Spanish) / **In process** (English). The URL routes `/veritas/` and `/en/veritas/` are preserved to maintain link integrity and prevent anchor breakage. Shared labels derive from `editorial_name` in config and i18n bundles.
+The editorial section uses the working title **En proceso** (Spanish) / **In process** (English). The URL routes `/veritas/` and `/en/veritas/` are preserved to maintain link integrity and prevent anchor breakage. Shared labels derive from `editorial_name` in the i18n files; localized section titles and descriptions live in the two `veritas/_index.md` files.
 
 ---
 
@@ -57,9 +59,11 @@ layouts/
 │   ├── brand-story.html     # Editorial team narrative and contributor profiles
 │   ├── contact-channel.html # Primary contact channel resolver (Instagram, Email, WhatsApp)
 │   ├── follow-project.html  # Secondary project engagement and verified channel links
-│   ├── meta-tags.html       # Open Graph, Twitter cards, canonical tags, hreflang
-│   ├── site-footer.html     # Footer navigation, copyright, and verified links
-│   └── site-nav.html        # Responsive header with mobile toggle and language switch
+│   ├── concept-note.html    # Explicit fictional-concept disclosure
+│   ├── concept-piece-card.html # Reusable garment card
+│   ├── artist-cards.html    # Collection/artist cards
+│   ├── collaboration-image.html # Shared SVG and raster image rendering
+│   └── reading-minutes.html # Estimated interview reading time
 ├── veritas/
 │   ├── list.html            # Editorial archive (interviews with Lucía Ferreyra & Tomás Varela)
 │   └── single.html          # 3-chapter interview view with linked garment references
@@ -71,19 +75,18 @@ layouts/
 
 ## 4. Asset Processing Pipeline
 
-Hugo Pipes manages all assets with cryptographic fingerprinting and cache validation:
+Hugo Pipes processes CSS, JavaScript and image resources. CSS and JavaScript receive content fingerprints; static files are copied separately. Document metadata, navigation and footer markup live in `layouts/_default/baseof.html`.
 
 ### SCSS Compilation
 ```go
-{{ $opts := dict "transpiler" "libsass" "targetPath" "css/main.css" "outputStyle" (cond hugo.IsProduction "compressed" "expanded") }}
-{{ $css := resources.Get "scss/main.scss" | toCSS $opts }}
-{{ if hugo.IsProduction }}{{ $css = $css | fingerprint }}{{ end }}
+{{ $sassOpts := dict "targetPath" "css/style.css" "outputStyle" "compressed" }}
+{{ $style := resources.Get "scss/main.scss" | toCSS $sassOpts | minify | fingerprint }}
 ```
 
 ### Media Pipeline
 - High-resolution garment plates and studio concepts are stored in `assets/images/`.
-- Processed via Hugo Pipes into modern WebP formats with fallback JPEGs at quality `85`.
-- Hero, front, and back garment views enforce explicit `width`, `height`, and `loading="lazy"` attributes (above-the-fold hero images use `loading="eager"` and `fetchpriority="high"`) to prevent Cumulative Layout Shift (CLS).
+- Raster studio images are resized to 640px and 1280px WebP variants. Native SVG garment plates are served directly. Social metadata uses a 1200 × 630 JPEG; configured WebP/JPEG quality is `85`. There is no separate JPEG fallback in the collaboration image partial.
+- The shared image partial emits `alt`, `width` and `height`, defaults to `loading="lazy"`, and accepts `loading="eager"`. It does not currently emit `fetchpriority`. Dimensions help reserve space; they do not prove absence of layout shift.
 
 ### Social Share Cards
 - Individual 1200 × 630 cards for all 6 garments reside under `assets/images/social/`.
@@ -98,14 +101,12 @@ The styling system is partitioned into modular SCSS files under `assets/scss/`:
 
 | Module | Responsibility |
 | --- | --- |
-| `_tokens.scss` | Color tokens (`#0A0A0A` ink, `#F1F0E8` paper, `#DFFF00` acid), typography scales, spacing units, z-index layers. |
+| `_tokens.scss` | Colour and semantic surface tokens, font stacks, container/header sizes and base reset. |
 | `_typography.scss` | Display headers (Anton), body sans font stack, monospace metadata (Space Mono), line heights, letter spacing. |
 | `_nav.scss` | Header layout, mobile sheet navigation, language switcher, desktop inline links. |
-| `_editorial.scss` | Global container widths, grid utilities, article prose, interview pull-quotes, callouts. |
-| `_collaborations.scss`| Current series grid (6 pieces), collection cards, cross-links, garment action rows. |
-| `_lookbook.scss` | Lookbook grid layout, plate viewer, specs table, companion piece cards. |
-| `_drops.scss` | Collection banner treatments, palette chips, artist bio block, pieces list. |
-| `_veritas.scss` | 3-chapter conversational layouts, pull quotes, garment visual callouts. |
+| `_editorial.scss` | Editorial surfaces, shared controls, responsive behaviour, manifesto reading styles and forced colours. |
+| `_collaborations.scss`| Series grids, collections, garment details, interviews, homepage and team/contact presentation. |
+| `_components.scss` | Shared buttons, cards and base manifesto styles. |
 | `_forms.scss` | Antispam-protected contact forms, form inputs, button focus states, empty state banners. |
 | `_glitch.scss` | Subtle branding glitch accents, hover transforms, micro-interactions. |
 
@@ -114,7 +115,7 @@ The styling system is partitioned into modular SCSS files under `assets/scss/`:
 ## 6. Progressive Enhancement & Accessibility
 
 1. **Zero-JS Core:**
-   - Every page, link, garment view, collection, and legal disclosure is 100% accessible with JavaScript disabled.
+   - Core content and navigation are intended to remain usable with JavaScript disabled. This does not establish full accessibility conformance.
    - Mobile navigation defaults to an accessible document-flow list if JS fails to execute.
 
 2. **Keyboard & Focus Management:**
@@ -127,6 +128,17 @@ The styling system is partitioned into modular SCSS files under `assets/scss/`:
    - Explicit styling for `forced-colors: active` ensuring border and contrast preservation in Windows High Contrast mode.
 
 4. **Integrity & Security:**
-   - Strict Content Security Policy (CSP) compatibility.
-   - External links specify `rel="noopener noreferrer"`.
-   - Contact form actions default to mailto or verified endpoints; placeholder endpoints (`placeholder`) disable transmission to prevent leaked submissions.
+   - Hosting security headers and any CSP must be inspected on the deployed response; no active CSP is established by the local build.
+   - Stockist links that open new tabs specify `rel="noopener noreferrer"`.
+   - Contact resolves a confirmed primary channel first, then a configured form endpoint without `placeholder`, otherwise a pending state. The form endpoint is independent of `contact_verified`; configuring it requires a separate owner check.
+
+---
+
+## 7. Documentation Architecture & Bilingual Parity
+
+Project documentation maintains parity between Argentine Spanish (`es-AR`) and English:
+- **Central Index:** [`docs/README.es-AR.md`](README.es-AR.md) catalogues all operational and consultation documents.
+- **Language Pairs:** Root and `docs/` technical guides feature a localized `.es-AR.md` companion with header language toggles.
+- **Consultation Copies:** Working instructions (`AGENT-INSTRUCTIONS.es-AR.md`, `ARCHETYPES.es-AR.md`, `PROMPTS.es-AR.md`, `project-description.es-AR.md`) provide local reading copies while preserving technical identifiers, configuration keys, and original prompts.
+- **Independence from Content Tree:** Documentation files remain outside Hugo's `content/` hierarchy, avoiding inadvertent generation of public routes.
+

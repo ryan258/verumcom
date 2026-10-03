@@ -1,5 +1,7 @@
 # VERUM — Content & Editorial Guide
 
+[Español (Argentina)](CONTENT-GUIDE.es-AR.md) · English
+
 Operational guidelines for editorial maintenance, bilingual voice standards, content models, and placeholder replacement.
 
 ---
@@ -12,7 +14,7 @@ The work is grounded in **four creative territories**:
 1. **Capas / Layers:** What survives when another graphic layer is applied? Expressed in *Sobreimpreso* via offset planes, ecru negative spaces, and persistent typography.
 2. **Marcas / Working Marks:** Which technical decision should remain visible? Expressed in *En Obra* via open angles, dimension lines, and construction guides.
 3. **Uso / Everyday Use:** What happens when the garment moves? Familiar silhouettes (straight-cut tees, fleece hoodies, unstructured caps) designed for daily wear.
-4. **Voces / Named Contributors:** Who gets to explain and approve the work? Authentic contributors whose distinct voice and craft are documented with explicit approval.
+4. **Voces / Named Contributors:** Who gets to explain and approve the work? The current voices are fictional; real contributors will need their own documented, approved accounts.
 
 ---
 
@@ -42,77 +44,91 @@ The current catalog is a **fictional design study** demonstrating structure, aes
 
 ### Disclosure Integrity
 - Both public collections and garment pages feature explicit disclaimer banners identifying the series as a concept study.
-- Do not remove concept disclaimers until real, approved contributors and physical samples have replaced the fictional assets.
+- Review the complete person/interview/image/garment unit before changing disclosures. Current templates retain concept notices even if `concept` changes; do not remove notices globally while fictional items remain.
 
 ---
 
 ## 4. Content Models & Front Matter
 
 ### Garment (`content/{lang}/lookbook/{slug}/index.md`)
-```toml
-+++
-title = "Registro"
-translationKey = "registro"
-draft = false
-concept = true
-category = "remera" # remera | buzo | accesorio
-drop = "sobreimpreso" # sobreimpreso | en-obra
-artist_name = "Lucía Ferreyra"
-artist_url = "/veritas/lucia-ferreyra/"
-description = "Remera ecru de corte recto en jersey de algodón pesado..."
-hero = "front.jpg"
-hero_alt = "Registro tee front view"
-back = "back.jpg"
-back_alt = "Registro tee back graphic"
-detail = "detail.jpg"
-detail_alt = "Detail of three-color offset print"
-specs = [
-  "Jersey de algodón 100% 240 g/m²",
-  "Cuello cerrado de rib 1x1",
-  "Estampa serigráfica al agua en tres colores",
-  "Confección en Buenos Aires"
-]
-+++
+Existing Spanish concept example. Field names and reference values must remain unchanged when translating prose. For a new page, use the archetype with `draft: true`.
+
+```yaml
+---
+title: "Remera Registro"
+translationKey: "piece-registro"
+description: "Tres planos de color se desplazan entre sí. El crudo queda visible como el papel entre afiches: no todo el espacio necesita otra capa."
+weight: 1
+concept: true
+artist_id: "lucia-ferreyra"
+artist_name: "Lucía Ferreyra"
+drop_ref: "drops/sobreimpreso"
+story_ref: "veritas/lucia-ferreyra"
+kind: "tee"
+fabric: "Jersey de algodón, objetivo 240 g/m²"
+color: "Crudo / Rojo / Cobalto / Amarillo ácido"
+fit: "Corte recto amplio, hombro levemente caído."
+technique: "Serigrafía de tres tintas en el frente; firma pequeña en la espalda."
+art: "images/collaborations/registro.svg"
+art_back: "images/collaborations/registro-back.svg"
+---
 ```
 
 ### Collection / Drop (`content/{lang}/drops/{slug}/index.md`)
-```toml
-+++
-title = "Sobreimpreso"
-translationKey = "sobreimpreso"
-draft = false
-concept = true
-artist = "Lucía Ferreyra"
-artist_bio = "Grabadora y diseñadora gráfica..."
-interview_url = "/veritas/lucia-ferreyra/"
-description = "Serie gráfica basada en la memoria visual y la superposición..."
-palette = ["#e13830", "#224dcd", "#e3ef28", "#f1f0e8"]
-pieces = ["registro", "persistencia", "testigo"]
-+++
+Existing concept example; collection pieces are found through `artist_id`, not a manually maintained `pieces` list.
+
+```yaml
+---
+artist_id: "lucia-ferreyra"
+artist_name: "Lucía Ferreyra"
+neighborhood: "Chacarita"
+craft: "Serigrafía"
+tone: "print"
+concept: true
+hero: "images/collaborations/sobreimpreso-studio.png"
+hero_alt: "Mesa de serigrafía imaginada con tintas rojas, azules y amarillas y papeles sobreimpresos."
+weight: 1
+title: "Sobreimpreso"
+translationKey: "sobreimpreso"
+drop_number: "01"
+status: "concept"
+theme: "La memoria deja capas."
+bio: "Lucía es una artista ficticia que reúne fragmentos de carteles, letras dibujadas a mano y papeles de circulación cotidiana. En su taller imaginado de Chacarita, la memoria no se conserva intacta: se vuelve a imprimir."
+palette: "Rojo cartel / Cobalto / Amarillo ácido"
+story_ref: "veritas/lucia-ferreyra"
+description: "Tres prendas para llevar lo que el barrio se resiste a olvidar. Rojo, cobalto y amarillo ácido; capas que dejan ver lo anterior."
+---
 ```
 
 ### Editorial / En proceso (`content/{lang}/veritas/{slug}/index.md`)
+Existing fictional example, showing the introduction and first chapter only. A complete interview requires three chapters and two question/answer pairs per chapter. Do not publish a partial example or attribute these invented answers to a real person.
+
 ```toml
 +++
 title = "Lo que queda debajo"
 translationKey = "lucia-ferreyra"
-draft = false
+description = "Una conversación imaginada con Lucía Ferreyra sobre carteles que desaparecen, errores de registro y las cosas que vale la pena volver a imprimir."
+weight = 1
 concept = true
 artist_id = "lucia-ferreyra"
 artist_name = "Lucía Ferreyra"
-craft = "Grabado y serigrafía"
+craft = "Serigrafía"
 neighborhood = "Chacarita"
-drop_ref = "sobreimpreso"
-hero = "studio.jpg"
-intro = "Conversación sobre capas de tinta, memoria barrial..."
-closing = "La serie Sobreimpreso explora la persistencia del trazo..."
+tone = "print"
+drop_ref = "drops/sobreimpreso"
+hero = "images/collaborations/sobreimpreso-studio.png"
+hero_alt = "Mesa de serigrafía imaginada con tintas rojas, azules y amarillas y papeles sobreimpresos."
+intro = "En este taller imaginado de Chacarita hay papeles que nadie ordena por fecha. Lucía Ferreyra los agrupa por lo que dejan ver: una letra partida, una dirección incompleta, el color que sobrevive debajo de otro. Sobreimpreso nace de esa forma de mirar. Esta entrevista ficticia sigue tres decisiones —superponer, insistir, reducir— hasta convertirlas en una remera, un buzo y una gorra."
+closing = "Sobreimpreso no propone congelar Chacarita en una imagen. Propone una manera de trabajar: mirar lo que se acumula, elegir qué conservar y dejar visible el paso de una capa a otra. Las tres prendas comparten ese gesto, pero cada una lo dice a una escala distinta."
 
 [[chapters]]
-title = "Mirar de nuevo"
+title = "01 / Volver a mirar"
 piece = "registro"
 questions = [
-  ["¿Por qué trabajar sobre afiches viejos?", "..."],
-  ["¿Qué se descarta en el proceso?", "..."]
+  ["¿Qué hace que guardes un pedazo de papel?",
+   "Que tenga una huella de uso. No busco el cartel más lindo; me interesa el que tuvo una función y después quedó fuera de lugar. Una letra cortada por otra pegatina, una flecha que ya no lleva a ninguna parte. Cuando lo saco de ahí, no quiero fingir que me llevo todo el barrio. Me llevo una pregunta: ¿qué parte de esto seguiría teniendo sentido en otro soporte?"],
+  ["¿Cómo evitás que la memoria se vuelva nostalgia decorativa?",
+   "No reconstruyo una época perfecta. Trabajo con lo que falta y con lo que alguien tapó. Por eso no dibujé un cartel antiguo entero para Registro: quedaron tres planos y un desfase. El espacio crudo entre las tintas importa tanto como el color. Ahí entra quien usa la prenda; no tiene que conocer mi historia para encontrar la suya."],
 ]
 +++
 ```
@@ -123,12 +139,12 @@ questions = [
 
 All pending real-world content is tracked using the structured inventory in `PLACEHOLDERS.md`:
 
-- **P00:** Working title and editorial voice consensus.
-- **P01:** Contributor approval and signed profile statements.
-- **P02:** Real source inspirations and studio artifact documentation.
-- **P03:** Physical garment sampling notes (shrinkage, fabric weight, real fit photos).
-- **P04:** Real contributor interviews across the 3-chapter format.
-- **P05:** Authentic workshop photography and process imagery.
-- **P06:** Before-and-after design iteration cards.
-- **P07:** Physical hangtag and label care copy.
-- **P08:** Workshop gatherings or event protocol (only when dates and locations are physically confirmed).
+- **P00:** Editorial title and local reading.
+- **P01:** Team and founder story: approved names, roles and factual history.
+- **P02:** Collection and collaboration: source, transformation and garment consequences.
+- **P03:** Garment description and sample evidence, with targets distinguished from measured results.
+- **P04:** Interview provenance, permission, three chapters and six answers.
+- **P05:** Images, scene status, factual alt text and credits.
+- **P06:** Short editorial piece or post; no invented progress or release date.
+- **P07:** Card, hangtag or insert study; no unsupported composition or care instructions.
+- **P08:** Gathering or visit, only with confirmed details and access information.
