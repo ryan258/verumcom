@@ -1,5 +1,7 @@
 # VERUM — Brand universe and artist series 01–02
 
+[Español (Argentina)](CREATIVE-DIRECTION.es-AR.md) · English
+
 Current direction: October 3, 2026. VERUM remains the clothing brand. En proceso / In process is the working editorial title replacing Veritas in the interface. The two collaborations remain fictional design studies. This is not a real collaboration announcement or a production-ready apparel range.
 
 This file owns creative decisions. PLACEHOLDERS.md owns the replacement briefs; CONTENT.md owns field and route instructions. The original project-description.md is historical, not a source of current promises.

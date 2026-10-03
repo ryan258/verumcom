@@ -1,5 +1,7 @@
 # VERUM — Contenido provisional y reemplazos
 
+**Español (Argentina)** · [Índice de documentación](docs/README.es-AR.md)
+
 Inventario y briefs vigentes al 3 de octubre de 2026. Reemplaza la lista antigua de doce prendas y cuatro crónicas. No reutilizar las rutas retiradas del brief inicial.
 
 | Elemento | Fuente actual | Reemplazo pendiente |
@@ -31,7 +33,7 @@ El sitio actual sigue mostrando los conceptos completos. Las instrucciones viven
 
 **Consigna:** «Escuchá “En proceso” en una conversación sobre ropa. ¿Qué esperarías encontrar? ¿Te recuerda a algo local que convenga conocer?» Registrar la expresión exacta, quién aporta la lectura (con permiso) y el contexto. Una asociación personal es una señal para discutir, no una definición universal del habla porteña.
 
-**Entrega mínima:** `[título elegido] + [lectura local] + [decisión de los propietarios y fecha]`. No hay que contratar ni activar nada. Sin una decisión final, conservar el título como propuesta de trabajo. La asociación de Veritas con una línea de fragancias está documentada en CREATIVE-DIRECTION.md; el significado callejero mencionado sigue sin verificarse.
+**Entrega mínima:** `[título elegido] + [lectura local] + [decisión de los propietarios y fecha]`. No hay que contratar ni activar nada. Sin una decisión final, conservar el título como propuesta de trabajo. La asociación de Veritas con una línea de fragancias está documentada en [CREATIVE-DIRECTION.es-AR.md](CREATIVE-DIRECTION.es-AR.md); el significado callejero mencionado sigue sin verificarse.
 
 ### P01 — Equipo e historia fundadora
 

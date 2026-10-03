@@ -1,6 +1,8 @@
 # Contenido de VERUM
 
-La serie actual contiene dos colaboraciones ficticias, seis prendas conceptuales y dos entrevistas imaginadas, en español e inglés. La dirección creativa y las decisiones acordadas están en [CREATIVE-DIRECTION.md](CREATIVE-DIRECTION.md).
+**Español (Argentina)** · [Índice de documentación](docs/README.es-AR.md)
+
+La serie actual contiene dos colaboraciones ficticias, seis prendas conceptuales y dos entrevistas imaginadas, en español e inglés. La dirección creativa y las decisiones acordadas están en [CREATIVE-DIRECTION.es-AR.md](CREATIVE-DIRECTION.es-AR.md).
 
 ## Fuentes
 
@@ -57,7 +59,7 @@ El canal principal requiere `primary_contact` y `contact_verified` en `hugo.toml
 
 ## Universo y placeholders instructivos — 3 de octubre
 
-La dirección de voz, temas y aplicaciones está en CREATIVE-DIRECTION.md. Las fichas P00–P08 de PLACEHOLDERS.md dan consignas y ejemplos para reemplazar el contenido; no son texto listo para visitantes. Los arquetipos ahora explican qué completar en cada campo y mantienen `draft: true` / `concept: true`. La ficha de muestra se registra por separado del copy público; un gramaje objetivo no se convierte en medición al completar la ficha.
+La dirección de voz, temas y aplicaciones está en [CREATIVE-DIRECTION.es-AR.md](CREATIVE-DIRECTION.es-AR.md). Las fichas P00–P08 de PLACEHOLDERS.md dan consignas y ejemplos para reemplazar el contenido; no son texto listo para visitantes. Los arquetipos ahora explican qué completar en cada campo y mantienen `draft: true` / `concept: true`. La ficha de muestra se registra por separado del copy público; un gramaje objetivo no se convierte en medición al completar la ficha.
 
 El nombre editorial visible es **En proceso / In process**, de trabajo. Cambiarlo en la clave `editorial_name` de ambos archivos i18n y en el `title`/`description` de ambos índices `veritas/_index.md`. Las invitaciones compartidas dicen «leer las conversaciones» sin duplicar el nombre. Conservar `translationKey`, `artist_id`, `story_ref`, nombres de carpetas y anclas si solo cambia el rótulo.
 
