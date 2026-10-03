@@ -1,115 +1,86 @@
-# VERUM — Sitio Web Oficial
+# VERUM — Sitio de marca y lookbook
 
-> Sitio web bilingüe (Español Porteño / Inglés) de marca y lookbook para **VERUM**, etiqueta independiente de indumentaria pesada y callejera nacida en Buenos Aires, Argentina.
+Sitio bilingüe de una marca de indumentaria independiente en desarrollo en Buenos Aires. Español en `/`, inglés en `/en/`. Hugo Extended, SCSS y JavaScript mínimo; sin carrito ni pagos.
 
-Construido desde cero como un tema a medida para **Hugo Extended**. Sin frameworks de JavaScript, sin dependencias pesadas y sin e-commerce (cero changuito, cero pasarelas de pago).
+La serie actual usa contenido provisional: dos artistas ficticios, seis prendas conceptuales y dos entrevistas imaginadas. Es una demostración de la dirección y de la estructura editorial, no un anuncio de colaboraciones reales ni de productos disponibles. La dirección actual es «Ideas que se llevan / Ideas you can wear». Las biografías, imágenes y especificaciones reales se incorporan cuando estén aprobadas.
 
----
+## Desarrollo
 
-## 1. Requisitos Previos
+Requiere Hugo Extended >= 0.163.0; CI fija 0.166.0. Python >= 3.11 para los verificadores.
 
-- **Hugo Extended Edition** `>= v0.158` (probado y validado en `v0.165.0+extended`).
-  > Es obligatorio usar la versión **Extended** para la compilación de Sass/SCSS nativa vía Hugo Pipes y el procesamiento de imágenes.
-
-```bash
-# macOS (Homebrew)
-brew install hugo
-
-# Verificar instalación
-hugo version
-```
-
----
-
-## 2. Desarrollo Local
-
-Clonar o entrar al repositorio y levantar el servidor de desarrollo local:
-
-```bash
-# Servidor local con recarga rápida y soporte bilingüe
+```sh
 hugo server -D
-
-# Acceder en el navegador:
-# Español (Default): http://localhost:1313/
-# English (Secundario): http://localhost:1313/en/
 ```
 
----
+## Experiencia actual
 
-## 3. Compilación de Producción
+- **Inicio:** ilustraciones de prendas de la serie actual, las seis piezas, colecciones y En proceso. Ya no usa la campera de campaña ajena al catálogo.
+- **Lookbook:** acceso directo a seis prendas, sin filtros ni paso obligatorio por un artista.
+- **Drops:** dos colecciones con contexto, paleta, prendas e historia.
+- **Prenda:** vistas frontal/posterior, detalles propuestos, entrevista relacionada y piezas compañeras.
+- **En proceso / In process:** conversaciones ficticias, relacionadas con decisiones de diseño.
+- **Manifiesto:** principios y sección `#equipo`, preparada para la historia y los perfiles reales.
+- **Contacto:** un canal principal confirmado o un estado pendiente explícito. No se publican horarios de taller provisionales.
 
-Para compilar los archivos estáticos en la carpeta `public/`:
+## Universo y carga guiada
 
-```bash
-hugo --minify --gc
+La marca sigue siendo **VERUM**. El nombre editorial de trabajo es **En proceso** en español e **In process** en inglés. Se conservan las rutas `/veritas/` y `/en/veritas/`, sus bundles, relaciones y anclas para no romper enlaces. Los rótulos compartidos usan `editorial_name`; el título y la descripción del índice están en cada `_index.md`. Un cambio de URL posterior requiere una migración completa con aliases.
+
+El universo se organiza en capas, marcas de trabajo, uso cotidiano y voces con nombre propio. El manifiesto muestra esa dirección; las consignas de edición quedan en las fuentes. Para completar contenido por voz, alcanza una entrada como «P01: …» o «P03 Registro: …»; el editor usa PLACEHOLDERS.md para convertirla en campos y conservar los pendientes. No hay que completar todo en una sesión.
+
+Los arquetipos de colección, prenda y entrevista incluyen instrucciones y permanecen en `draft: true`, `concept: true`. Las plantillas actuales conservan los avisos de ficción aunque se cambie ese último campo. No reemplazar una persona ficticia por una real sin actualizar el conjunto relacionado y revisar cómo se presenta.
+
+## Canal principal
+
+En `hugo.toml`, `primary_contact` admite `instagram`, `email` o `whatsapp`. `contact_verified = false` mantiene los destinos provisionales fuera de los enlaces públicos. Tras confirmar el canal seleccionado y su destino, ponerlo en `true` activa el mismo enlace en inicio, lookbook, colecciones, prendas, contacto y footer. El valor confirma solamente el canal seleccionado; al cambiarlo, volver a confirmar su destino.
+
+`form_endpoint` y `newsletter_endpoint` son integraciones independientes. El contacto ignora un endpoint vacío o que contenga `placeholder`; la newsletter solo se muestra con endpoint configurado. Confirmar la cuenta y actualizar privacidad antes de activarlos. No hacen falta para el flujo principal.
+
+El dominio, el correo y el usuario social de ejemplo requieren confirmación de los propietarios. `baseURL` determina canonical, sitemap y URLs para compartir. GitHub Pages lo reemplaza con la URL de Pages durante su build.
+
+## Verificación enfocada — ejecutar localmente
+
+Para comprobar la versión actual con los verificadores enfocados del sitio:
+
+```sh
+cd /Users/ryanjohnson/Projects/verumcom
+VERUM_PREVIEW_DIR="$(mktemp -d /tmp/verum-review.XXXXXX)"
+hugo --destination "$VERUM_PREVIEW_DIR" --cacheDir /tmp/verum-hugo-cache --baseURL http://127.0.0.1:8766/ --noBuildLock &&
+python3 scripts/verify_review.py "$VERUM_PREVIEW_DIR"
 ```
 
-- Compila y minifica automáticamente SCSS con `fingerprint` e integridad subrecurso (SRI).
-- Minifica HTML, CSS y JavaScript nativo.
-- Genera sitemaps bilingües (`sitemap.xml`) y etiquetas `hreflang` cruzadas con `x-default`.
+`verify_review.py` ejecuta primero `verify_concepts.py`: relaciones bilingües, enlaces, imágenes, capítulos, disclosures y ausencia de rutas retiradas. Luego comprueba la separación Lookbook/Drops, las seis tarjetas, las imágenes sociales de cada prenda, la ruta al equipo y el estado del canal principal.
 
----
+Para revisar ese mismo resultado en el navegador, en la misma terminal:
 
-## 4. Arquitectura y Metodología BEM
+```sh
+python3 -m http.server 8766 --bind 127.0.0.1 --directory "$VERUM_PREVIEW_DIR"
+```
 
-El proyecto implementa una arquitectura modular con metodología **BEM (Block Element Modifier)** en toda la suite SCSS:
+Abrir `http://127.0.0.1:8766/`. Revisar a 1440, 390 y 320 px: portada → prenda → entrevista; Lookbook → Drops; ES/EN; apertura y cierre del menú con Escape; contacto pendiente o el canal confirmado. Comprobar que los controles y el texto no se cortan, y que el foco se ve al usar Tab. Estas pruebas no establecen conformidad WCAG ni validan entrega de mensajes.
 
-- `assets/scss/_tokens.scss`: Variables de diseño (`--ink`, `--bone`, `--accent`, `--concrete`, `--paper`; `--cyan` y `--magenta` conservan compatibilidad con componentes existentes).
-- `assets/scss/_typography.scss`: Tipografía Anton autoalojada, texto de sistema y bases de accesibilidad. La licencia de Anton vive en `static/fonts/OFL-Anton.txt`.
-- `assets/scss/_glitch.scss`: Efecto aberración cromática RGB split en CSS puro con protección estricta para `@media (prefers-reduced-motion: reduce)`.
-- `assets/scss/_nav.scss`: Cabecera sticky en escritorio, navegación desplegable en el flujo de la página en mobile y footer.
-- `assets/scss/_lookbook.scss`: Bases de la grilla de prendas, ficha técnica y aviso de no-carrito.
-- `assets/scss/_drops.scss`: Lanzamientos con estados condicionales (en la calle vs. próximamente).
-- `assets/scss/_veritas.scss`: Crónicas editoriales de lectura inmersiva con artistas locales.
-- `assets/scss/_forms.scss`: Puntos de venta físicos y formulario de contacto antispam.
-- `assets/scss/_editorial.scss`: Dirección visual editorial, campaña, selección de prendas, newsletter, refinamientos de páginas internas y adaptación responsive.
-- `assets/js/main.js`: Menú progresivo y filtros combinados por categoría/drop, con estado en la URL y conteo de resultados anunciado.
+## Documentación y arquitectura
 
----
+- [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md): Arquitectura estática, jerarquía de plantillas, partials, procesamiento de imágenes y SCSS.
+- [`docs/CONTENT-GUIDE.md`](./docs/CONTENT-GUIDE.md): Guía editorial, los cuatro territorios, estándares de voz y modelos de contenido.
+- [`docs/VERIFICATION.md`](./docs/VERIFICATION.md): Suite de verificación determinista, scripts de prueba y protocolo de accesibilidad.
+- [`ROADMAP.md`](./ROADMAP.md): Hitos del proyecto, fases completadas, prioridades activas y próximas etapas.
+- [`CONTENT.md`](./CONTENT.md): Campos y pasos de carga editorial.
+- [`PLACEHOLDERS.md`](./PLACEHOLDERS.md): Inventario y briefs P00–P08; consignas, extensión, ejemplos y qué hacer cuando faltan datos.
+- [`CREATIVE-DIRECTION.md`](./CREATIVE-DIRECTION.md): Universo, voz, gramática visual, aplicaciones, decisión de nombre editorial y dos colecciones.
+- [`project-description.md`](./project-description.md): Brief original, conservado como antecedente histórico.
 
-## 5. Implementación Bilingüe
+## Archivos principales
 
-- **Español (es-AR)**: Idioma primario situado en la raíz (`/`, `/lookbook/`, `/manifiesto/`). Escrito en español rioplatense porteño con voseo (*vos*, *mirá*, *rescatá*, *fichá*) y lunfardo callejero orientado a jóvenes de 20 a 30 años.
-- **English (en)**: Idioma secundario situado bajo `/en/` (`/en/lookbook/`, `/en/manifesto/`).
-- Las páginas se vinculan mediante el parámetro `translationKey` en el front matter.
-- Los textos de interfaz residen en `i18n/es.toml` e `i18n/en.toml`.
+- `layouts/index.html`, `layouts/lookbook/`, `layouts/drops/`: recorrido de prendas y colecciones.
+- `layouts/partials/contact-channel.html`, `follow-project.html`: resolución y presentación del canal principal.
+- `layouts/partials/brand-story.html`: historia y perfiles aprobados del equipo.
+- `assets/scss/_collaborations.scss`: colecciones, portada, cuadrícula y acciones.
+- `assets/js/main.js`: menú progresivo; los enlaces siguen disponibles sin JavaScript.
+- `assets/images/social/`: seis tarjetas PNG de 1200 × 630; Hugo publica JPG con metadata localizada.
 
----
+## Publicación
 
-## 6. Despliegue en Servidores Estáticos
+El workflow existente `.github/workflows/gh-pages.yml` compila y publica en GitHub Pages al recibir un push a `main` o una ejecución manual. No ejecutar esas acciones sin autorización de Ryan. Esta revisión no publicó ni modificó la configuración de despliegue.
 
-Recomendado: **Cloudflare Pages** o **Netlify**.
-
-### Configuración en Cloudflare Pages:
-- **Build command**: `hugo --minify`
-- **Build output directory**: `public`
-- **Environment variables**: `HUGO_VERSION = 0.165.0`
-
-### Cabeceras de Seguridad (Security Headers):
-Se recomienda configurar las siguientes cabeceras en el host:
-- `X-Content-Type-Options: nosniff`
-- `X-Frame-Options: DENY`
-- `Referrer-Policy: strict-origin-when-cross-origin`
-- `Content-Security-Policy: default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self' https://buttondown.email https://formspree.io; base-uri 'self'; object-src 'none';`
-
----
-
-## 7. Documentación Complementaria
-
-- [`CONTENT.md`](./CONTENT.md): Guía para cargar y editar prendas, drops y crónicas editoriales.
-- [`PLACEHOLDERS.md`](./PLACEHOLDERS.md): Registro técnico de imágenes y activos provisionales para su sustitución en producción.
-
-
-## 8. Diseño y Accesibilidad
-
-La interfaz combina superficies de papel y tinta, un acento ácido, fotografía local y títulos condensados. La tipografía y los símbolos se sirven desde el sitio; los íconos decorativos no dependen de una fuente externa. Hugo genera versiones WebP de las fotografías de campaña y catálogo.
-
-- El enlace para saltar al contenido transfiere el foco al `main`.
-- El menú mobile es un desplegable en el flujo del documento. `Escape` lo cierra y devuelve el foco al botón. Sin JavaScript, los enlaces permanecen disponibles.
-- Los filtros de prenda y drop se intersectan. Los botones exponen `aria-pressed`, el conteo anuncia los cambios y el estado vacío explica cómo recuperarse. La URL conserva los filtros al recargar o regresar desde una ficha.
-- Las fichas presentan la imagen principal, la información de la prenda y las imágenes adicionales en el mismo orden de lectura visual y semántico. Los materiales, colores y talles usan una lista de definiciones.
-- Los controles principales tienen objetivos de al menos 44 px. Los focos visibles, la preferencia de movimiento reducido y los modos de colores forzados tienen estilos explícitos.
-- La suscripción usa un campo con etiqueta visible, autocompletado y validación nativa. La entrega del servicio externo debe verificarse por separado antes del lanzamiento.
-- Contacto muestra un enlace de email cuando `form_endpoint` está vacío o contiene `placeholder`. Un endpoint real habilita el formulario. No se envían mensajes a un destino provisional.
-
-Verificación de la revisión del 5 de septiembre de 2026: compilación de producción bilingüe; inspección de enlaces internos, IDs y alternativas de imágenes; recorridos de teclado del menú y enlace de salto; filtros combinados y recuperación del estado vacío; cambio de idioma en una ficha; validación de email vacío; revisión de reflujo y contraste de texto en páginas representativas a 320 px y revisión visual de escritorio. Estas comprobaciones no constituyen una certificación WCAG ni sustituyen una prueba con lectores de pantalla reales.
+Para otros hosts estáticos: `hugo --minify`, salida `public`, Hugo Extended 0.166.0. Usar un destino limpio: el contenido retirado puede quedar en un `public/` viejo.

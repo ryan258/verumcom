@@ -1,95 +1,149 @@
-# VERUM — Registro Técnico de Imágenes y Activos de Fondo
+# VERUM — Contenido provisional y reemplazos
 
-> **Especificación de producción para sustitución de imágenes y texturas de fondo.**  
-> Este documento detalla cada activo visual, imagen de fondo, retrato editorial y plano de producto necesario para el sitio, con sus dimensiones exactas, relaciones de aspecto, estética de encuadre y rutas de archivo en el repositorio.
+Inventario y briefs vigentes al 3 de octubre de 2026. Reemplaza la lista antigua de doce prendas y cuatro crónicas. No reutilizar las rutas retiradas del brief inicial.
 
----
+| Elemento | Fuente actual | Reemplazo pendiente |
+| Nombre editorial | En proceso / In process; rutas técnicas `veritas` | P00: lectura local y decisión de los propietarios; VERUM se conserva |
+| --- | --- | --- |
+| Prendas | `assets/images/collaborations/{registro,persistencia,testigo,cota,trazo,escuadra}.svg` y variantes `-back.svg` | Muestras aprobadas y fotografías frontal, posterior, puesta y detalle |
+| Talleres | `sobreimpreso-studio.png`, `en-obra-studio.png` en la misma carpeta | Fotos autorizadas del colaborador y proceso reales |
+| Tarjetas sociales | `assets/images/social/{slug}.png` | Regenerar al cambiar el diseño, o usar `social_image` en la ficha con una foto aprobada |
+| Artistas/entrevistas | Bundles de `drops` y `veritas` en ambos idiomas | Identidades, biografías, permisos y entrevistas aprobadas; reemplazar conjuntamente |
+| Fundadores | Campos opcionales de los manifiestos: `founder_story`, `founders` | Nombres públicos, roles, historia breve y aprobación del texto |
+| Contacto | `hugo.toml`: `primary_contact`, `contact_verified`, destinos | Confirmar titularidad del canal seleccionado antes de activarlo |
+| Dominio | `baseURL` en `hugo.toml` | Confirmar dominio de publicación y actualizarlo antes del build final |
+| Puntos de venta | `data/stockists.yaml`, vacío | Solo locales confirmados; no publicar direcciones de muestra |
+| Newsletter/formulario | Endpoints desactivados/provisionales en `hugo.toml` | Cuenta confirmada, privacidad actualizada y prueba real de entrega |
 
-## 1. Activos Visuales y Fondos del Home (Alineados al Mockup)
+La portada usa las ilustraciones de la serie actual. `assets/images/hero-bg.jpg` y `hero-model.png` se conservan como activos antiguos, pero ya no se muestran en la portada ni se usan como fallback social. Las ilustraciones son SVG; no sustituyen evidencia del calce, textura o confección.
 
-| Sección del Home | Identificador del Activo | Ruta en el Repositorio | Proporción / Resolución | Dirección de Arte y Composición |
-|---|---|---|---|---|
-| **01. Hero Principal** | **Fondo Urbano CABA** | `static/images/hero-bg.jpg` | `16:9`<br>`1920 x 1080 px` | Fotografía analógica blanco y negro de edificios antiguos de Buenos Aires con grano marcado y afiche tipo pegatina callejera (*"BUENOS AIRES SIEMPRE RESISTE"*). |
-| **01. Hero Principal** | **Modelo VERUM Espalda** | `static/images/hero-model.png` *(o integrado en hero-bg)* | `4:5` o recorte transparente | Modelo porteño joven con capucha puesta y campera oversize negra con estampa stencil blanca de VERUM en la espalda, mirando hacia arriba por sobre el hombro. |
-| **01. Hero Principal** | **Tag Callejero Corona** | `static/images/tag-corona.svg` | Vectorial / SVG | Grafiti a mano alzada en aerosol blanco/cyan: *"MISMA CIUDAD OTRA VERDAD 👑"*. |
-| **02. Drop Spotlight** | **Portada Drop 01/03** | `content/es/drops/drop-01-lo-real/hero.jpg`<br>`content/en/drops/drop-01-lo-real/hero.jpg` | `16:9`<br>`1920 x 1080 px`<br>*(mín. 1280x720)* | Plano medio de modelo con remera oversize negra estampada en entorno de arquitectura brutalista de hormigón crudo. Tag en aerosol magenta: *"ARTE TAMBIÉN ES RESISTENCIA 👑"*. |
-| **03. Destacados 01** | **Caos Hoodie (Dorso)** | `content/es/lookbook/buzo-canguro-asfalto/01-front.jpg`<br>`content/en/lookbook/buzo-canguro-asfalto/01-front.jpg` | `4:5`<br>`1200 x 1500 px` | Vista trasera de buzo con capucha oversize negro de 460g con serigrafía gráfica central en espalda en locación callejera con flash crudo. |
-| **03. Destacados 02** | **Verdad Tee (Dorso)** | `content/es/lookbook/remera-hormigon-raw/01-front.jpg`<br>`content/en/lookbook/remera-hormigon-raw/01-front.jpg` | `4:5`<br>`1200 x 1500 px` | Vista trasera de remera boxy fit blanca/cruda de 280g con estampa de retrato desgastado en serigrafía negra táctil. |
-| **03. Destacados 03** | **Territorio Cargo** | `content/es/lookbook/pantalon-cargo-palermo/01-front.jpg`<br>`content/en/lookbook/pantalon-cargo-palermo/01-front.jpg` | `4:5`<br>`1200 x 1500 px` | Detalle en plano cerrado de bolsillo lateral fuelle en pantalón cargo negro de tela ripstop técnica con etiqueta tejida y costuras reforzadas. |
-| **04. Veritas Spread** | **Retrato Artista (Izquierda)** | `content/es/veritas/01-tinta-viva-la-boca/hero.jpg`<br>`content/en/veritas/01-tinta-viva-la-boca/hero.jpg` | `4:5`<br>`1000 x 1250 px` | Retrato de perfil en blanco y negro de artista callejera con iluminación dramática de contraluz, intervenido con chorreado o cruz en aerosol magenta neón (`#FF0090`). |
-| **04. Veritas Spread** | **Edificio y Pegatina (Derecha)** | `static/images/veritas-street-wall.jpg` | `4:3`<br>`1200 x 900 px` | Fachada de edificio de departamentos de Buenos Aires con pasacalles o pegatina tipográfica: *"LA BELLEZA TAMBIÉN ES POLÍTICA 👑"*. |
-| **05. Newsletter** | **Mirada en Sombra** | `static/images/newsletter-eye.jpg` | `16:9` o libre<br>`1000 x 600 px` | Primer plano cerrado en blanco y negro de ojos mirando intensamente desde la penumbra, con grano 35mm y frase stencil: *"LOS REALES TAMBIÉN SE SUSCRIBEN"*. |
+## Cómo usar estos placeholders
 
----
+Cada placeholder tiene una tarea concreta, una extensión y una condición de reemplazo. Los ejemplos entre corchetes son instrucciones de edición, no texto final. Se pueden completar por dictado: **«P01: …»**, **«P03 Registro: …»**. Una respuesta breve alcanza para empezar; no hace falta volver a copiar la ficha. Quien edite transforma esa entrada en ambos idiomas y marca lo que siga sin conocerse.
 
-## 2. Texturas Globales y Elementos Vectoriales
+**Tres estados editoriales:** `propuesta` (inventado o previsto, identificado como tal), `dato recibido` (aún sin aprobación para publicar), `aprobado` (texto y uso acordados). Estos estados son una convención de trabajo, no campos nuevos de Hugo ni una autorización automática. Una aprobación de texto no demuestra producción, permisos de todas las imágenes ni disponibilidad. Registrar fuente, responsable y fecha en la entrega; guardar conversaciones privadas y documentos personales fuera del repositorio público.
 
-| Activo | Ruta en Repositorio | Formato / Dimensiones | Uso en el Sistema |
-|---|---|---|---|
-| **Logotipo Stencil con Goteo** | `static/images/logo.svg`<br>`assets/images/logo.svg` | SVG vectorial (`520 x 140` viewBox) | Wordmark principal con goteo de tinta en letras R, U, M y desfase cromático cyan (`#00F0FF`) y magenta (`#FF0090`). |
-| **Microtrama de Grano / Ruido** | `static/images/noise.png` | PNG 8-bit con alfa (`100 x 100 px`) | Trama sutil repetible sobre fondo `--ink` para dar acabado táctil y romper la perfección digital. |
-| **Grano de Papel de Diario** | `static/images/paper-grain.png` *(opcional)* | PNG transparente (`200 x 200 px`) | Textura para secciones claras (`--paper`) en Manifiesto y Veritas. |
+El sitio actual sigue mostrando los conceptos completos. Las instrucciones viven acá y en comentarios de las fuentes/arquetipos; no se insertan como preguntas para visitantes. Los campos públicos vacíos no se rellenan con un nombre, una dirección, una cifra o una cita inventados. No retirar el aviso de ficción por completar un único campo.
 
----
+### P00 — Nombre editorial
 
-## 3. Catálogo de Prendas del Lookbook (12 Paquetes Completos)
+**Destino:** `i18n/{es,en}.toml`, clave `editorial_name`; títulos/descripciones de `content/{es,en}/veritas/_index.md`. **Estado actual:** En proceso / In process es el título de trabajo. VERUM no cambia. Las URLs y claves `veritas` se conservan.
 
-Cada prenda se almacena como un **page bundle** en `content/es/lookbook/{slug}/` y `content/en/lookbook/{slug}/`.  
-Requiere 3 tomas estandarizadas en relación de aspecto **`4:5`** (mínimo `800 x 1000 px`, recomendado `1200 x 1500 px`):
+**Consigna:** «Escuchá “En proceso” en una conversación sobre ropa. ¿Qué esperarías encontrar? ¿Te recuerda a algo local que convenga conocer?» Registrar la expresión exacta, quién aporta la lectura (con permiso) y el contexto. Una asociación personal es una señal para discutir, no una definición universal del habla porteña.
 
-- **`01-front.jpg`**: Vista frontal completa (modelo de pie o prenda colgada en percha de taller).
-- **`02-back.jpg`**: Vista trasera completa (corte, espalda, estampa o capucha).
-- **`03-detail.jpg`**: Plano detalle de tejido (textura de frisa 420g, ripstop, cierres YKK, remaches o bordado).
+**Entrega mínima:** `[título elegido] + [lectura local] + [decisión de los propietarios y fecha]`. No hay que contratar ni activar nada. Sin una decisión final, conservar el título como propuesta de trabajo. La asociación de Veritas con una línea de fragancias está documentada en CREATIVE-DIRECTION.md; el significado callejero mencionado sigue sin verificarse.
 
-| Prenda | Categoría | Drop | Especificación de las Fotos |
-|---|---|---|---|
-| `campera-verdad` | Outerwear | Drop 01 | Bomber negra pesada con estampa trasera en cyan glitch y cierres metálicos plateados. |
-| `buzo-canguro-asfalto` | Outerwear | Drop 01 | Hoodie gris hormigón con capucha doble estructurada y remaches de acero en bolsillo. |
-| `remera-hormigon-raw` | Tees | Drop 01 | Remera boxy fit blanca cruda con cuello cerrado y serigrafía táctil en relieve. |
-| `pantalon-cargo-palermo` | Bottoms | Drop 01 | Cargo militar ripstop negro con 6 bolsillos y lazos de ajuste en tobillos. |
-| `remera-grafiti-boca` | Tees | Drop 01 | Remera negra lavada a la piedra con desgaste intencional y stencil tipográfico porteño. |
-| `campera-rompeviento-sur` | Outerwear | Drop 01 | Rompevientos técnico impermeable con vivos magenta ocultos y capucha de tormenta. |
-| `buzo-cuello-redondo-barracas` | Outerwear | Drop 01 | Crewneck negro de frisa esmerilada pesada con microbordado en puño izquierdo. |
-| `pantalon-jogger-pesado` | Bottoms | Drop 01 | Jogger holgado de algodón de 420g con cordón plano de algodón y puños sueltos. |
-| `remera-subte-d` | Tees | Drop 01 | Remera gris cemento con tipografía brutalista y horarios de tren impresos en nuca. |
-| `gorra-stencil-cinco-paneles` | Accessories | Drop 01 | Gorra camper 5 paneles en gabardina 8oz negra con parche bordado y hebilla metálica. |
-| `chaleco-tactico-mataderos` | Outerwear | Drop 01 | Chaleco utilitario multibolsillo en cordura 500D impermeable con argollas en D. |
-| `piluso-ripstop-noche` | Accessories | Drop 01 | Bucket hat impermeable en tela ripstop con ala descendente y cinta porta-accesorios. |
+### P01 — Equipo e historia fundadora
 
----
+**Destino:** `founder_story` y `founders` en ambos manifiestos. **Extensión:** 70–110 palabras para la historia; 35–50 por persona.
 
-## 4. Portadas de Lanzamientos (`drops`)
+**Consigna:** «¿Quiénes están haciendo esto, qué los reunió y qué decisión concreta tomaron juntos? Cerrá con lo que están haciendo ahora, sin adelantar resultados.» Un detalle confirmado sirve más que una historia heroica.
 
-Relación de aspecto fija: **`16:9`** (recomendado `1920 x 1080 px`, mínimo `1280 x 720 px`).
+**Molde de edición:** `[Nombres públicos] empezamos a trabajar juntos a partir de [hecho real]. [Decisión concreta] nos llevó a explorar [dirección]. Hoy estamos [actividad verificable]; todavía falta [paso pendiente].`
 
-| Drop | Estado | Ubicación del Archivo | Descripción de la Fotografía |
-|---|---|---|---|
-| **Drop 01 — Lo Real** | En la calle *(Released)* | `content/es/drops/drop-01-lo-real/hero.jpg`<br>`content/en/drops/drop-01-lo-real/hero.jpg` | Foto nocturna grupal en calle adoquinada de Barracas con modelos vistiendo la colección completa. Iluminación directa de farola y flash. |
-| **Drop 02 — Ruido** | En confección *(Upcoming)* | `content/es/drops/drop-02-ruido/hero.jpg`<br>`content/en/drops/drop-02-ruido/hero.jpg` | Foto de taller textil en Villa Crespo con rollos de tela ripstop reflectiva, mesas de corte y máquina overlock en movimiento. |
+**Perfil:** `[nombre público] / [rol real] / [aporte específico] / [relación con el proyecto que esa persona aprueba]`. No adjudicar a los fundadores las biografías de Lucía o Tomás, formación, barrio, diagnóstico, oficio, año de inicio ni experiencia que no hayan contado y aprobado.
 
----
+**Sin datos:** omitir los campos; el sitio conserva la introducción general al proyecto. No cargar el molde con corchetes ni perfiles vacíos. Completar ambos idiomas juntos, conservando hechos y grado de certeza.
 
-## 5. Crónicas Editoriales (`veritas`)
+### P02 — Colección y colaboración
 
-Relación de aspecto fija: **`3:2`** (recomendado `1800 x 1200 px`, mínimo `1200 x 800 px`).
+**Destino:** bundles `drops`; guía de campos en `CONTENT.md`. **Extensión:** `description` 25–40 palabras; `bio` 60–90; `theme` una frase breve.
 
-| Historia Editorial | Barrio | Ubicación del Archivo | Descripción del Retrato Documental |
-|---|---|---|---|
-| **01. Tinta Viva** | La Boca | `content/es/veritas/01-tinta-viva-la-boca/hero.jpg`<br>`content/en/veritas/01-tinta-viva-la-boca/hero.jpg` | Retrato de Nico 'Fasolo' frente a un mural de chapa oxidada en La Boca sosteniendo rodillo de albañil con pintura goteando. |
-| **02. Serigrafía Nocturna** | Barracas | `content/es/veritas/02-serigrafia-nocturna-barracas/hero.jpg`<br>`content/en/veritas/02-serigrafia-nocturna-barracas/hero.jpg` | Mesa de impresión de 8 metros en galpón de Barracas a las 3 AM con maniguetas, marcos serigráficos y buzos secándose al aire. |
-| **03. Tipografía Brutalista** | Retiro | `content/es/veritas/03-tipografia-subte-c/hero.jpg`<br>`content/en/veritas/03-tipografia-subte-c/hero.jpg` | Koba pegando afiches tipográficos impresos en tipos de madera sobre las columnas de hormigón en los andenes de Retiro. |
-| **04. Hierro y Cemento** | San Telmo | `content/es/veritas/04-hierro-y-cemento-san-telmo/hero.jpg`<br>`content/en/veritas/04-hierro-y-cemento-san-telmo/hero.jpg` | Cacho Varela en su sótano de herrería forjando remaches de acero macizo con soplete y chispas de soldadura. |
+**Consigna:** «Nombrá una observación de partida, una decisión de diseño y algo que se decidió dejar afuera. Explicá qué cambia entre la remera, el buzo y la gorra.»
 
----
+**Molde:** `[observación o fuente] → [gesto transformado] → [ubicación en cada pieza] → [límite o pregunta pendiente]`. En Sobreimpreso, la capa cambia de escala; en En Obra, el ángulo se reduce. Esos son ejemplos conceptuales, no declaraciones de un colaborador real.
 
-## 6. Procedimiento de Sustitución en Producción
+**Para reemplazar:** identidad y presentación aprobadas; fuente del motivo y permiso de uso si corresponde; crédito exacto; texto en ES/EN. El barrio se incluye por su relación real con el trabajo y con acuerdo del colaborador, nunca para sumar credibilidad prestada. Si el nombre cambia, actualizar `artist_id`, `artist_name`, prendas y entrevista en conjunto. No reutilizar el diálogo ficticio como si lo hubiera dicho la persona nueva.
 
-El sitio está diseñado para que la sustitución sea un **reemplazo directo de archivos**:
+**Sin datos:** conservar la colaboración ficticia completa y su aviso. No mezclar una identidad real con un testimonio inventado.
 
-1. **Exportación**: Generar los archivos finales en formato **JPG** o **WebP** comprimidos al 85% de calidad, respetando las proporciones y nombres de archivo arriba indicados.
-2. **Reemplazo Directo**: Copiar los archivos finales sobre las rutas correspondientes en `content/es/...`, `content/en/...` y `static/images/`.
-3. **Regeneración**:
-   ```bash
-   hugo --minify --gc
-   ```
-   Hugo procesará automáticamente los activos, generará las variantes optimizadas y actualizará los hashes sin necesidad de editar ninguna plantilla HTML ni archivo Markdown.
+### P03 — Prenda y muestra
+
+**Destino:** bundles `lookbook`. **Extensión:** `description` 25–45 palabras; cuerpo 80–140; un dato claro por campo técnico.
+
+**Consigna:** «¿Cuál es el gesto de esta pieza, dónde está y qué deja libre? ¿Qué necesita comprobarse al pasar del dibujo a la tela?» Escribir primero la decisión visible; después, el objetivo técnico.
+
+**Ficha de muestra para completar fuera del copy:** `[pieza y versión] / [fecha y responsable] / [tejido y fuente] / [gramaje: objetivo o medido + método] / [medidas y forma de medir] / [posición de la gráfica] / [prueba de movimiento y comodidad] / [lavado realizado y resultado] / [cambio siguiente]`. Si no hubo prueba, escribir «no probado»; no deducir el resultado de un SVG o de una foto.
+
+**Ejemplo de tono para un objetivo:** «Frente crudo, tres planos desplazados. Objetivo: jersey de algodón de 240 g/m²; falta evaluar caída y estampa en muestra.» **Molde para una observación real:** «En la muestra [versión], [observación comprobada]. Se propone [ajuste].»
+
+**Sin datos:** conservar «objetivo» y la nota de muestreo. No publicar talles, composición exacta, origen de fabricación, durabilidad, cuidados ni stock por inferencia. Las cotas decorativas de En Obra no son medidas. Una muestra no equivale a una serie terminada.
+
+### P04 — En proceso: conversación
+
+**Destino:** `content/{es,en}/veritas/{persona}/index.md`, front matter TOML. **Forma:** tres capítulos, dos preguntas por capítulo; respuestas orientativas de 60–100 palabras, sin rellenar una respuesta corta con ficción.
+
+**Guion de entrevista real:**
+
+1. **Mirar:** «¿Qué observación puso esto en marcha?» / «¿Qué parte de esa fuente elegiste dejar afuera?» Vincular con la remera.
+2. **Decidir:** «¿Qué cambió al pasar a una prenda?» / «¿Qué probaste o descartaste, y por qué?» Vincular con el buzo.
+3. **Reducir:** «¿Qué queda cuando el gesto se hace más chico?» / «¿Qué sigue sin resolverse?» Vincular con la gorra.
+
+**Respuesta pendiente:** `[relato de la persona, tomado de conversación o texto autorizado; incluir un objeto, una elección y su consecuencia]`. Esa instrucción no se publica como una cita. No convertir una respuesta dictada en un manifiesto de marca ni quitar dudas para hacerla sonar más contundente.
+
+**Para reemplazar:** registro de origen, permiso de atribución, revisión de las citas, créditos y traducción que conserve las reservas del hablante. Una paráfrasis se identifica como tal. Reemplazar también introducción, cierre, retrato/escena y las referencias desde colección/prendas. **Sin entrevista:** mantener «conversación imaginada»; nunca cambiar solo `concept`.
+
+### P05 — Imágenes y escenas
+
+**Destino:** recursos compartidos y `hero_alt`; la prenda permite `social_image`. **Entrega por prenda:** frontal, posterior, detalle relevante y vista de uso. Usar 4:5 como guía para fotos de prenda; prever 16:9 para taller y 1200 × 630 para compartir, manteniendo el sujeto fuera de bordes de recorte.
+
+**Brief:** `[qué decisión debe verse] / [qué objeto y estado se fotografían] / [encuadre] / [crédito y permiso] / [texto alternativo factual]`. Pedir manos/proceso solo cuando aporten información; no simular un taller real con utilería sin explicarlo. Si una imagen es generada, mantener ese estado visible en el texto que la acompaña.
+
+**Alt de ejemplo conceptual:** «Ilustración frontal de una remera cruda con tres planos desplazados en rojo, cobalto y amarillo.» Describir lo visible; no inferir tacto, calidad, identidad de una persona o ubicación. **Sin imagen real:** conservar SVG/escena generada y su rótulo, sin llamarlos fotos de producción.
+
+### P06 — Pieza editorial breve o publicación
+
+**Destino:** material de trabajo, no una publicación programada. **Forma:** una imagen o detalle, 40–70 palabras y un enlace existente.
+
+**Molde ES:** `[observación concreta]. Por eso [decisión visible en la pieza]. [Estado: concepto o muestra real identificada]. [Invitación: mirar el diseño o leer la conversación]. [Crédito].`
+
+**Ejemplo conceptual:** «Tres planos, un pequeño desfase. Registro deja el fondo crudo visible entre las tintas. Es una ilustración de diseño: la caída de la tela y el resultado de la estampa todavía necesitan una muestra. Mirá el frente y la espalda en el lookbook.»
+
+**English treatment:** «Three planes, a small offset. Registro leaves the ecru ground visible between the inks. This is a design illustration; the fabric's drape and print still need sampling. See the front and back in the lookbook.»
+
+No agregar precio, contador, «últimas unidades», testimonio, fecha ni reserva. **Sin novedad:** no inventar un avance para llenar un calendario. Adaptar imagen y texto juntos; la aclaración debe viajar con la pieza si sale del sitio.
+
+### P07 — Tarjeta, etiqueta o inserto de estudio
+
+**Destino:** futuro estudio gráfico, aún no implementado en el sitio. **Forma:** una cara expresiva y una cara informativa.
+
+**Molde:** `VERUM / [colección] / [pieza] / [crédito aprobado] / [versión documentada]`. En un estudio: «Concepto visual. Material y terminaciones pendientes de muestra.» En una muestra real: identificar esa muestra sin afirmar disponibilidad.
+
+Una barra de registro o un ángulo puede acompañar la composición; no imitar sellos de certificación. Composición, cuidados y origen requieren datos reales antes de diseñar una etiqueta destinada a una prenda. **Sin datos:** el estudio queda interno y esos campos vacíos; no inventar símbolos de lavado ni numeraciones que sugieran una edición limitada.
+
+### P08 — Encuentro o visita
+
+**Destino:** futuro texto de invitación, no una promesa actual. **Consigna:** «¿Para qué se reúne la gente, qué está confirmado y qué necesita saber alguien para decidir si puede ir?»
+
+**Molde:** `[actividad concreta] / [día, hora y zona horaria] / [lugar con permiso para publicarlo] / [cómo llegar e ingresar] / [asientos, escalones y demás datos de acceso conocidos] / [costo si lo hay] / [canal confirmado]`. No llamar accesible a un espacio sin explicar las condiciones conocidas. Se puede responder una duda sin obligar a compartir información médica.
+
+**Sin confirmación:** no publicar la invitación, no inventar una dirección y no activar reservas. El título «En proceso» no implica un taller abierto al público.
+
+## Sustitución completa de un concepto
+
+Reemplazar persona, relato, imágenes y datos relacionados en ambos idiomas como una misma entrega. Conservar identificadores y enlaces cuando sigan representando el mismo contenido; si cambian, revisar todas las referencias antes de publicar. El campo `concept` no es un interruptor de verdad: las plantillas actuales conservan deliberadamente el aviso de ficción. El paso a una colaboración real exige una revisión específica de contenido y presentación, no eliminar avisos globales que siguen siendo necesarios en otras piezas.
+
+Antes de dar por completo un reemplazo, revisar solo la unidad editada: fuente y permiso, grado de certeza, campos vinculados ES/EN, rótulo de imagen y vista renderizada. Ningún dato ausente se transforma en hecho por haber pasado un verificador.
+
+## Próxima entrega de los propietarios
+
+1. Elegir y confirmar un canal de contacto; no hace falta configurar tres.
+2. Aprobar una historia breve de los fundadores: quiénes son, por qué VERUM, qué aporta cada uno y qué están haciendo ahora. No atribuirles los talleres ni las biografías ficticias.
+3. Elegir una prenda para la primera muestra. Registrar tela, gramaje medido, medidas, colocación de la estampa, resultado de calce y cambios necesarios. Los valores actuales son objetivos de diseño.
+4. Incorporar fotos de la muestra real y la aprobación del colaborador antes de presentar la pieza como producida.
+
+## Regenerar tarjetas sociales
+
+Los seis PNG se incluyen en el proyecto; un build normal de Hugo no necesita ImageMagick. Al editar los SVG, regenerarlos con:
+
+```sh
+python3 scripts/render_social_cards.py
+```
+
+Requiere ImageMagick (`magick`). En macOS usa Menlo; en otro sistema, indicar una fuente monoespaciada instalada:
+
+```sh
+VERUM_SHARE_FONT=/ruta/a/fuente.ttf python3 scripts/render_social_cards.py
+```
+
+Cada tarjeta reúne frente y espalda sin recortar la prenda. Verificar visualmente las tarjetas regeneradas antes de publicarlas. Las páginas de prenda incorporan `og:image`, texto alternativo y metadata de Twitter.

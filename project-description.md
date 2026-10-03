@@ -2,7 +2,7 @@
 
 **Version:** 1.0
 **Prepared for:** Web developer (Hugo build)
-**Status:** Ready to quote and build
+**Status:** Original brief — historical reference. See README.md, CONTENT.md and PLACEHOLDERS.md for the current implementation. Market/trend statements below are original positioning assumptions, not verified research.
 **Platform:** Hugo (static site generator), Extended edition
 
 ---

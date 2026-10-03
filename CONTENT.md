@@ -1,124 +1,66 @@
-# VERUM — Guía de Carga y Edición de Contenido
+# Contenido de VERUM
 
-Este documento explica cómo crear y modificar contenido en VERUM utilizando archivos Markdown y paquetes de página (*page bundles*).
+La serie actual contiene dos colaboraciones ficticias, seis prendas conceptuales y dos entrevistas imaginadas, en español e inglés. La dirección creativa y las decisiones acordadas están en [CREATIVE-DIRECTION.md](CREATIVE-DIRECTION.md).
 
----
+## Fuentes
 
-## 1. Tono y Voz de Marca (Guía para Quien Escriba)
+| Contenido | Español | Inglés |
+| --- | --- | --- |
+| Sobreimpreso | `content/es/drops/sobreimpreso/index.md` | `content/en/drops/sobreimpreso/index.md` |
+| En Obra | `content/es/drops/en-obra/index.md` | `content/en/drops/en-obra/index.md` |
+| Prendas | `content/es/lookbook/{registro,persistencia,testigo,cota,trazo,escuadra}/index.md` | Mismos nombres bajo `content/en/lookbook/` |
+| Entrevistas | `content/es/veritas/{lucia-ferreyra,tomas-varela}/index.md` | Mismos nombres bajo `content/en/veritas/` |
+| Imágenes compartidas | `assets/images/collaborations/` | La misma fuente, sin duplicación por idioma |
+| Interfaz | `i18n/es.toml` | `i18n/en.toml` |
 
-VERUM habla desde el asfalto de Buenos Aires para un público de 20 a 30 años metido en el streetwear pesado, la música urbana (trap, RKT), el diseño gráfico brutalista y el arte callejero.
+## Campos y relaciones
 
-- **Español Rioplatense / Porteño estricto**: Usar siempre el **voseo** (*vos*, *mirá*, *rescatá*, *calzate*, *escribinos*). Prohibido el uso de *tú* o giros neutros corporativos.
-- **Lunfardo y vocabulario de taller**: Palabras naturales al nicho (*pilcha*, *corte*, *posta*, *facha*, *frisa*, *pesado*, *berreta* —VERUM combate lo berreta—, *galpón*, *asfalto*, *barrio*).
-- **Oraciones cortas y directas**: La marca se llama "Verdad". Cualquier adjetivo publicitario falso o marketing inflado destruye la identidad.
-- **Títulos de 2 a 6 palabras**: Los templates tipográficos están calibrados para titulares pesados y breves.
-- **Descripciones de prendas**: 2 a 3 oraciones como máximo. El peso técnico (gramaje, corte, remaches) habla por sí solo.
+Las colecciones usan `artist_id`, `artist_name`, `neighborhood`, `craft`, `theme`, `bio`, `palette`, `hero`, `hero_alt`, `story_ref` y `weight`. `description` es la frase de presentación: se muestra en la portada de la colección y como meta descripción. El estado es `concept`, sin fecha de lanzamiento.
 
----
+Las prendas usan `artist_id`, `drop_ref`, `story_ref`, `kind`, `fabric`, `color`, `fit`, `technique`, `art`, `art_back` y `weight`. `description` es la nota de diseño: aparece en la entrevista y como meta descripción. Los objetivos de gramaje no son especificaciones verificadas. No agregar talles o disponibilidad sin evidencia.
 
-## 2. Modelos de Contenido y Arquetipos
+Las entrevistas usan `description` (resumen), `intro`, `chapters` y `closing`, y llevan front matter en TOML (`+++`) porque los capítulos están anidados: cada `[[chapters]]` tiene `title`, `piece` (slug de la prenda) y `questions` (pares pregunta/respuesta). Las notas de diseño y los enlaces se obtienen de la prenda, evitando versiones duplicadas. El tiempo de lectura se calcula solo, a 180 palabras por minuto.
 
-### 2.1. Prenda del Lookbook (`lookbook`)
+Los pares de idioma comparten `translationKey`. Modificar ambos idiomas al cambiar una relación o una propuesta de producto. Las traducciones conservan los nombres propios de las colecciones y prendas.
 
-Cada prenda se gestiona como un **paquete de página** (*page bundle*) que contiene su archivo `index.md` y sus fotografías adentro:
+## Imágenes
 
-```text
-content/es/lookbook/nombre-de-la-prenda/
-├── index.md
-├── 01-front.jpg
-├── 02-back.jpg
-└── 03-detail.jpg
-```
+`hero` apunta a un recurso global procesado por Hugo en WebP con tamaños responsivos. `art` y `art_back` apuntan a SVG editables. Los textos alternativos de las escenas están en cada idioma; los rótulos frontal/posterior se traducen por i18n. Las ilustraciones no son fotos de productos fabricados.
 
-#### Campos del Front Matter:
+## Verificación enfocada
 
-```yaml
----
-title: "Campera Verdad"                      # Nombre visible de la prenda (2-4 palabras)
-date: 2026-03-01                             # Fecha de publicación
-drop: "drop-01"                              # Identificador del drop al que pertenece (drop-01, drop-02)
-categories: ["outerwear"]                    # Categoría: outerwear | tees | bottoms | accessories
-sizes: ["S", "M", "L", "XL", "XXL"]         # Lista de talles confeccionados
-fabric: "Frisa Pesada 420 GSM"               # Composición textil y gramaje técnico
-color: "Negro Carbón / Cyan Glitch"          # Variante cromática de la prenda
-featured: true                               # true para destacarse en la grilla principal del home y lookbook
-gallery_order: ["01-front.jpg", "02-back.jpg", "03-detail.jpg"] # Orden secuencial de fotos
-stockists: ["barracas-studio", "san-telmo-shop"] # IDs de locales donde conseguirla
-translationKey: "campera-verdad"             # Clave idéntica para vincular la versión en inglés
-draft: false                                 # false para publicar inmediatamente
----
+Después de editar, construir en un destino limpio y ejecutar `python3 scripts/verify_concepts.py /ruta/al/destino`. El chequeo valida cantidades, relaciones, traducciones, capítulos, imágenes, enlaces locales y ausencia de rutas retiradas en ese destino. Revisar en navegador los cambios visuales. Las páginas conceptuales muestran siempre su naturaleza ficticia; el paso a colaboradores reales requiere revisión explícita de contenido y plantillas.
 
-Corte bomber boxy con frisa pesada de algodón peinado. Estampa en espalda serigrafiada a mano en Barracas con tintas al agua y detalles en cyan glitch. Cierre metálico industrial YKK y puños de morley reforzados.
-```
+## Puntos de venta y newsletter
 
----
+`data/stockists.yaml` está vacío a propósito: sin puntos de venta confirmados, la página los explica y el enlace "Dónde encontrarnos" del encabezado no aparece. Agregá entradas reales con la forma que documenta el propio archivo. La sección de newsletter de la portada solo aparece si `newsletter_endpoint` (en `hugo.toml`) tiene un valor.
 
-### 2.2. Lanzamientos (`drops`)
+## Inicio, Lookbook y equipo — revisión del 2 de octubre
 
-Ubicación: `content/es/drops/drop-XX-nombre/index.md`
+El inicio y Lookbook muestran las seis prendas desde los bundles; Drops mantiene el acceso por colección. Las dos ilustraciones principales del inicio apuntan a Registro y Cota. Cambiar esas referencias en `layouts/index.html` si cambia la selección editorial.
+
+Los manifiestos aceptan estos campos opcionales en su front matter YAML; completarlos en ambos idiomas solo con texto aprobado:
 
 ```yaml
----
-title: "Drop 01 — Lo Real"                  # Título completo del drop
-drop_number: "01"                            # Número correlativo (01, 02, etc.)
-date: 2026-03-15                             # Fecha del lanzamiento
-status: "released"                           # released (en la calle) | upcoming (en confección) | archived (agotado)
-hero: "hero.jpg"                             # Imagen de portada en proporción 16:9
-statement: "Primera tirada de indumentaria pesada fabricada sin concesiones en CABA."
-translationKey: "drop-01"                    # Clave de traducción para inglés
-draft: false
----
-
-Texto conceptual sobre la tanda, el concepto de diseño y la producción en talleres.
+founder_story: "Historia real aprobada del equipo."
+founders:
+  - name: "Nombre público aprobado"
+    role: "Rol real"
+    bio: "Biografía breve aprobada."
 ```
 
-> **Comportamiento del estado `upcoming`**: Cuando el status es `upcoming`, la página del drop oculta automáticamente el listado de prendas y despliega una caja de suscripción por correo electrónico para avisar a los usuarios antes de la salida al público.
+El ejemplo no está cargado en las páginas. Sin esos campos, `#equipo` presenta únicamente el proyecto en Buenos Aires y su siguiente paso de muestra. El enlace “Detrás de VERUM” de la portada llega a esa sección.
 
----
+Las tarjetas de prendas admiten `social_image` para reemplazar la tarjeta de diseño con una imagen aprobada en `assets/`. Si se omite, se usa `images/social/{slug}.png`. Regenerar esos PNG al modificar los SVG, según `PLACEHOLDERS.md`.
 
-### 2.3. Crónica Editorial (`veritas`)
+El canal principal requiere `primary_contact` y `contact_verified` en `hugo.toml`. El componente compartido publica únicamente ese destino. No quedan horarios de taller ni enlaces públicos a cuentas sin confirmar. Para verificar la revisión, seguir el comando de `README.md`; no usar resultados históricos como evidencia de esta versión.
 
-Ubicación: `content/es/veritas/nombre-de-la-historia/index.md`
+## Universo y placeholders instructivos — 3 de octubre
 
-```yaml
----
-title: "Tinta Viva sobre Chapa en La Boca"  # Título de la crónica
-date: 2026-04-02                             # Fecha de publicación
-author: "Joaquín Benítez"                    # Redactor de la crónica
-artist_name: "Nico 'Fasolo' Ramos"          # Nombre o apodo del artista entrevistado
-neighborhood: "La Boca"                      # Barrio de Buenos Aires donde se realizó la crónica
-hero: "hero.jpg"                             # Fotografía principal en proporción 3:2
-summary: "Crónica de taller: pintura al látex, aerosol y resistencia visual sobre el asfalto porteño."
-translationKey: "veritas-01"                 # Clave de traducción
-draft: false
----
+La dirección de voz, temas y aplicaciones está en CREATIVE-DIRECTION.md. Las fichas P00–P08 de PLACEHOLDERS.md dan consignas y ejemplos para reemplazar el contenido; no son texto listo para visitantes. Los arquetipos ahora explican qué completar en cada campo y mantienen `draft: true` / `concept: true`. La ficha de muestra se registra por separado del copy público; un gramaje objetivo no se convierte en medición al completar la ficha.
 
-Cuerpo del artículo en formato Markdown. Se pueden utilizar citas destacadas con `>` para resaltar frases textuales del artista.
-```
+El nombre editorial visible es **En proceso / In process**, de trabajo. Cambiarlo en la clave `editorial_name` de ambos archivos i18n y en el `title`/`description` de ambos índices `veritas/_index.md`. Las invitaciones compartidas dicen «leer las conversaciones» sin duplicar el nombre. Conservar `translationKey`, `artist_id`, `story_ref`, nombres de carpetas y anclas si solo cambia el rótulo.
 
----
+Los manifiestos incluyen comentarios con la consigna P01. Omitir los campos de fundadores hasta contar con una historia real aprobada; los comentarios no se convierten en texto público. Los ejemplos entre corchetes de PLACEHOLDERS.md nunca se cargan como un nombre o una cita. No guardar evidencia privada ni datos personales en comentarios de archivos destinados a un repositorio público.
 
-### 2.4. Puntos de Venta (`data/stockists.yaml`)
-
-Los locales no son páginas Markdown sino un archivo de datos estructurado en `data/stockists.yaml`:
-
-```yaml
-- id: "barracas-studio"
-  name: "Taller 420 Barracas"
-  city: "Buenos Aires"
-  neighborhood: "Barracas"
-  address: "Av. Patricios 1420"
-  hours: "Jue a Sáb 14:00 – 20:00"
-  maps_url: "https://maps.google.com/?q=Av.+Patricios+1420+Buenos+Aires"
-  instagram: "@taller420.ba"
-  description: "Espacio de producción serigráfica y showroom abierto los fines de semana."
-```
-
----
-
-## 3. Flujo de Traducción al Inglés
-
-1. Cada archivo creado en `content/es/...` debe tener su correspondiente contraparte en `content/en/...`.
-2. Ambos archivos **deben compartir el mismo `translationKey`** en su front matter.
-3. Las URLs en inglés están traducidas (`/en/lookbook/`, `/en/manifesto/`, `/en/drops/`, `/en/stockists/`, `/en/contact/`).
-4. Si un artículo aún no cuenta con traducción al inglés, simplemente no se crea el archivo en `content/en/`: el sitio ocultará limpiamente el botón de cambio de idioma en esa página en lugar de generar un enlace roto o un error 404.
+Para revisar una carga: comprobar las dos versiones de idioma, las relaciones prenda → colección → conversación, el estado de imagen y la vista renderizada de esa unidad. La sección técnica `veritas` sigue siendo necesaria para las plantillas y los verificadores. El verificador actual está acotado a dos colecciones, seis prendas y dos entrevistas; agregar otra unidad requiere ampliar ese contrato deliberadamente.
