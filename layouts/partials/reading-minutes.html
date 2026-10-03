@@ -1,0 +1,4 @@
+{{/* Reading time of an interview at 180 words per minute (intro, answers, closing). */}}
+{{ $words := add (countwords .Params.intro) (countwords .Params.closing) }}
+{{ range .Params.chapters }}{{ range .questions }}{{ $words = add $words (countwords (index . 0)) (countwords (index . 1)) }}{{ end }}{{ end }}
+{{ return int (math.Max 1 (math.Round (div $words 180.0))) }}

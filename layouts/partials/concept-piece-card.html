@@ -1,0 +1,13 @@
+{{ $p := .page }}
+<article class="concept-piece-card">
+<a href="{{ $p.RelPermalink }}">
+<div class="concept-piece-card__image">{{ partial "collaboration-image.html" (dict "src" $p.Params.art "alt" "") }}</div>
+<div class="concept-piece-card__body">
+<span class="eyebrow">{{ $p.Params.artist_name }}</span>
+{{ if eq .heading "h2" }}<h2>{{ $p.Title }}</h2>{{ else }}<h3>{{ $p.Title }}</h3>{{ end }}
+<p>{{ $p.Params.color }}</p>
+<span class="text-link">{{ i18n "view_piece" }} <span aria-hidden="true">↗</span>
+</span>
+</div>
+</a>
+</article>

@@ -4,6 +4,8 @@ defaultContentLanguage = "es"
 defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 summaryLength = 30
+# No taxonomy pages: nothing links to them and "drops" would collide with the drops section.
+disableKinds = ["taxonomy", "term"]
 
 [languages]
   [languages.es]
@@ -11,43 +13,49 @@ summaryLength = 30
     label = "Español"
     contentDir = "content/es"
     weight = 1
-    title = "VERUM — Lo Real"
+    title = "VERUM — Ideas que se llevan"
     [languages.es.params]
-      tagline = "Lujo de barrio. Sin filtros. CABA."
-      description = "VERUM — Indumentaria cruda y auténtica nacida en las calles de Buenos Aires. Sin chamuyo, sin intermediarios."
+      tagline = "Ideas que se llevan. Buenos Aires."
+      description = "VERUM — Proyecto de indumentaria independiente en Buenos Aires. Seis prendas conceptuales: capas de color, marcas de trabajo y ropa cotidiana."
 
   [languages.en]
     locale = "en"
     label = "English"
     contentDir = "content/en"
     weight = 2
-    title = "VERUM — The Real"
+    title = "VERUM — Ideas you can wear"
     [languages.en.params]
-      tagline = "Neighborhood luxury. Unfiltered. CABA."
-      description = "VERUM — Raw, authentic streetwear straight from the streets of Buenos Aires. No gimmicks, no middlemen."
-
-[taxonomies]
-  drop = "drops"
-  category = "categories"
+      tagline = "Ideas you can wear. Buenos Aires."
+      description = "VERUM — An independent clothing project in Buenos Aires. Six concept garments exploring layers of colour, working marks and everyday clothing."
 
 [params]
   brand_name = "VERUM"
   origin = "Buenos Aires, Argentina"
+  # Set contact_verified only after the owner confirms the selected channel.
+  contact_verified = false
+  primary_contact = "instagram" # instagram, email, or whatsapp
   instagram = "https://instagram.com/verum.ba"
   whatsapp = ""
   contact_email = "contacto@verum.com"
   form_endpoint = "https://formspree.io/f/placeholder"
-  newsletter_endpoint = "https://buttondown.email/api/emails/embed-subscribe/verum"
+  # Empty hides the newsletter section. Set your verified Buttondown embed URL to enable it,
+  # e.g. https://buttondown.email/api/emails/embed-subscribe/<your-username>
+  newsletter_endpoint = ""
 
 [imaging]
-  quality = 85
   resampleFilter = "Lanczos"
   bgColor = "#0A0A0A"
+  [imaging.webp]
+    quality = 85
+  [imaging.jpeg]
+    quality = 85
 
-[build]
-  writeStats = true
+# Content has no dates, so RSS feeds would be empty noise.
+[outputs]
+  home = ["html"]
+  section = ["html"]
 
-[caches]
-  [caches.assets]
-    maxAge = "720h"
-    dir = ":resourceDir/_gen"
+# 0.163 is the first Hugo with per-format imaging quality; older versions fail here, not mid-build.
+[module.hugoVersion]
+  extended = true
+  min = "0.163.0"

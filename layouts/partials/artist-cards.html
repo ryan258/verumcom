@@ -1,0 +1,18 @@
+<div class="artist-grid">
+{{ range (where .Site.RegularPages "Section" "drops").ByWeight }}
+<article class="artist-card artist-card--{{ .Params.tone }}">
+<a href="{{ .RelPermalink }}" class="artist-card__link">
+<div class="artist-card__image">{{ partial "collaboration-image.html" (dict "src" .Params.hero "alt" "") }}<span class="artist-card__number" aria-hidden="true">{{ .Params.drop_number }}</span>
+</div>
+<div class="artist-card__body">
+<p class="eyebrow">{{ .Params.craft }} / {{ .Params.neighborhood }}</p>
+<h2>{{ .Params.artist_name }}</h2>
+<p class="artist-card__drop">{{ .Title }} <span aria-hidden="true">↗</span>
+</p>
+<p class="artist-card__theme">{{ .Params.theme }}</p>
+<span class="artist-card__cta">{{ i18n "explore_collection" }} <span aria-hidden="true">→</span>
+</span>
+</div>
+</a>
+</article>
+{{ end }}</div>

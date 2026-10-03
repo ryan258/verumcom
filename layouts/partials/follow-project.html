@@ -1,0 +1,7 @@
+{{ $channel := partial "contact-channel.html" . }}
+{{ with $channel }}
+<aside class="follow-project">
+  <div><h2>{{ i18n "follow_title" }}</h2><p>{{ i18n "follow_copy" }}</p></div>
+  <a class="btn btn--ink" href="{{ .url }}">{{ .label }} <span aria-hidden="true">↗</span></a>
+</aside>
+{{ end }}

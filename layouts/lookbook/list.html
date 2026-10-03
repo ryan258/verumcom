@@ -1,51 +1,13 @@
 {{ define "main" }}
-<div class="section">
-  <div class="section__header">
-    <div>
-      <span class="mono-meta">BUENOS AIRES / {{ if eq .Language.Lang "es" }}EL ARCHIVO{{ else }}THE ARCHIVE{{ end }}</span>
-      <h1 class="section__title glitch-text">{{ .Title }}</h1>
-    </div>
-  </div>
-
-  <p class="section__intro">{{ if eq .Language.Lang "es" }}Explorá por prenda o por drop. Abrí una pieza para ver sus materiales, talles y dónde encontrarla.{{ else }}Explore by category or drop. Open a piece for its materials, sizes, and where to find it.{{ end }}</p>
-  <div class="filter-bar" hidden>
-    <fieldset class="filter-bar__group"><legend>{{ i18n "cta_filter_category" }}</legend>
-      <button type="button" class="filter-bar__btn" data-filter-type="category" data-filter-val="all" aria-pressed="true">{{ i18n "cta_filter_all" }}</button>
-      {{ range slice "outerwear" "tees" "bottoms" "accessories" }}<button type="button" class="filter-bar__btn" data-filter-type="category" data-filter-val="{{ . }}" aria-pressed="false">{{ i18n (printf "cat_%s" .) }}</button>{{ end }}
-    </fieldset>
-    <fieldset class="filter-bar__group"><legend>{{ i18n "cta_filter_drop" }}</legend>
-      <button type="button" class="filter-bar__btn" data-filter-type="drop" data-filter-val="all" aria-pressed="true">{{ i18n "cta_filter_all" }}</button>
-      {{ range where (where .Site.RegularPages "Section" "drops") "Params.status" "released" }}<button type="button" class="filter-bar__btn" data-filter-type="drop" data-filter-val="drop-{{ .Params.drop_number }}" aria-pressed="false">Drop {{ .Params.drop_number }}</button>{{ end }}
-    </fieldset>
-  </div>
-  <div class="filter-summary"><p id="filter-count" role="status" aria-atomic="true" data-label="{{ if eq .Language.Lang "es" }}piezas{{ else }}pieces{{ end }}">{{ len .Pages }} {{ if eq .Language.Lang "es" }}piezas{{ else }}pieces{{ end }}</p><button class="filter-reset" type="button" hidden>{{ if eq .Language.Lang "es" }}Limpiar filtros{{ else }}Clear filters{{ end }}</button></div>
-  <div class="filter-empty" hidden><h2>{{ if eq .Language.Lang "es" }}Todavía no hay piezas acá.{{ else }}No pieces here yet.{{ end }}</h2><p>{{ if eq .Language.Lang "es" }}Probá otra categoría o limpiá los filtros para volver a ver la colección.{{ else }}Try another category or clear the filters to see the collection again.{{ end }}</p></div>
-
-  <!-- Asymmetric Lookbook Grid -->
-  <div class="lookbook-grid">
-    {{ range $index, $piece := .Pages }}
-      <article class="piece-card" data-drop="{{ .Params.drop }}" data-categories="{{ delimit .Params.categories "," }}">
-        <a href="{{ .RelPermalink }}" class="piece-card__media" tabindex="-1" aria-hidden="true">
-          {{ $frontImg := index .Params.gallery_order 0 }}
-          {{ $res := .Resources.GetMatch $frontImg }}
-          {{ if $res }}
-            {{ $res = $res.Resize "720x webp" }}
-            <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="piece-card__img" loading="lazy" width="{{ $res.Width }}" height="{{ $res.Height }}">
-          {{ else }}
-            <div class="piece-card__placeholder">[IMAGEN DE PRENDA]</div>
-          {{ end }}
-        </a>
-        <div class="piece-card__content">
-          <div class="piece-card__specs-row">
-            <span class="piece-card__meta-tag">{{ index .Params.categories 0 | upper }} // {{ .Params.drop | upper }}</span>
-            <span class="piece-card__price-free-tag">{{ .Params.fabric }}</span>
-          </div>
-          <h2 class="piece-card__title">
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          </h2>
-        </div>
-      </article>
-    {{ end }}
-  </div>
+<div class="collab-index section">
+<header class="lookbook-heading">
+<p class="eyebrow">VERUM / {{ i18n "design_illustration" }}</p>
+<h1>{{ .Title }}</h1>
+<p>{{ .Description }}</p>
+<a class="text-link" href="{{ relref . "drops" }}">{{ i18n "explore_by_collection" }} ↗</a>
+</header>
+<div class="piece-grid">{{ range .RegularPages.ByWeight }}{{ partial "concept-piece-card.html" (dict "page" . "heading" "h2") }}{{ end }}</div>
+{{ partial "concept-note.html" . }}
+{{ partial "follow-project.html" . }}
 </div>
 {{ end }}

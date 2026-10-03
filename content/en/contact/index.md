@@ -1,6 +1,7 @@
 ---
 title: "Direct Inquiry"
-description: "Reach our studio for piece inquiries, workshop availability, or press. Direct and blunt."
+description: "Contact information and updates for the VERUM project in Buenos Aires."
 translationKey: "contact"
 draft: false
+layout: "contact"
 ---

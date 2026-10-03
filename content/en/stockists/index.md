@@ -1,6 +1,7 @@
 ---
 title: "Stockists"
-description: "Physical partner stores and workshops across Buenos Aires where you can inspect and acquire VERUM pieces."
+description: "Where to see VERUM in person. There are no stockists yet: the current pieces are concepts."
 translationKey: "stockists"
+layout: "stockists"
 draft: false
 ---

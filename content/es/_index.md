@@ -1,5 +1,5 @@
 ---
-title: "VERUM — Lo Real"
-description: "Lujo de barrio. Indumentaria pesada y cruda confeccionada en Buenos Aires."
+title: "VERUM — Ideas que se llevan"
+description: "VERUM: proyecto de indumentaria independiente en Buenos Aires. Explorá seis diseños conceptuales y las ideas detrás de cada colección."
 translationKey: "home"
 ---

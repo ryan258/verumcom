@@ -1,5 +1,7 @@
 ---
-title: "Lanzamientos"
-description: "Archivo de tiradas limitadas por tanda única. Hecho en CABA."
+title: "Drops"
 translationKey: "drops-index"
+description: "Dos colaboraciones conceptuales: Sobreimpreso y En Obra."
 ---
+
+Dos colaboraciones conceptuales: Sobreimpreso y En Obra.

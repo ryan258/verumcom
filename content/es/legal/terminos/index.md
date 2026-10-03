@@ -5,6 +5,8 @@ translationKey: "terms"
 draft: false
 ---
 
-Todo el contenido visual, textual, tipográfico y fotográfico exhibido en este sitio web pertenece a VERUM y a los artistas colaboradores. Queda prohibida la reproducción comercial no autorizada.
+Los textos, las ilustraciones de prendas y las imágenes de este sitio pertenecen a VERUM, salvo que se indique otra cosa. Queda prohibida su reproducción comercial sin autorización.
 
-VERUM opera exclusivamente como un sitio informativo y lookbook de marca sin pasarelas de pago ni transacciones digitales en este dominio.
+Los artistas, las entrevistas y las colaboraciones de la serie actual son ficticios. Las escenas de taller son imágenes generadas y las prendas de la portada son ilustraciones de diseño. Las prendas son conceptos: no hay productos fabricados ni disponibles para comprar.
+
+VERUM opera este dominio solo como sitio informativo y lookbook de marca, sin pasarelas de pago ni transacciones digitales.

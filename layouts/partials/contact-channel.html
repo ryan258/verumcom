@@ -1,0 +1,15 @@
+{{ $channel := dict }}
+{{ if .Site.Params.contact_verified }}
+  {{ $kind := .Site.Params.primary_contact }}
+  {{ if and (eq $kind "instagram") .Site.Params.instagram }}
+    {{ $channel = dict "url" .Site.Params.instagram "label" (i18n "follow_instagram") }}
+  {{ else if and (eq $kind "email") .Site.Params.contact_email }}
+    {{ $channel = dict "url" (printf "mailto:%s" .Site.Params.contact_email) "label" (i18n "follow_email") }}
+  {{ else if and (eq $kind "whatsapp") .Site.Params.whatsapp }}
+    {{ $channel = dict "url" .Site.Params.whatsapp "label" (i18n "follow_whatsapp") }}
+  {{ end }}
+{{ end }}
+{{ if and .Site.Params.contact_verified (not $channel) }}
+  {{ errorf "VERUM: contact_verified requires a configured primary_contact (instagram, email or whatsapp) and its destination." }}
+{{ end }}
+{{ return $channel }}

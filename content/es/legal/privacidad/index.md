@@ -5,6 +5,8 @@ translationKey: "privacy"
 draft: false
 ---
 
-En VERUM respetamos tu privacidad de forma absoluta. Este sitio web estático no utiliza cookies invasivas, ni rastreadores de publicidad de terceros, ni perfiles comerciales.
+Este sitio es estático. No usa cookies propias ni de terceros, ni rastreadores publicitarios, ni analítica, ni perfiles comerciales. Las fuentes, las imágenes y los archivos se sirven desde el mismo sitio. El servicio de hosting puede registrar datos técnicos de conexión, como la dirección IP, según sus propias políticas.
 
-Cualquier dato enviado a través de nuestros formularios de contacto o suscripción a avisos se utiliza exclusivamente para responder tu consulta o notificarte de un lanzamiento nuevo. Nunca vendemos, transferimos ni compartimos información con terceros.
+Por ahora no hay formularios activos. Si nos escribís por email, usamos tu mensaje solo para responderte. Si más adelante activamos el formulario de contacto o el boletín, los datos los va a procesar un proveedor externo (Formspree para el contacto, Buttondown para el boletín) y lo vamos a indicar acá antes de activarlos.
+
+No vendemos tus datos ni los usamos para otra cosa que responderte o avisarte de lo que pediste.

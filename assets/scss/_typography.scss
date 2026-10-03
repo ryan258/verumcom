@@ -16,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6, .display-type {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 400;
   text-transform: uppercase;
@@ -41,7 +41,7 @@ h4 {
   font-size: clamp(1.1rem, 2vw, 1.6rem);
 }
 
-.mono-meta, .spec-label, .drop-tag, .tag {
+.mono-meta {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
@@ -77,18 +77,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-family: var(--font-mono);
   font-weight: bold;
   z-index: 9999;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 .skip-link:focus {

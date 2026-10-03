@@ -3,9 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
-  
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+  {{ $is404 := eq .Kind "404" }}
+  {{ $title := cond .IsHome .Site.Title (printf "%s — %s" (cond $is404 (i18n "error_404_title") .Title) .Site.Params.brand_name) }}
+  {{ $desc := or .Description (.Summary | plainify | truncate 160) .Site.Params.description }}
+  <title>{{ $title }}</title>
+
+  <meta name="description" content="{{ $desc }}">
+  {{ if $is404 }}
+  <meta name="robots" content="noindex">
+  {{ else }}
   <link rel="canonical" href="{{ .Permalink }}">
 
   <!-- hreflang Tags with x-default -->
@@ -19,12 +25,31 @@
       <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
     {{ end }}
   {{ end }}
+  {{ end }}
 
-  <!-- OpenGraph -->
-  <meta property="og:title" content="{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ .Site.Title }}">
-  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <!-- OpenGraph / Twitter -->
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ .Site.Params.brand_name }}">
+  <meta property="og:locale" content="{{ replace .Site.Language.Locale "-" "_" }}">
+  {{ $social := or .Params.social_image .Params.hero "images/social/registro.png" }}
+  {{ $socialAlt := or .Params.hero_alt (i18n "home_garment_note") }}
+  {{ if and (eq .Section "lookbook") .IsPage }}
+    {{ $social = or .Params.social_image (printf "images/social/%s.png" .File.ContentBaseName) }}
+    {{ $socialAlt = printf "%s — %s" .Title (i18n "design_illustration") }}
+  {{ end }}
+  {{ with resources.Get $social }}
+    {{ $og := .Fill "1200x630 jpg" }}
+    <meta property="og:image" content="{{ $og.Permalink }}">
+    <meta property="og:image:width" content="{{ $og.Width }}">
+    <meta property="og:image:height" content="{{ $og.Height }}">
+    <meta property="og:image:alt" content="{{ $socialAlt }}">
+    <meta name="twitter:image" content="{{ $og.Permalink }}">
+    <meta name="twitter:image:alt" content="{{ $socialAlt }}">
+  {{ end }}
+  <meta name="twitter:card" content="summary_large_image">
 
   <meta name="theme-color" content="#0A0A0A">
   <link rel="icon" href="{{ "images/favicon.svg" | relURL }}" type="image/svg+xml">
@@ -40,26 +65,24 @@
   <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" defer></script>
 </head>
 <body>
-  {{ $es := eq .Site.Language.Lang "es" }}
-  {{ $about := cond $es "manifiesto" "manifesto" }}
-  {{ $stockists := cond $es "puntos-de-venta" "stockists" }}
-  {{ $contact := cond $es "contacto" "contact" }}
-  <a href="#main-content" class="skip-link">{{ if $es }}Saltar al contenido{{ else }}Skip to content{{ end }}</a>
+  {{ $home := i18n "nav_home" }}
+  <a href="#main-content" class="skip-link">{{ i18n "skip_to_content" }}</a>
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="{{ .Site.Home.RelPermalink }}" class="wordmark" aria-label="VERUM — {{ if $es }}Inicio{{ else }}Home{{ end }}">VERUM<span aria-hidden="true">®</span></a>
-      <span class="site-header__origin">BUENOS AIRES<br>{{ if $es }}INDUMENTARIA INDEPENDIENTE{{ else }}INDEPENDENT STREETWEAR{{ end }}</span>
+      <a href="{{ .Site.Home.RelPermalink }}" class="wordmark" aria-label="VERUM — {{ $home }}">VERUM</a>
+      <span class="site-header__origin">BUENOS AIRES<br>{{ i18n "header_origin" }}</span>
       <div class="site-header__right">
-        <nav class="lang-switch" aria-label="{{ if $es }}Idioma{{ else }}Language{{ end }}">
+        <nav class="lang-switch" aria-label="{{ i18n "nav_language" }}">
           {{ range .AllTranslations }}<a href="{{ .RelPermalink }}" lang="{{ .Language.Locale }}" hreflang="{{ .Language.Locale }}" aria-label="{{ .Language.Label }}"{{ if eq .Language.Lang $.Language.Lang }} aria-current="page"{{ end }}>{{ upper .Language.Lang }}</a>{{ end }}
         </nav>
-        <a class="header-stockists" href="{{ relref . $stockists }}">{{ if $es }}Dónde encontrarnos{{ else }}Find us{{ end }} <span aria-hidden="true">↗</span></a>
+        {{ if hugo.Data.stockists }}<a class="header-stockists" href="{{ relref . (i18n "path_stockists") }}">{{ i18n "nav_find_us" }} <span aria-hidden="true">↗</span></a>{{ end }}
       </div>
       <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-navigation" hidden><span>{{ i18n "nav_menu" }}</span><span class="menu-symbol" aria-hidden="true">+</span></button>
-      <nav class="main-nav" id="site-navigation" aria-label="{{ if $es }}Navegación principal{{ else }}Main navigation{{ end }}">
+      <nav class="main-nav" id="site-navigation" aria-label="{{ i18n "nav_main" }}">
         <ul class="main-nav__list">
-          {{ range slice (dict "path" "lookbook" "label" "Lookbook") (dict "path" "drops" "label" "Drops") (dict "path" "veritas" "label" "Veritas") (dict "path" $about "label" (cond $es "Manifiesto" "Manifesto")) }}
-          <li><a href="{{ relref $ .path }}" class="main-nav__link"{{ if eq $.Section .path }} aria-current="{{ if $.IsSection }}page{{ else }}true{{ end }}"{{ end }}>{{ .label }}</a></li>
+          {{ range slice (dict "path" "lookbook" "label" "Lookbook") (dict "path" "drops" "label" "Drops") (dict "path" "veritas" "label" (i18n "editorial_name")) (dict "path" (i18n "path_manifesto") "label" (i18n "nav_manifesto")) }}
+          {{ $target := $.Site.GetPage .path }}
+          <li><a href="{{ $target.RelPermalink }}" class="main-nav__link"{{ if eq $.RelPermalink $target.RelPermalink }} aria-current="page"{{ else if $.IsDescendant $target }} aria-current="true"{{ end }}>{{ .label }}</a></li>
           {{ end }}
         </ul>
       </nav>
@@ -68,12 +91,12 @@
   <main id="main-content" tabindex="-1">{{ block "main" . }}{{ end }}</main>
   <footer class="site-footer">
     <div class="site-footer__top">
-      <div><a class="wordmark" href="{{ .Site.Home.RelPermalink }}" aria-label="VERUM — {{ if $es }}Inicio{{ else }}Home{{ end }}">VERUM<span aria-hidden="true">®</span></a><p>{{ if $es }}Ropa. Ideas. Personas.<br>Desde Buenos Aires, con identidad.{{ else }}Clothing. Ideas. People.<br>From Buenos Aires, with identity.{{ end }}</p></div>
-      <nav aria-label="{{ if $es }}Explorá VERUM{{ else }}Explore VERUM{{ end }}"><span class="eyebrow">{{ if $es }}Explorá{{ else }}Explore{{ end }}</span><a href="{{ relref . "lookbook" }}">Lookbook</a><a href="{{ relref . "drops" }}">Drops</a><a href="{{ relref . "veritas" }}">Veritas</a><a href="{{ relref . $about }}">{{ if $es }}Manifiesto{{ else }}Manifesto{{ end }}</a></nav>
-      <nav aria-label="{{ if $es }}Conectá{{ else }}Connect{{ end }}"><span class="eyebrow">{{ if $es }}En persona{{ else }}In person{{ end }}</span><a href="{{ relref . $stockists }}">{{ i18n "nav_stockists" }}</a>{{ with .Site.GetPage $contact }}<a href="{{ .RelPermalink }}">{{ if $es }}Contacto{{ else }}Contact{{ end }}</a>{{ end }}<a href="{{ .Site.Params.instagram }}" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a></nav>
-      <div class="site-footer__note"><span class="eyebrow">34°36′ S / 58°22′ W</span><p>{{ if $es }}MISMA CIUDAD.<br>OTRA VERDAD.{{ else }}SAME CITY.<br>ANOTHER TRUTH.{{ end }}</p></div>
+      <div><a class="wordmark" href="{{ .Site.Home.RelPermalink }}" aria-label="VERUM — {{ $home }}">VERUM</a><p>{{ i18n "footer_tagline" | safeHTML }}</p></div>
+      <nav aria-label="{{ i18n "footer_explore" }} VERUM"><span class="eyebrow">{{ i18n "footer_explore" }}</span><a href="{{ relref . "lookbook" }}">Lookbook</a><a href="{{ relref . "drops" }}">Drops</a><a href="{{ relref . "veritas" }}">{{ i18n "editorial_name" }}</a><a href="{{ relref . (i18n "path_manifesto") }}">{{ i18n "nav_manifesto" }}</a></nav>
+      <nav aria-label="{{ i18n "footer_connect" }}"><span class="eyebrow">{{ i18n "footer_in_person" }}</span><a href="{{ relref . (i18n "path_stockists") }}">{{ i18n "nav_stockists" }}</a>{{ with .Site.GetPage (i18n "path_contact") }}<a href="{{ .RelPermalink }}">{{ i18n "nav_contact" }}</a>{{ end }}{{ with partial "contact-channel.html" . }}<a href="{{ .url }}">{{ .label }} <span aria-hidden="true">↗</span></a>{{ end }}</nav>
+      <div class="site-footer__note"><span class="eyebrow">34°36′ S / 58°22′ W</span><p>{{ i18n "footer_note" | safeHTML }}</p></div>
     </div>
-    <div class="site-footer__bottom"><span>© {{ now.Year }} VERUM · BUENOS AIRES, ARGENTINA</span><div><a href="{{ relref . "legal/privacidad" }}">{{ if $es }}Privacidad{{ else }}Privacy{{ end }}</a><a href="{{ relref . "legal/terminos" }}">{{ if $es }}Términos{{ else }}Terms{{ end }}</a><a href="#main-content">{{ if $es }}Volver arriba{{ else }}Back to top{{ end }} <span aria-hidden="true">↑</span></a></div></div>
+    <div class="site-footer__bottom"><span>© {{ now.Year }} VERUM · BUENOS AIRES, ARGENTINA</span><div><a href="{{ relref . (i18n "path_privacy") }}">{{ i18n "footer_privacy" }}</a><a href="{{ relref . (i18n "path_terms") }}">{{ i18n "footer_terms" }}</a><a href="#main-content">{{ i18n "back_to_top" }} <span aria-hidden="true">↑</span></a></div></div>
   </footer>
 </body>
 </html>

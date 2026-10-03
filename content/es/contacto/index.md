@@ -1,6 +1,7 @@
 ---
 title: "Contacto Directo"
-description: "Escribinos para consultas de prendas, disponibilidad en talleres o prensa. Sin vueltas."
+description: "Información de contacto y novedades del proyecto VERUM en Buenos Aires."
 translationKey: "contact"
 draft: false
+layout: "contact"
 ---

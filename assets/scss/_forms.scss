@@ -53,19 +53,6 @@
     line-height: 1.4;
   }
 
-  &__icon {
-    flex: 0 0 1rem;
-    margin-top: 0.25rem;
-  }
-
-  &__icon--location {
-    color: var(--cyan);
-  }
-
-  &__icon--hours {
-    color: var(--concrete);
-  }
-
   &__desc {
     font-size: 0.9rem;
     color: var(--concrete);
@@ -172,10 +159,6 @@
   &__textarea {
     min-height: 140px;
     resize: vertical;
-  }
-
-  &__honeypot {
-    display: none !important;
   }
 }
 

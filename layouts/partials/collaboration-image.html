@@ -1,0 +1,9 @@
+{{ $image := resources.Get .src }}
+{{ if not $image }}{{ errorf "Missing collaboration image: %s" .src }}{{ end }}
+{{ $loading := .loading | default "lazy" }}
+{{ if eq $image.MediaType.SubType "svg" }}
+<img src="{{ $image.RelPermalink }}" alt="{{ .alt }}" width="720" height="900" loading="{{ $loading }}" class="{{ .class | default "" }}">
+{{ else }}
+{{ $small := $image.Resize "640x webp" }}{{ $large := $image.Resize "1280x webp" }}
+<img src="{{ $large.RelPermalink }}" srcset="{{ $small.RelPermalink }} 640w, {{ $large.RelPermalink }} 1280w" sizes="{{ .sizes | default "(max-width: 760px) 100vw, 50vw" }}" alt="{{ .alt }}" width="{{ $large.Width }}" height="{{ $large.Height }}" loading="{{ $loading }}" class="{{ .class | default "" }}">
+{{ end }}

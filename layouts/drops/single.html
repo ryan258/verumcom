@@ -1,85 +1,48 @@
 {{ define "main" }}
-<div class="drop-detail">
-  <a href="{{ relref . (dict "path" "drops" "lang" .Site.Language.Lang) }}" class="mono-meta drop-detail__back-link">
-    {{ i18n "cta_back_to_drops" }}
-  </a>
-
-  <!-- Drop Hero Image -->
-  <div class="drop-detail__hero">
-    {{ $hero := .Resources.GetMatch .Params.hero }}
-    {{ if $hero }}
-      <img src="{{ $hero.RelPermalink }}" alt="{{ .Title }}" class="drop-detail__hero-img" width="{{ $hero.Width }}" height="{{ $hero.Height }}">
-    {{ end }}
-  </div>
-
-  <div class="drop-detail__intro">
-    <div class="drop-detail__meta">
-      <span class="mono-meta drop-detail__number">DROP {{ .Params.drop_number }}</span>
-      <span class="mono-meta">// {{ .Date.Format "02.01.2006" }}</span>
-      {{ if eq .Params.status "released" }}
-        <span class="badge-tag badge-tag--cyan">{{ i18n "drop_status_released" }}</span>
-      {{ else if eq .Params.status "upcoming" }}
-        <span class="badge-tag badge-tag--magenta">{{ i18n "drop_status_upcoming" }}</span>
-      {{ else }}
-        <span class="badge-tag">{{ i18n "drop_status_archived" }}</span>
-      {{ end }}
-    </div>
-
-    <h1 class="drop-detail__title glitch-text">{{ .Title }}</h1>
-    <p class="drop-detail__statement">{{ .Params.statement }}</p>
-    
-    <div class="drop-detail__content">
-      {{ .Content }}
-    </div>
-  </div>
-
-  <!-- State Branching: Upcoming vs Released -->
-  {{ if eq .Params.status "upcoming" }}
-    <div class="newsletter-box">
-      <span class="badge-tag badge-tag--magenta newsletter-box__badge">{{ i18n "drop_status_upcoming" }}</span>
-      <h2 class="newsletter-box__title">{{ i18n "drop_upcoming_notice" }}</h2>
-      
-      <label class="newsletter-box__label" for="drop-newsletter-email">{{ i18n "contact_email" }} ({{ if eq .Language.Lang "es" }}obligatorio{{ else }}required{{ end }})</label>
-      <form action="{{ .Site.Params.newsletter_endpoint }}" method="POST" class="newsletter-box__form">
-        <input type="email" id="drop-newsletter-email" name="email" autocomplete="email" class="newsletter-box__input" placeholder="{{ i18n "newsletter_placeholder" }}" required aria-label="{{ i18n "contact_email" }}">
-        <button type="submit" class="btn btn--accent">
-          <span>{{ i18n "cta_subscribe" }}</span>
-          <span class="ui-symbol" aria-hidden="true">+</span>
-        </button>
-      </form>
-    </div>
-  {{ else }}
-    <!-- Pieces belonging to this drop -->
-    {{ $dropSlug := printf "drop-%s" .Params.drop_number }}
-    {{ $dropPieces := where (where .Site.RegularPages "Section" "lookbook") ".Params.drop" $dropSlug }}
-    <div>
-      <h2 class="drop-detail__pieces-title">{{ i18n "drop_pieces_in_drop" }}</h2>
-      <div class="lookbook-grid">
-        {{ range $dropPieces }}
-          <article class="piece-card" data-drop="{{ .Params.drop }}">
-            <a href="{{ .RelPermalink }}" class="piece-card__media" tabindex="-1" aria-hidden="true">
-              {{ $frontImg := index .Params.gallery_order 0 }}
-              {{ $res := .Resources.GetMatch $frontImg }}
-              {{ if $res }}
-                {{ $res = $res.Resize "720x webp" }}
-                <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="piece-card__img" loading="lazy" width="{{ $res.Width }}" height="{{ $res.Height }}">
-              {{ else }}
-                <div class="piece-card__placeholder">[PRENDA]</div>
-              {{ end }}
-            </a>
-            <div class="piece-card__content">
-              <div class="piece-card__specs-row">
-                <span class="piece-card__meta-tag">{{ index .Params.categories 0 | upper }}</span>
-                <span class="piece-card__price-free-tag">{{ .Params.fabric }}</span>
-              </div>
-              <h3 class="piece-card__title">
-                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-              </h3>
-            </div>
-          </article>
-        {{ end }}
-      </div>
-    </div>
-  {{ end }}
+{{ $story := .Site.GetPage .Params.story_ref }}
+<article class="collab-page collab-page--{{ .Params.tone }}">
+<header class="collab-hero paper-surface">
+<div class="collab-hero__copy">
+<a class="text-link" href="{{ relref . "drops" }}">← {{ i18n "all_collections" }}</a>
+<p class="eyebrow">{{ i18n "concept_collection" }} / {{ .Params.drop_number }}</p>
+<h1>{{ .Title }}</h1>
+<p class="collab-hero__artist">VERUM × {{ .Params.artist_name }}</p>
+<p class="collab-hero__statement">{{ .Description }}</p>
+<a class="btn btn--ink" href="#collection">{{ i18n "three_pieces" }} <span aria-hidden="true">↓</span>
+</a>
 </div>
+<figure>{{ partial "collaboration-image.html" (dict "src" .Params.hero "alt" .Params.hero_alt "loading" "eager") }}<figcaption>{{ i18n "generated_studio" }} / {{ .Params.neighborhood }}</figcaption>
+</figure>
+</header>
+<div class="section">
+<section class="artist-intro" aria-labelledby="artist-title">
+<div>
+<p class="eyebrow">{{ .Params.craft }} / {{ .Params.neighborhood }}</p>
+<h2 id="artist-title">{{ .Params.theme }}</h2>
+</div>
+<div>
+<p>{{ .Params.bio }}</p>
+<p class="eyebrow artist-intro__palette">{{ .Params.palette }}</p>
+<a href="{{ $story.RelPermalink }}" class="text-link">{{ i18n "read_artist_interview" }} <span aria-hidden="true">↗</span>
+</a>
+</div>
+</section>
+<section id="collection" aria-labelledby="collection-title">
+<div class="collection-heading">
+<h2 id="collection-title">{{ i18n "three_pieces" }}</h2>
+<p class="eyebrow">{{ i18n "design_illustrations" }}</p>
+</div>
+<div class="concept-pieces">{{ range (where (where .Site.RegularPages "Section" "lookbook") "Params.artist_id" .Params.artist_id).ByWeight }}{{ partial "concept-piece-card.html" (dict "page" .) }}{{ end }}</div>
+</section>
+{{ partial "concept-note.html" . }}{{ partial "follow-project.html" . }}
+{{ range where (where .Site.RegularPages "Section" "drops") "Params.artist_id" "ne" .Params.artist_id }}<nav class="collab-next" aria-label="{{ i18n "other_collection" }}">
+<div>
+<p class="eyebrow">{{ i18n "other_collection" }}</p>
+<h2>{{ .Title }}</h2>
+<p>{{ .Params.artist_name }} / {{ .Params.craft }}</p>
+</div>
+<a class="btn btn--secondary" href="{{ .RelPermalink }}">{{ i18n "explore_collection" }} <span aria-hidden="true">→</span>
+</a>
+</nav>{{ end }}</div>
+</article>
 {{ end }}

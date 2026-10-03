@@ -1,40 +1,23 @@
 {{ define "main" }}
-<div class="section">
-  <div class="section__header">
-    <div>
-      <span class="mono-meta">EDITORIAL // CRÓNICAS DE TALLER</span>
-      <h1 class="section__title glitch-text">{{ .Title }}</h1>
-    </div>
-  </div>
-
-  <div class="veritas-grid">
-    {{ range .Pages }}
-      <article class="veritas-card">
-        <a href="{{ .RelPermalink }}" class="veritas-card__media" tabindex="-1" aria-hidden="true">
-          {{ $hero := .Resources.GetMatch .Params.hero }}
-          {{ if $hero }}
-            {{ $res := $hero.Resize "720x webp" }}
-            <img src="{{ $res.RelPermalink }}" alt="{{ .Title }}" class="veritas-card__img" loading="lazy" width="{{ $res.Width }}" height="{{ $res.Height }}">
-          {{ else }}
-            <div class="veritas-card__placeholder">[PORTADA HISTORIA]</div>
-          {{ end }}
-        </a>
-        <div class="veritas-card__content">
-          <div class="veritas-card__meta">
-            <span class="mono-meta">{{ .Params.neighborhood }} // {{ .Params.artist_name }}</span>
-            <span class="badge-tag badge-tag--magenta">VERITAS</span>
-          </div>
-          <h2 class="veritas-card__title">
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          </h2>
-          <p class="veritas-card__summary">{{ .Params.summary }}</p>
-          <a href="{{ .RelPermalink }}" class="veritas-card__read-more">
-            <span>{{ i18n "veritas_read_story" }}</span>
-            <span class="ui-symbol" aria-hidden="true">→</span>
-          </a>
-        </div>
-      </article>
-    {{ end }}
-  </div>
+<div class="section collab-index">
+<header class="collab-heading">
+<p class="eyebrow">{{ i18n "artist_series" }} / {{ i18n "imagined_conversations" }}</p>
+<h1>{{ .Title }}<span class="veritas-star" aria-hidden="true">✳</span>
+</h1>
+<p class="collab-heading__intro">{{ .Description }}</p>
+</header>
+<div class="interview-grid">{{ range .RegularPages.ByWeight }}<article class="interview-card">
+<a class="interview-card__image" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">{{ partial "collaboration-image.html" (dict "src" .Params.hero "alt" "") }}</a>
+<div>
+<p class="eyebrow">{{ .Params.artist_name }} / {{ .Params.neighborhood }}</p>
+<h2>
+<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+</h2>
+<p>{{ .Description }}</p>
+<a href="{{ .RelPermalink }}" class="text-link">{{ i18n "read_interview" }} <span aria-hidden="true">↗</span>
+</a>
+<span class="interview-card__time">{{ partial "reading-minutes.html" . }} {{ i18n "minutes_read" }}</span>
 </div>
+</article>{{ end }}</div>
+{{ partial "concept-note.html" . }}</div>
 {{ end }}

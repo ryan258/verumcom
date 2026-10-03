@@ -1,5 +1,7 @@
 ---
 title: "Drops"
-description: "Archive of limited edition single-batch releases. Crafted in Buenos Aires."
 translationKey: "drops-index"
+description: "Two concept collaborations: Sobreimpreso and En Obra."
 ---
+
+Two concept collaborations: Sobreimpreso and En Obra.

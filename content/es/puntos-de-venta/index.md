@@ -1,6 +1,7 @@
 ---
 title: "Puntos de Venta"
-description: "Locales y talleres en Buenos Aires donde podés ver, probarte y comprar prendas VERUM en persona."
+description: "Dónde ver VERUM en persona. Por ahora no hay puntos de venta: las piezas actuales son conceptos."
 translationKey: "stockists"
+layout: "stockists"
 draft: false
 ---

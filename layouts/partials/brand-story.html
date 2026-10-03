@@ -1,0 +1,7 @@
+<section id="equipo" class="brand-story" aria-labelledby="brand-story-title">
+  <p class="eyebrow">BUENOS AIRES / VERUM</p>
+  <h2 id="brand-story-title">{{ i18n "behind_verum" }}</h2>
+  {{ with .Params.founder_story }}<p>{{ . }}</p>{{ else }}<p>{{ i18n "brand_project_intro" }}</p>{{ end }}
+  {{ with .Params.founders }}<div class="founders">{{ range . }}<article><h3>{{ .name }}</h3>{{ with .role }}<p class="eyebrow">{{ . }}</p>{{ end }}<p>{{ .bio }}</p></article>{{ end }}</div>{{ end }}
+  <p>{{ i18n "brand_process" }}</p>
+</section>

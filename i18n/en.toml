@@ -1,15 +1,6 @@
-# Navigation
-[nav_lookbook]
-other = "Lookbook"
-
+# Site chrome
 [nav_manifesto]
 other = "Manifesto"
-
-[nav_drops]
-other = "Drops"
-
-[nav_veritas]
-other = "Veritas"
 
 [nav_stockists]
 other = "Stockists"
@@ -20,147 +11,149 @@ other = "Contact"
 [nav_menu]
 other = "Menu"
 
-[nav_close]
-other = "Close"
+[back_view]
+other = "Back view"
 
-# Actions & CTAs
-[cta_lookbook]
-other = "View Lookbook"
+[skip_to_content]
+other = "Skip to content"
 
-[cta_latest_drop]
-other = "Explore Drop"
+[nav_home]
+other = "Home"
 
-[cta_explore_drop]
-other = "Explore Drop"
+[nav_language]
+other = "Language"
 
+[nav_find_us]
+other = "Find us"
+
+[nav_main]
+other = "Main navigation"
+
+[header_origin]
+other = "INDEPENDENT STREETWEAR"
+
+[footer_tagline]
+other = "Clothing. Ideas. People.<br>From Buenos Aires, with identity."
+
+[footer_explore]
+other = "Explore"
+
+[footer_in_person]
+other = "In person"
+
+[footer_connect]
+other = "Connect"
+
+[footer_note]
+other = "ONE CITY.<br>MANY PERSPECTIVES."
+
+[footer_privacy]
+other = "Privacy"
+
+[footer_terms]
+other = "Terms"
+
+[back_to_top]
+other = "Back to top"
+
+[path_manifesto]
+other = "manifesto"
+
+[path_stockists]
+other = "stockists"
+
+[path_contact]
+other = "contact"
+
+[path_privacy]
+other = "legal/privacy"
+
+[path_terms]
+other = "legal/terms"
+
+# Home
+[home_artist_intro]
+other = "Two artists. Six pieces."
+
+[home_artist_copy]
+other = "Memory in layers. Change in lines. Two imagined worlds taking shape in everyday clothing."
+
+[home_veritas_title]
+other = "Ideas can be worn, too."
+
+[home_eyebrow]
+other = "From Buenos Aires. For the streets."
+
+[home_h1_1]
+other = "IDEAS"
+
+[home_h1_2]
+other = "YOU CAN"
+
+[home_h1_3]
+other = "WEAR."
+
+[home_lede]
+other = "Layers of colour. Working marks. Everyday clothing.<br>A clothing concept from Buenos Aires."
+
+[home_cta_lookbook]
+other = "Explore the lookbook"
+
+[home_cta_story]
+other = "Behind VERUM"
+
+[home_model_alt]
+other = "Model wearing a black VERUM jacket, looking back on a Buenos Aires street."
+
+[home_origin]
+other = "ORIGIN: THE STREET"
+
+[home_campaign]
+other = "CAMPAIGN 001 — THE REAL"
+
+[home_hero_disclosure]
+other = "AI-GENERATED MODEL · PLACEHOLDER IMAGE"
+
+[home_strip_1]
+other = "CLOTHING WITH IDENTITY"
+
+[home_strip_2]
+other = "IDEAS FROM BUENOS AIRES"
+
+[home_strip_3]
+other = "FROM IDEA TO GARMENT"
+
+# Newsletter
 [cta_subscribe_btn]
-other = "Join List"
+other = "Sign me up"
 
-[cta_where_to_buy]
-other = "Where to find it"
+[newsletter_eyebrow]
+other = "STAY IN THE LOOP"
 
-[cta_view_piece]
-other = "Inspect piece"
+[newsletter_title]
+other = "HEAR IT<br>FIRST."
 
-[cta_filter_all]
-other = "All"
+[newsletter_copy]
+other = "New releases, stories, and what comes next.<br>Straight from the street to your inbox."
 
-[cta_filter_category]
-other = "By category"
+[newsletter_email]
+other = "Your email"
 
-[cta_filter_drop]
-other = "By drop"
+[newsletter_required]
+other = "required"
 
-[cta_subscribe]
-other = "Join list"
+[newsletter_placeholder]
+other = "you@example.com"
 
+[newsletter_unsub]
+other = "Unsubscribe whenever you want."
+
+# Contact
 [cta_send]
 other = "Send message"
 
-[cta_back_to_lookbook]
-other = "← Back to Lookbook"
-
-[cta_back_to_drops]
-other = "← Back to Drops"
-
-[cta_back_to_veritas]
-other = "← Back to Stories"
-
-[cta_back_home]
-other = "Back to home"
-
-# Piece specs
-[spec_drop]
-other = "Release"
-
-[spec_category]
-other = "Category"
-
-[spec_fabric]
-other = "Fabric & Weight"
-
-[spec_color]
-other = "Colorway"
-
-[spec_sizes]
-other = "Available sizes"
-
-[spec_details]
-other = "Technical Specifications"
-
-[spec_story]
-other = "Piece Background"
-
-[spec_stockists_available]
-other = "Stockist Availability"
-
-[spec_no_cart_notice]
-other = "VERUM does not operate an e-commerce cart. Pieces are acquired in-person at partner stockists in Buenos Aires or through direct Instagram inquiry."
-
-# Categories
-[cat_outerwear]
-other = "Outerwear & Hoodies"
-
-[cat_tees]
-other = "T-Shirts"
-
-[cat_bottoms]
-other = "Pants & Trousers"
-
-[cat_accessories]
-other = "Accessories & Headwear"
-
-# Drops states
-[drop_status_released]
-other = "Available now"
-
-[drop_status_upcoming]
-other = "In production / Upcoming"
-
-[drop_status_archived]
-other = "Archived / Sold out"
-
-[drop_pieces_in_drop]
-other = "Pieces in this release"
-
-[drop_upcoming_notice]
-other = "Currently in production across Buenos Aires workshops. Subscribe to receive an alert when the batch lands."
-
-# Veritas editorial
-[veritas_byline]
-other = "By"
-
-[veritas_artist]
-other = "Artist"
-
-[veritas_neighborhood]
-other = "Neighborhood"
-
-[veritas_read_story]
-other = "Read full dispatch"
-
-# Stockists
-[stockists_title]
-other = "Stockists"
-
-[stockists_subtitle]
-other = "Physical locations to touch the fabric, test the drape, and acquire the garments."
-
-[stockists_hours]
-other = "Hours"
-
-[stockists_map_link]
-other = "Open in Google Maps"
-
-[stockists_instagram]
-other = "Store Instagram"
-
-# Contact
-[contact_title]
-other = "Direct Inquiry"
-
 [contact_subtitle]
-other = "Questions regarding pieces, studio visits, or press. Blunt and direct."
+other = "Questions about the project, proposed pieces or press."
 
 [contact_name]
 other = "Name"
@@ -177,47 +170,209 @@ other = "Your message"
 [contact_direct]
 other = "Direct Channels"
 
-[contact_whatsapp]
-other = "Message on WhatsApp"
+[contact_kicker]
+other = "DIRECT CHANNELS // BUENOS AIRES"
 
-# Newsletter
-[newsletter_title_1]
-other = "Hear It"
+[contact_required_note]
+other = "Fields marked with * are required."
 
-[newsletter_title_2]
-other = "First"
+[contact_fallback_title]
+other = "Let's talk."
 
-[newsletter_desc_mockup]
-other = "New drops. Stories. Events. Everything essential, zero spam."
+[contact_fallback_text]
+other = "For clothing, availability, or press inquiries, reach us by email or Instagram."
 
-[newsletter_real_ones]
-other = "The real ones also subscribe"
+[contact_fallback_button]
+other = "Email the studio"
 
-[newsletter_placeholder_mockup]
-other = "Your email here"
+[contact_label_whatsapp]
+other = "Studio WhatsApp"
 
-# Footer
-[footer_rights]
-other = "VERUM — Crafted with conviction in Buenos Aires, Argentina."
+[contact_label_instagram]
+other = "Official Instagram"
 
-[footer_no_store]
-other = "Independent garment manufacturing. Zero middlemen."
+[contact_label_email]
+other = "Email"
 
-[footer_tagline_bar]
-other = "Buenos Aires, Argentina. Clothes. Ideas. People."
 
-[footer_slogan]
-other = "The real cannot be polished."
+# Stockists
+[stockists_subtitle]
+other = "Physical locations to touch the fabric, test the drape, and acquire the garments."
 
-[footer_legal_privacy]
-other = "Privacy Policy"
+[stockists_map_link]
+other = "Open in Google Maps"
 
-[footer_legal_terms]
-other = "Terms of Service"
+[stockists_kicker]
+other = "VERUM IN PERSON // BUENOS AIRES"
+
+[stockists_empty]
+other = "There are no stockists yet. The pieces in the current series are concepts and are not for sale. Confirmed shops will be listed here."
+
+# Manifesto
+[cta_lookbook]
+other = "View Lookbook"
+
+[manifesto_kicker]
+other = "STATEMENT OF PRINCIPLES // CABA"
+
+[manifesto_footer]
+other = "VERUM // IDEAS YOU CAN WEAR // BUENOS AIRES"
 
 # 404
+[cta_back_home]
+other = "Back to home"
+
 [error_404_title]
 other = "404 — Off the Grid"
 
 [error_404_desc]
 other = "The coordinates you requested do not exist or were lost in the noise. Return to base."
+
+# Concept collections, pieces and interviews
+[spec_fabric]
+other = "Fabric & Weight"
+
+[spec_color]
+other = "Colorway"
+
+[concept_label]
+other = "Fictional concept"
+
+[concept_disclosure]
+other = "The artists, interviews and collaborations are fictional. Studio scenes are generated images and garments are design illustrations. They do not represent manufactured products or items available to buy."
+
+[artist_series]
+other = "Artist series"
+
+[choose_artist]
+other = "Choose an artist to enter their collection."
+
+[explore_collection]
+other = "Explore the collection"
+
+[view_piece]
+other = "View the piece"
+
+[lookbook_to_veritas]
+other = "Behind every piece, a way of seeing."
+
+[read_interviews]
+other = "Read the conversations"
+
+[all_artists]
+other = "All artists"
+
+[concept_collection]
+other = "Concept collection"
+
+[generated_studio]
+other = "Generated studio scene · Visual concept"
+
+[three_pieces]
+other = "Three pieces. One perspective."
+
+[read_artist_interview]
+other = "From idea to garment: read the conversation"
+
+[design_illustrations]
+other = "Design illustrations / Tee · Hoodie · Cap"
+
+[other_collection]
+other = "The other collection"
+
+[breadcrumb]
+other = "Breadcrumb"
+
+[front_view]
+other = "Front view"
+
+[design_illustration]
+other = "Design illustration"
+
+[proposed_details]
+other = "Proposed details"
+
+[proposed_fit]
+other = "Fit"
+
+[proposed_technique]
+other = "Artwork technique"
+
+[sampling_note]
+other = "Materials and fabric weights are design targets. Sizing, measurements, finishes and care depend on sample testing; there is no approved production specification yet."
+
+[idea_to_piece]
+other = "The idea behind this piece"
+
+[same_collection]
+other = "In the same collection"
+
+[imagined_conversations]
+other = "Imagined conversations"
+
+[fictional_interview]
+other = "Fictional interview"
+
+[read_interview]
+other = "Read the interview"
+
+[minutes_read]
+other = "min read"
+
+[in_this_interview]
+other = "In this conversation"
+
+[from_idea_to_garment]
+other = "From idea to garment"
+
+[next_interview]
+other = "The other conversation"
+
+[behind_verum]
+other = "Behind VERUM"
+
+[brand_project_intro]
+other = "VERUM is an independent clothing project taking shape in Buenos Aires. The idea: heavyweight clothing, a distinct identity and a direct connection to the people who make it."
+
+[brand_process]
+other = "Moving from a drawing to a garment still needs a sample to assess fit, fabric and print. The pieces on this site show the proposed direction; they are not finished garments yet."
+
+[home_garment_note]
+other = "Designs from the current series · Concept illustrations, not for sale."
+
+[six_pieces]
+other = "Six pieces. Two perspectives."
+
+[view_all_pieces]
+other = "View all pieces"
+
+[all_collections]
+other = "All collections"
+
+[explore_by_collection]
+other = "Explore the story behind each collection"
+
+[follow_title]
+other = "Follow what comes next."
+
+[follow_copy]
+other = "Follow VERUM’s progress or get in touch about a piece. The designs are concepts and are not currently for sale."
+
+[follow_instagram]
+other = "Follow VERUM on Instagram"
+
+[follow_email]
+other = "Get in touch by email"
+
+[follow_whatsapp]
+other = "Talk to us on WhatsApp"
+
+[contact_pending_title]
+other = "Our contact channels are being prepared."
+
+[contact_pending_copy]
+other = "There is no confirmed public contact channel yet. We’ll publish it here when it is ready. In the meantime, you can explore the proposed pieces."
+
+# Working editorial title; /veritas/ remains the stable route.
+[editorial_name]
+other = "In process"

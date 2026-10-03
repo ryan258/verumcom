@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="section">
+  <div class="section__header">
+    <div>
+      <span class="mono-meta">{{ i18n "stockists_kicker" }}</span>
+      <h1 class="section__title glitch-text">{{ .Title }}</h1>
+    </div>
+  </div>
+
+  {{ with hugo.Data.stockists }}
+  <div class="stockist-intro">
+    <p>{{ i18n "stockists_subtitle" }}</p>
+  </div>
+
+  <div class="stockist-grid">
+    {{ range . }}
+      <article class="stockist-card">
+        <div class="stockist-card__header">
+          <span class="stockist-card__neighborhood">{{ .city }} // {{ .neighborhood }}</span>
+          <h2 class="stockist-card__name">{{ .name }}</h2>
+        </div>
+
+        <div class="stockist-card__address">
+          <span class="ui-symbol" aria-hidden="true">◎</span>
+          <span>{{ .address }}</span>
+        </div>
+
+        <div class="stockist-card__hours">
+          <span class="ui-symbol" aria-hidden="true">◷</span>
+          <span>{{ .hours }}</span>
+        </div>
+
+        {{ with .description }}
+          <p class="stockist-card__desc">{{ . }}</p>
+        {{ end }}
+
+        <div class="stockist-card__actions">
+          <a href="{{ .maps_url }}" target="_blank" rel="noopener noreferrer" class="stockist-card__link">
+            <span>{{ i18n "stockists_map_link" }}</span>
+            <span class="ui-symbol" aria-hidden="true">↗</span>
+          </a>
+          <a href="https://instagram.com/{{ trim .instagram "@" }}" target="_blank" rel="noopener noreferrer" class="stockist-card__link stockist-card__link--instagram">
+            <span>{{ .instagram }}</span>
+            <span class="ui-symbol" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+  {{ else }}
+  <div class="stockist-intro">
+    <p>{{ i18n "stockists_empty" }}</p>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
