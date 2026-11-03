@@ -29,6 +29,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      - name: Set up Python for local output checks
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install Hugo CLI
         uses: peaceiris/actions-hugo@v3
         with:
@@ -44,6 +49,9 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Verify rendered content before upload
+        run: python scripts/verify_review.py ./public --base-url "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

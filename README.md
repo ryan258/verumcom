@@ -73,7 +73,7 @@ Abrir `http://127.0.0.1:8766/`. Revisar a 1440, 390 y 320 px: portada → prenda
 - [`PLACEHOLDERS.md`](./PLACEHOLDERS.md): Inventario y briefs P00–P08; consignas, extensión, ejemplos y qué hacer cuando faltan datos.
 - [`CREATIVE-DIRECTION.es-AR.md`](./CREATIVE-DIRECTION.es-AR.md): Universo, voz, gramática visual, aplicaciones, decisión de nombre editorial y dos colecciones.
 - [`docs/ARCHETYPES.es-AR.md`](./docs/ARCHETYPES.es-AR.md): Consignas de arquetipos de colección, prenda y entrevista.
-- [`docs/AGENT-INSTRUCTIONS.es-AR.md`](./docs/AGENT-INSTRUCTIONS.es-AR.md): Traducción de consulta para agentes y reglas de GitNexus.
+- [`docs/AGENT-INSTRUCTIONS.es-AR.md`](./docs/AGENT-INSTRUCTIONS.es-AR.md): Traducción histórica de instrucciones de agentes; no es una guía operativa vigente.
 - [`project-description.es-AR.md`](./project-description.es-AR.md): Brief original, conservado como antecedente histórico.
 
 ## Archivos principales

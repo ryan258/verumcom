@@ -88,3 +88,14 @@ Navigate to `http://127.0.0.1:8766/` and audit against the following matrix:
 | **Language Switcher** | `es` ↔ `en` | Switch language on individual garment and collection pages; confirm exact route correspondence. |
 
 These are targeted checks, not proof of WCAG conformance, screen-reader acceptance, real-device coverage or delivery to an external inbox. A configured endpoint is not a verified delivery result.
+
+
+### Output under a deployment subpath
+
+When Hugo overrides the configured base URL, pass that same effective URL to the focused checker, for example:
+
+```sh
+python3 scripts/verify_review.py "$PREVIEW_DIR" --base-url https://example.invalid/verumcom/
+```
+
+The checker resolves local images, links, anchors and garment navigation relative to that subpath. The Pages workflow supplies its configured Pages URL before artifact upload. This is a generated-output gate; it does not verify business facts, account ownership, provider delivery, human acceptance or a successful deployment.

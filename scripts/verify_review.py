@@ -11,10 +11,27 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
 parser.add_argument('destination', type=Path)
+parser.add_argument('--base-url', help='Effective Hugo base URL, including any deployment subpath')
 parser.add_argument('--contact-url', help='Expected primary link when using a config/env override')
 args = parser.parse_args()
 dest = args.destination.resolve()
-subprocess.run([sys.executable, str(ROOT / 'scripts/verify_concepts.py'), str(dest)], check=True)
+base_url = (args.base_url or tomllib.loads((ROOT / 'hugo.toml').read_text())['baseURL']).rstrip('/') + '/'
+base = urlsplit(base_url)
+if base.scheme not in ('http', 'https') or not base.netloc or base.query or base.fragment:
+    parser.error('--base-url must be an absolute HTTP(S) URL without query or fragment')
+base_path = unquote(base.path)
+
+def site_route(route):
+    return base_path.rstrip('/') + route
+
+def output_path(path):
+    decoded = unquote(path)
+    assert decoded.startswith(base_path), f'Local URL escapes deployment base path: {path}'
+    relative = decoded[len(base_path):]
+    assert '..' not in Path(relative).parts, f'Unsafe local URL: {path}'
+    return dest / relative
+
+subprocess.run([sys.executable, str(ROOT / 'scripts/verify_concepts.py'), str(dest), '--base-url', base_url], check=True)
 params = tomllib.loads((ROOT / 'hugo.toml').read_text())['params']
 expected_contact = args.contact_url
 if expected_contact is None and params.get('contact_verified'):
@@ -62,11 +79,11 @@ for lang, prefix, manifesto, contact in [('es', '', 'manifiesto', 'contacto'), (
     for page in (home, lookbook):
         assert page.classes.count('concept-piece-card') == 6, f'{page.route}: expected six garment cards'
         for slug in slugs:
-            assert prefix + '/lookbook/' + slug + '/' in page.links, f'{page.route}: missing garment {slug}'
+            assert site_route(prefix + '/lookbook/' + slug + '/') in page.links, f'{page.route}: missing garment {slug}'
     assert 'artist-card' not in lookbook.classes, 'Lookbook should present garments directly'
     assert drops.classes.count('artist-card') == 2, 'Drops should retain both collections'
     assert not any('hero-model' in src or 'hero-bg' in src for src in home.images), 'Retired campaign in homepage'
-    assert 'equipo' in about.ids and prefix + '/' + manifesto + '/#equipo' in home.links, 'Missing founder-section route'
+    assert 'equipo' in about.ids and site_route(prefix + '/' + manifesto + '/#equipo') in home.links, 'Missing founder-section route'
     assert 'h3' not in lookbook.headings, 'Lookbook garment cards should follow h1 with h2'
     assert not any('10:00' in t or '19:00' in t for t in contact_page.text), 'Unconfirmed workshop hours remain'
     pages = [home, lookbook, about, contact_page, drops]
@@ -76,13 +93,13 @@ for lang, prefix, manifesto, contact in [('es', '', 'manifiesto', 'contacto'), (
         pages.append(page)
         url = page.meta.get('og:image', '')
         assert f'/images/social/{slug}' in url and url.endswith('.jpg'), f'{slug}: incorrect social image'
-        assert (dest / unquote(urlsplit(url).path).lstrip('/')).is_file(), f'{slug}: share image not emitted'
+        assert output_path(urlsplit(url).path).is_file(), f'{slug}: share image not emitted'
         assert page.meta.get('og:image:alt') and page.meta.get('twitter:image') == url, f'{slug}: missing share metadata'
         social_urls.add(url)
     assert len(social_urls) == 6, 'Garments must have distinct share images'
     for slug in ('sobreimpreso', 'en-obra'):
         page = Page(prefix + '/drops/' + slug + '/')
-        assert prefix + '/drops/' in page.links, 'Collection must return to Drops'
+        assert site_route(prefix + '/drops/') in page.links, 'Collection must return to Drops'
         pages.append(page)
     for page in pages:
         if expected_contact:

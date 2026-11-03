@@ -1,5 +1,7 @@
 # VERUM — Instrucciones para agentes, versión de consulta
 
+**Archivo histórico:** esta traducción conserva las instrucciones del 3 de octubre de 2026. La integración fue retirada el 18 de octubre de 2026; para trabajar, seguí `AGENTS.md` y `CLAUDE.md` actuales.
+
 **Español (Argentina)** · [AGENTS.md](../AGENTS.md) · [CLAUDE.md](../CLAUDE.md) · [Índice](README.es-AR.md)
 
 Traducción de consulta de los bloques GitNexus presentes en ambos archivos el 3 de octubre de 2026. Los archivos operativos generados conservan sus nombres y contenido; esta copia no los reemplaza ni cambia las instrucciones de Ryan. Los valores del índice son una instantánea, no evidencia de su estado futuro.

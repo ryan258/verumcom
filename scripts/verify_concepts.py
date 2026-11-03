@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Focused, dependency-free verification of the two artist collections."""
+import argparse
 from collections import Counter
 from html.parser import HTMLParser
 import json
@@ -10,9 +11,18 @@ from urllib.parse import unquote, urljoin, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEST = Path(sys.argv[1]).resolve() if len(sys.argv) == 2 else None
-if DEST is None or not DEST.is_dir():
-    raise SystemExit('Usage: python3 scripts/verify_concepts.py <clean Hugo output directory>')
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('destination', type=Path)
+parser.add_argument('--base-url', help='Effective Hugo base URL, including any deployment subpath')
+args = parser.parse_args()
+DEST = args.destination.resolve()
+if not DEST.is_dir():
+    parser.error('destination must be a generated Hugo output directory')
+BASE_URL = (args.base_url or tomllib.loads((ROOT / 'hugo.toml').read_text())['baseURL']).rstrip('/') + '/'
+ORIGIN = urlsplit(BASE_URL)
+if ORIGIN.scheme not in ('http', 'https') or not ORIGIN.netloc or ORIGIN.query or ORIGIN.fragment:
+    parser.error('--base-url must be an absolute HTTP(S) URL without query or fragment')
+BASE_PATH = unquote(ORIGIN.path)
 
 
 def check(condition, message):
@@ -109,6 +119,14 @@ def rendered(path):
     return cache[path]
 
 
+def output_path(path):
+    decoded = unquote(path)
+    check(decoded.startswith(BASE_PATH), f'Local URL escapes deployment base path: {path}')
+    relative = decoded[len(BASE_PATH):]
+    check('..' not in Path(relative).parts, f'Unsafe local URL: {path}')
+    return DEST / relative
+
+
 links_checked = 0
 for route in all_routes:
     page = rendered(DEST / route.lstrip('/') / 'index.html')
@@ -118,14 +136,14 @@ for route in all_routes:
     check(('Fictional concept' if route.startswith('/en/') else 'Concepto de ficción') in text, f'{route}: missing disclosure')
     for image in page.images:
         check('alt' in image and 'width' in image and 'height' in image, f'{route}: incomplete image attributes')
-        target = urlsplit(urljoin('https://verum.com' + route, image['src']))
-        if target.netloc == 'verum.com':
-            check((DEST / unquote(target.path).lstrip('/')).is_file(), f'{route}: missing image {target.path}')
+        target = urlsplit(urljoin(urljoin(BASE_URL, route.lstrip('/')), image['src']))
+        if target.netloc == ORIGIN.netloc:
+            check(output_path(target.path).is_file(), f'{route}: missing image {target.path}')
     for link in page.links:
-        target = urlsplit(urljoin('https://verum.com' + route, link))
-        if target.scheme not in ['http', 'https'] or target.netloc != 'verum.com':
+        target = urlsplit(urljoin(urljoin(BASE_URL, route.lstrip('/')), link))
+        if target.scheme not in ['http', 'https'] or target.netloc != ORIGIN.netloc:
             continue
-        path = DEST / unquote(target.path).lstrip('/')
+        path = output_path(target.path)
         if target.path.endswith('/') or path.is_dir():
             path /= 'index.html'
         check(path.is_file(), f'{route}: broken link {link}')
