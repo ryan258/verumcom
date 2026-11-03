@@ -5,8 +5,8 @@
 Inventario y briefs vigentes al 3 de octubre de 2026. Reemplaza la lista antigua de doce prendas y cuatro crónicas. No reutilizar las rutas retiradas del brief inicial.
 
 | Elemento | Fuente actual | Reemplazo pendiente |
-| Nombre editorial | En proceso / In process; rutas técnicas `veritas` | P00: lectura local y decisión de los propietarios; VERUM se conserva |
 | --- | --- | --- |
+| Nombre editorial | En proceso / In process; rutas técnicas `veritas` | P00: lectura local y decisión de los propietarios; VERUM se conserva |
 | Prendas | `assets/images/collaborations/{registro,persistencia,testigo,cota,trazo,escuadra}.svg` y variantes `-back.svg` | Muestras aprobadas y fotografías frontal, posterior, puesta y detalle |
 | Talleres | `sobreimpreso-studio.png`, `en-obra-studio.png` en la misma carpeta | Fotos autorizadas del colaborador y proceso reales |
 | Tarjetas sociales | `assets/images/social/{slug}.png` | Regenerar al cambiar el diseño, o usar `social_image` en la ficha con una foto aprobada |
@@ -34,6 +34,11 @@ El sitio actual sigue mostrando los conceptos completos. Las instrucciones viven
 **Consigna:** «Escuchá “En proceso” en una conversación sobre ropa. ¿Qué esperarías encontrar? ¿Te recuerda a algo local que convenga conocer?» Registrar la expresión exacta, quién aporta la lectura (con permiso) y el contexto. Una asociación personal es una señal para discutir, no una definición universal del habla porteña.
 
 **Entrega mínima:** `[título elegido] + [lectura local] + [decisión de los propietarios y fecha]`. No hay que contratar ni activar nada. Sin una decisión final, conservar el título como propuesta de trabajo. La asociación de Veritas con una línea de fragancias está documentada en [CREATIVE-DIRECTION.es-AR.md](CREATIVE-DIRECTION.es-AR.md); el significado callejero mencionado sigue sin verificarse.
+
+**Lecturas a contrastar:** hipótesis de una revisión externa del 3 de noviembre de 2026, sin lectura local que las confirme. Sumar estas preguntas a la consigna y registrar qué confirma, corrige o descarta cada persona.
+
+- **Memoria y verdad.** VERUM («verdad») junto a «La memoria deja capas» y «Lo que queda debajo» puede evocar *Memoria, Verdad y Justicia*, consigna de los organismos de derechos humanos. Preguntar: «¿Esto se lee como una búsqueda propia o como uso de esa consigna?». Hasta tener respuesta, evitar el 24 de marzo como fecha de lanzamiento y cualquier imagen de pañuelos o de la Plaza de Mayo.
+- **Barrios con lectura propia.** La Paternal se asocia con Argentinos Juniors y los comienzos de Maradona; Chacarita, con su cementerio y la tumba de Gardel. Un tema sobre lo que queda, situado en Chacarita, puede leerse a través del cementerio. Preguntar: «¿Qué te viene a la cabeza con cada barrio?». Usar la respuesta para decidir si conviene mantener, explicar o reemplazar la referencia al barrio.
 
 ### P01 — Equipo e historia fundadora
 
